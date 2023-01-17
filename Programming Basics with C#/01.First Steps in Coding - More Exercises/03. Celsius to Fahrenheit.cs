@@ -1,6 +1,6 @@
 using System;
 
-namespace Тренировка
+namespace Training
 {
     internal class Program
     {
