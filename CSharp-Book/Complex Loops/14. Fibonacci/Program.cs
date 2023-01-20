@@ -21,16 +21,6 @@ namespace Числа_на_Фибоначи
 
             }
             Console.WriteLine(f1);
-
-
-
-
-
-
-
-
-
-
         }
     }
 }
