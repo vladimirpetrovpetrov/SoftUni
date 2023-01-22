@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Check_the_index_of_the_first_number_in_array___bigger_than_its_neighbours</RootNamespace>
+  </PropertyGroup>
+
+</Project>
