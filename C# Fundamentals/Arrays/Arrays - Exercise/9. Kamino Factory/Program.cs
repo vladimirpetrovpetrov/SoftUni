@@ -1,69 +1,78 @@
 ﻿var lengthOfDNA = int.Parse(Console.ReadLine());
 string command = string.Empty;
+int[] bestDNAarray = new int[lengthOfDNA];
 
-int startingIndex = 0;
-int sampleNumber = 0;
-int bestSampleNumber = 1;
+
+
+int latestDNAnumber = 0;
+int dnaNumber = 0;
 int biggestSeq = 1;
-int biggestSeqATM = 1;
-int sum = 0; int bestSum = 0;
+int seqNow = 1;
+int bestDNAnumber = 0;
+int latestIndex = 0;
+int BestLatestIndex = int.MaxValue;
+int sumNow = 0;
+int bestSum = 0;
+
+
+
 while (command != "Clone them!")
 {
-    
+
     command = Console.ReadLine();
     if (command == "Clone them!")
     {
         break;
     }
-    var arr = command.Split('!').Select(int.Parse).ToArray();
-    sampleNumber++;
-    sum = arr.Sum();
+    dnaNumber++;
+    latestDNAnumber = dnaNumber;
+    var arr = command.Split('!',StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
 
-    for (int i = 0; i < arr.Length; i++)
+    sumNow = arr.Sum();
+    for (int i = 0; i < arr.Length - 1; i++)
     {
-
-        for (int j = i + 1; j < arr.Length; j++)
+        if (arr[i] == arr[i + 1] && arr[i] == 1)
         {
-            if (arr[i] == 1 & arr[i] == arr[j])
+            seqNow++;
+            latestIndex = i + 1;
+            if (seqNow > biggestSeq)
             {
-                biggestSeqATM++; //
-                if (biggestSeqATM > biggestSeq)
+                biggestSeq = seqNow;
+                bestDNAnumber = latestDNAnumber;
+                BestLatestIndex = latestIndex;
+                bestSum = sumNow;
+                bestDNAarray = arr;
+            }
+            else if (seqNow == biggestSeq)
+            {
+                if (latestIndex < BestLatestIndex)
                 {
-                    biggestSeq = biggestSeqATM; //
-                    startingIndex = i; //
-                    bestSampleNumber= sampleNumber;
-                    bestSum = sum;
+                    BestLatestIndex = latestIndex;
+                    biggestSeq = seqNow;
+                    bestDNAnumber = latestDNAnumber;
+                    bestSum = sumNow;
+                    bestDNAarray = arr;
+                }
+                else if (latestIndex == BestLatestIndex)
+                {
+                    if (sumNow > bestSum)
+                    {
+                        BestLatestIndex = latestIndex;
+                        biggestSeq = seqNow;
+                        bestDNAnumber = latestDNAnumber;
+                        bestSum = sumNow;
+                        bestDNAarray = arr;
+                    }
                 }
             }
-            else
-            {
-                biggestSeqATM = 1;
-                break;
-            }
         }
-        biggestSeqATM = 1;
+        else
+        {
+            seqNow = 1;
+        }
     }
-
-
-
-
+    seqNow = 1;
 }
 
-Console.WriteLine($"Starting index = {startingIndex}");
-Console.WriteLine($"best biggest seq = {biggestSeq}");
-Console.WriteLine($"Best sample number = {bestSampleNumber}");
-Console.WriteLine($"Best sum = {bestSum}");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Console.WriteLine($"Best DNA sample {bestDNAnumber} with sum: {bestSum}.");
+Console.WriteLine(String.Join(" ", bestDNAarray));
