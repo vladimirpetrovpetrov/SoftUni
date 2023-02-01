@@ -1,46 +1,46 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿//input
+int sizeOfTheField = int.Parse(Console.ReadLine()!);
+if (sizeOfTheField == 0)
+{
+    return;
+}
+int[] field = new int[sizeOfTheField];
+Array.Fill(field, 0); // filing the array with 0
+//Console.WriteLine(String.Join(" ", field));
+int[] indexesOfBugs = Console.ReadLine()!.Split().Select(int.Parse).ToArray();
+InitBugs(field, indexesOfBugs);//filling the array with bugs/1-s
+//Console.WriteLine(String.Join(" ", field));
 
-var arrLength = int.Parse(Console.ReadLine());
-
-int[] arr = new int[arrLength];
-InitArr(arr, arrLength); //init the array only with 0
-//Console.WriteLine(String.Join(" ", arr));
-var bugsIndexes = Console.ReadLine()!.Split().Select(int.Parse).ToArray();
-InitBugs(arr, bugsIndexes); //init the bugs in the array (with 1)
-//Console.WriteLine(String.Join(" ", arr));
 
 
 while (true)
 {
-    var command = Console.ReadLine();
-    if(command == "end")
+    var movement = Console.ReadLine().Split().ToArray();
+    if (movement[0] == "end")
     {
-        Console.WriteLine(String.Join(" ", arr));
+        Console.WriteLine(String.Join(" ", field));
         return;
     }
-    string[] moves = command.Split().ToArray();
-    
-    int movingBug = int.Parse(moves[0]); //коя се движи
-    int spaces = int.Parse(moves[2]); // колко полета ще се движи
-    string direction = moves[1]; // на дясно или ляво
-
-    MoveBugs(arr, movingBug, spaces, direction);
-    //Console.WriteLine(String.Join(" ", arr));
-}
-
-
-
-
-
-
-
-static void InitArr(int[] arr, int length)
-{
-    for (int i = 0; i < length; i++)
+    int movingBug = int.Parse(movement[0]);
+    int spaces = int.Parse(movement[2]);
+    string direction = movement[1];
+    if (movingBug < 0 || movingBug > field.Length - 1)
     {
-        arr[i] = 0;
+        continue;
     }
+    if (direction == "right")
+    {
+        MoveRight(field, movingBug, spaces);
+        //Console.WriteLine(String.Join(" ", field));
+    }
+    else
+    {
+        MoveLeft(field, movingBug, spaces);
+        // Console.WriteLine(String.Join(" ", field));
+    }
+
 }
+
 
 static void InitBugs(int[] arr, int[] bugIndexes)
 {
@@ -56,38 +56,50 @@ static void InitBugs(int[] arr, int[] bugIndexes)
         }
     }
 }
-static void MoveBugs(int[] arr, int movingBug, int spaces, string direction)
+static void MoveRight(int[] field, int movingBugIndex, int spaces)
 {
-    if (arr[movingBug] != 1) { return; }
-    arr[movingBug] = 0;
-    if (direction == "right")
+    if (field[movingBugIndex] == 0) // ako nqma bug na poleto
     {
-        if (movingBug + spaces >= arr.Length)
+        return;
+    }
+    if (movingBugIndex + spaces > field.Length - 1)
+    {
+        field[movingBugIndex] = 0;
+        return;
+    }
+    field[movingBugIndex] = 0;
+
+    while (movingBugIndex + spaces < field.Length && field[movingBugIndex + spaces] != 0)
+    {
+        spaces++;
+        if (movingBugIndex + spaces >= field.Length)
         {
             return;
         }
-        while (arr[movingBug + spaces] != 0 && movingBug + spaces < arr.Length - 1)
-        {
-            spaces++;
-        }
-        if (movingBug + spaces < arr.Length)
-        {
-            arr[movingBug + spaces] = 1;
-        }
     }
-    else
+
+    field[movingBugIndex + spaces] = 1;
+}
+static void MoveLeft(int[] field, int movingBugIndex, int spaces)
+{
+    if (field[movingBugIndex] == 0)
     {
-        if (movingBug - spaces < 0)
+        return;
+    }
+    if (movingBugIndex - spaces < 0)
+    {
+        field[movingBugIndex] = 0;
+        return;
+    }
+    field[movingBugIndex] = 0;
+    while (movingBugIndex - spaces >= 0 && field[movingBugIndex - spaces] != 0)
+    {
+
+        spaces++;
+        if (movingBugIndex - spaces < 0)
         {
             return;
-        } //директно върни ако индекса е по-малък от 0 
-        while (arr[movingBug - spaces] != 0 && movingBug - spaces >= 0)
-        {
-                spaces++;
-        }
-        if (movingBug - spaces >= 0)
-        {
-            arr[movingBug - spaces] = 1;
         }
     }
+    field[movingBugIndex - spaces] = 1;
 }
