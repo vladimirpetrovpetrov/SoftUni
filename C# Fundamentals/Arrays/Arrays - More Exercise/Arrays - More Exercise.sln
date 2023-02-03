@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "1. Encrypt, Sort and Print 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2. Pascal Triangle", "2. Pascal Triangle\2. Pascal Triangle.csproj", "{061271DA-B0CE-465D-B53C-B8B114651840}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3. Recursive Fibonacci", "3. Recursive Fibonacci\3. Recursive Fibonacci.csproj", "{3C759F3B-082A-4E84-9E50-363CC1C62983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3. Recursive Fibonacci", "3. Recursive Fibonacci\3. Recursive Fibonacci.csproj", "{3C759F3B-082A-4E84-9E50-363CC1C62983}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4. Fold and Sum", "4. Fold and Sum\4. Fold and Sum.csproj", "{95A5DD60-8B29-4724-BEAA-0A7CED7B4252}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4. Fold and Sum", "4. Fold and Sum\4. Fold and Sum.csproj", "{95A5DD60-8B29-4724-BEAA-0A7CED7B4252}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5. Longest Increasing Subsequence (LIS)", "5. Longest Increasing Subsequence (LIS)\5. Longest Increasing Subsequence (LIS).csproj", "{92B272E8-7403-46ED-8B74-077E907D6EB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5. Longest Increasing Subsequence (LIS)", "5. Longest Increasing Subsequence (LIS)\5. Longest Increasing Subsequence (LIS).csproj", "{92B272E8-7403-46ED-8B74-077E907D6EB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
