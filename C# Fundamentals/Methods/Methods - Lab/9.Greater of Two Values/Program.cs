@@ -42,26 +42,7 @@ namespace _9.Greater_of_Two_Values
         }
         static string GetMax(string x, string y)
         {
-            var result = string.Empty;
-            for (int i = 0; i < x.Length; i++)
-            {
-                if (x[i] >= y[i])
-                {
-                    result = x;
-                    break;
-                }
-                else 
-                {
-                    result = y;
-                    break;
-                }
-            }
-            return result;
+            return String.Compare(x, y) <= 0 ? y : x;
         }
-
-
-
-
     }
-
 }
