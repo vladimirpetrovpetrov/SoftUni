@@ -1,53 +1,54 @@
-﻿var s = Console.ReadLine().Split().Select(int.Parse).ToArray();
+﻿using System;
 
-int maxSeq = 1;
-int seqNow = 1;
-
-int biggerIndex = 0;
-bool done = false;
-
-for (int i = 0;i < s.Length; i++)
+class LIS
 {
-    int k = i+1;
-    if(k == s.Length - 1)
+    static void Main()
     {
-        break;
-    }
-    while(done == false)
-    {
-        if (k == s.Length - 1)
-        {
-            done = true;
-        }
-        seqNow = MaxSeq(s,s[i], k, s.Length);
-        if (seqNow > maxSeq)
-        {
-            maxSeq = seqNow;
-        }
-        k++;
-    }
-    done = false;
-}
-Console.WriteLine(maxSeq);
+        string input = Console.ReadLine();
+        string[] tokens = input.Split(' ');
+        int n = tokens.Length;
+        int[] nums = new int[n];
+        int[] len = new int[n];
+        int[] prev = new int[n];
 
-int MaxSeq(int[] s,int proverqvanoChislo ,int i,int length)
-{
-    int seqM = 1;
-    int seqN = 1;
-    for (int j = i; j < length-1; j++)
-    {
-        if (proverqvanoChislo < s[j])
+        for (int i = 0; i < n; i++)
         {
-            seqN++;
+            nums[i] = int.Parse(tokens[i]);
+            len[i] = 1;
+            prev[i] = -1;
 
-            if (seqN > seqM)
+            for (int j = 0; j < i; j++)
             {
-                seqM = seqN;
+                if (nums[j] < nums[i] && len[j] + 1 > len[i])
+                {
+                    len[i] = len[j] + 1;
+                    prev[i] = j;
+                }
             }
-        } 
+        }
+
+        int maxLen = 0;
+        int maxPos = 0;
+
+        for (int i = 0; i < n; i++)
+        {
+            if (len[i] > maxLen)
+            {
+                maxLen = len[i];
+                maxPos = i;
+            }
+        }
+
+        int[] lis = new int[maxLen];
+        int k = maxLen - 1;
+
+        while (maxPos != -1)
+        {
+            lis[k] = nums[maxPos];
+            k--;
+            maxPos = prev[maxPos];
+        }
+
+        Console.WriteLine(string.Join(" ", lis));
     }
-
-
-    return seqM;
 }
-;
