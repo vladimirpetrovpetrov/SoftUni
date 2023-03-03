@@ -2,36 +2,29 @@
 {
     static void Main()
     {
-        int teamsCount = int.Parse(Console.ReadLine());
+        int n = int.Parse(Console.ReadLine());
         List<Team> teams = new List<Team>();
-        for (int i = 0; i < teamsCount; i++)
+        for (int i = 0; i < n; i++)
         {
             var teamsCreation = Console.ReadLine().Split("-", StringSplitOptions.RemoveEmptyEntries).ToList();
             var creator = teamsCreation[0];
-            var teamName = teamsCreation[1];
-            bool cannotBeCreated = false;
-            foreach (var item in teams)
+            var name = teamsCreation[1];
+            bool teamExists = teams.Any(t => t.Name == name);
+            bool creatorExists = teams.Any(t => t.Creator == creator);
+
+            if (teamExists)
             {
-                if (item.Name == teamName)
-                {
-                    Console.WriteLine($"Team {item.Name} was already created!");
-                    cannotBeCreated = true;
-                    break;
-                }
-                else if (item.Name == creator)
-                {
-                    if (item.Creator == creator)
-                    {
-                        Console.WriteLine($"{item.Creator} cannot create another team!");
-                        cannotBeCreated = true;
-                        break;
-                    }
-                }
+                Console.WriteLine($"Team {name} was already created!");
             }
-            if (!cannotBeCreated)
+            else if (creatorExists)
             {
-                teams.Add(new Team(teamName, creator));
-                Console.WriteLine($"Team {teamName} has been created by {creator}!");
+                Console.WriteLine($"{creator} cannot create another team!");
+            }
+            else
+            {
+                Team team = new Team(name, creator);
+                teams.Add(team);
+                Console.WriteLine($"Team {name} has been created by {creator}!");
             }
         }
         var availableTeams = new List<string>();
@@ -115,9 +108,5 @@ public class Team
         this.Name = name;
         this.Creator = creator;
         Members.Add(creator);
-    }
-    public void AddPlayerToTeam(string player)
-    {
-        Members.Add(player);
     }
 }
