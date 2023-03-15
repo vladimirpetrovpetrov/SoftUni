@@ -1,8 +1,14 @@
 ﻿using System.Text;
 
-var theBigNumber = Console.ReadLine().ToCharArray();
+var input = Console.ReadLine();
+var theBigNumber = input!.ToCharArray();
 var readyToWork = theBigNumber.Select(x => x.ToString()).ToArray().Select(int.Parse).ToArray();    
-int n = int.Parse(Console.ReadLine());
+int n = int.Parse(Console.ReadLine()!);
+if(n == 0 || input == "0")
+{
+    Console.WriteLine(0);
+    return;
+}
 StringBuilder st = new StringBuilder();
 var leftOver = 0;
 for (int i = readyToWork.Length-1; i >= 0; i--)
