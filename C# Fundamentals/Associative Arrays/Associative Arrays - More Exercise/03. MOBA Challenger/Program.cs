@@ -52,7 +52,6 @@ while (true)
     {
         //key, key value
         //if value is higher
-        //proveri tuk
         if (players[player].ContainsKey(role) && players[player][role] < skill)
         {
             players[player][role] = skill;
