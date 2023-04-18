@@ -1,33 +1,39 @@
-﻿int n = int.Parse(Console.ReadLine());
-Stack<int> stack = new Stack<int>();
+﻿Stack<int> stack = new Stack<int>();
+var n = int.Parse(Console.ReadLine());
 for (int i = 0; i < n; i++)
 {
-    var input = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
-    if (input[0] == 1)
+    var input = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries);
+
+    var op = int.Parse(input[0]);
+    if(op == 1)
     {
-        stack.Push(input[1]);
-    }else if (input[0] == 2)
+        var toPush = int.Parse(input[1]);
+        stack.Push(toPush);
+    }else if (op == 2)
     {
-        if(stack.Count == 0)
+        if (stack.Count > 0)
+        {
+            stack.Pop();
+        }
+        else
         {
             continue;
         }
-        stack.Pop();
-    }else if (input[0] == 3)
+    }else if (op == 3)
     {
-        if (stack.Count == 0)
+        if (stack.Count > 0)
         {
-            continue;
+            Console.WriteLine(stack.Max());
         }
-        Console.WriteLine(stack.Max());
-    }
-    else if (input[0] == 4)
+    }else if(op == 4)
     {
-        if (stack.Count == 0)
+        if (stack.Count > 0)
         {
-            continue;
+            Console.WriteLine(stack.Min());
         }
-        Console.WriteLine(stack.Min());
     }
 }
-Console.WriteLine(String.Join(", ",stack));
+if(stack.Count > 0)
+{
+    Console.WriteLine(String.Join(", ",stack));
+}

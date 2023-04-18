@@ -1,21 +1,21 @@
 ﻿var input = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
 var toAdd = input[0];
-var toPop = input[1];
+var toRemove = input[1];
 var toCheck = input[2];
-var nums = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
-Queue<int> queue = new Queue<int>(nums);
-for (int i = 0; i < toPop; i++)
+Queue<int> queue = new Queue<int>();
+var numbers = Console.ReadLine()!.Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+for (int i = 0; i < toAdd; i++)
 {
-    if (queue.Count == 0)
-    {
-        Console.WriteLine(0);
-        return;
-    }
+    queue.Enqueue(numbers[i]);
+}
+for (int i = 0; i < toRemove; i++)
+{
     queue.Dequeue();
 }
-if (queue.Count > 0)
+bool isTrue = queue.Contains(toCheck);
+if (queue.Count() > 0)
 {
-    if (queue.Contains(toCheck))
+    if (isTrue)
     {
         Console.WriteLine("true");
     }

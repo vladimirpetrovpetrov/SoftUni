@@ -1,36 +1,38 @@
-﻿Queue<string> playlist = new Queue<string>();
-var songs = Console.ReadLine().Split(", ", StringSplitOptions.RemoveEmptyEntries);
-foreach (var item in songs)
+﻿var startingSongs = Console.ReadLine().Split(", ", StringSplitOptions.RemoveEmptyEntries).ToList();
+Queue<string> songs = new(startingSongs);
+while (true)
 {
-    if (playlist.Contains(item))
+    var command = Console.ReadLine();
+    if (command == "Play")
     {
-        continue; //check here
-    }
-    playlist.Enqueue(item);
-}
-while(playlist.Count != 0)
-{
-    var input = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).ToList();
-    if (input[0] == "Play")
-    {
-        playlist.Dequeue();
-    }
-    else if (input[0] == "Add")
-    {
-        input.RemoveAt(0);
-        var songName = String.Join(" ", input);
-        if (!playlist.Contains(songName))
+        if (songs.Count > 0)
         {
-            playlist.Enqueue(songName);
+            songs.Dequeue();
+        }
+    }
+    else if (command == "Show")
+    {
+        if (songs.Count > 0)
+        {
+            Console.WriteLine(String.Join(", ", songs));
+        }
+    }
+    else
+    {
+        
+        command = command.Remove(0, 4);
+        if (songs.Contains(command))
+        {
+            Console.WriteLine($"{command} is already contained!");
         }
         else
         {
-            Console.WriteLine($"{songName} is already contained!");
+            songs.Enqueue(command);
         }
     }
-    else if (input[0] == "Show")
+    if(songs.Count == 0)
     {
-        Console.WriteLine(String.Join(", ",playlist));
+        Console.WriteLine("No more songs!");
+        break;
     }
 }
-Console.WriteLine("No more songs!");

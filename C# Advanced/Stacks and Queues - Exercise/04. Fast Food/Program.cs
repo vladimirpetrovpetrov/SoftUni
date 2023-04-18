@@ -1,25 +1,17 @@
 ﻿var quantity = int.Parse(Console.ReadLine());
-var quantities = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
-var queue = new Queue<int>(quantities);
-Console.WriteLine(queue.Max());
-bool haveEnough = true;
-while(queue.Count > 0)
+var input = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+Queue<int> queue = new Queue<int>(input);
+var fullfilled = new List<int>();
+while (queue.Count > 0 && quantity >= 0)
 {
-    if (quantity >= queue.Peek())
+    fullfilled.Add(queue.Peek());
+    if(quantity-queue.Peek() < 0)
     {
-        quantity -= queue.Dequeue();
+        Console.WriteLine(fullfilled.Max());
+        Console.WriteLine($"Orders left: {String.Join(" ", queue)}");
+        return;
     }
-    else
-    {
-        haveEnough = false;
-        break;
-    }
+    quantity -= queue.Dequeue();
 }
-if (!haveEnough)
-{
-    Console.WriteLine($"Orders left: {String.Join(" ",queue)}");
-}
-else
-{
-    Console.WriteLine("Orders complete");
-}
+Console.WriteLine(fullfilled.Max());
+Console.WriteLine("Orders complete");

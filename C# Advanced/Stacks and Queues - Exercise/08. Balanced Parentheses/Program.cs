@@ -1,62 +1,42 @@
 ﻿var input = Console.ReadLine();
-Stack<char> stack = new Stack<char>();
-bool isValid = true;
+Stack<char> openeningBrackets = new();
+bool balanced = true;
 foreach (var item in input)
 {
-    if (item == '(' || item == '{' || item == '[')
+    if(item == '(' || item == '[' || item == '{')
     {
-        stack.Push(item);
+        openeningBrackets.Push(item);
     }
     else
     {
-        if (item == ')')
+        if (openeningBrackets.Count > 0)
         {
-            if (stack.Count > 0)
+            if (openeningBrackets.Peek() == '(' && item == ')')
             {
-                if (stack.Peek() != '(')
-                {
-                    isValid = false;
-                    break;
-                }
-                else
-                {
-                    stack.Pop();
-                }
+                openeningBrackets.Pop();
             }
-        }
-        else if (item == ']')
-        {
-            if (stack.Peek() != '[')
+            else if (openeningBrackets.Peek() == '[' && item == ']')
             {
-                isValid = false;
-                break;
+                openeningBrackets.Pop();
+            }
+            else if (openeningBrackets.Peek() == '{' && item == '}')
+            {
+                openeningBrackets.Pop();
             }
             else
             {
-                if (stack.Count > 0)
-                {
-                    stack.Pop();
-                }
-            }
-        }
-        else if (item == '}')
-        {
-            if (stack.Peek() != '{')
-            {
-                isValid = false;
+                balanced = false;
                 break;
             }
-            else
-            {
-                if (stack.Count > 0)
-                {
-                    stack.Pop();
-                }
-            }
+        }
+        else //if the first char is closing bracket
+        {
+            balanced = false;
+            break;
         }
     }
 }
-if (isValid)
+if (balanced && openeningBrackets.Count == 0)
 {
     Console.WriteLine("YES");
 }

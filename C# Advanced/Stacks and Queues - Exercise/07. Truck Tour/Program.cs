@@ -1,29 +1,41 @@
-﻿var totalPumps = int.Parse(Console.ReadLine());
-var totalDistance = 0;
-
-Queue<int> pumps = new Queue<int>();
-for (int i = 0; i < totalPumps; i++)
+﻿int n = int.Parse(Console.ReadLine());
+var petrol = new Queue<int>();
+var distance = new Queue<int>();
+for (int i = 0; i < n; i++)
 {
-    //check if only ints or double also/check int or long
-    var input = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
-    var litresOfThePump = input[0];
-    var distanceToNext = input[1];
-    totalDistance += distanceToNext;
-    pumps.Enqueue(litresOfThePump);
+    var input = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+    petrol.Enqueue(input[0]);
+    distance.Enqueue(input[1]);
 }
-var tankL = 0;
-var count = -1;
-while (pumps.Count != 0)
+var petrolCopy = new Queue<int>();
+var distanceCopy = new Queue<int>();
+for (int i = 0; i < n; i++)
 {
-    tankL += pumps.Dequeue();
-    count++;
-    if (tankL >= totalDistance)
+    var currentFuel = petrol.Peek();
+    for (int x = 0; x < n; x++)
     {
-        Console.WriteLine(count);
-        break;
+        if (distance.Peek() <= currentFuel)
+        {
+            currentFuel -= distance.Peek();
+            if (x == n - 1)
+            {
+                Console.WriteLine(i);
+                return;
+            }
+        }
+        else
+        {
+            for (int y = x; y < n; y++)
+            {
+                petrol.Enqueue(petrol.Dequeue());
+                distance.Enqueue(distance.Dequeue());
+            }
+            break;
+        }
+        petrol.Enqueue(petrol.Dequeue());
+        distance.Enqueue(distance.Dequeue());
+        currentFuel += petrol.Peek();
     }
+    petrol.Enqueue(petrol.Dequeue());
+    distance.Enqueue(distance.Dequeue());
 }
-
-
-
-//TODO 

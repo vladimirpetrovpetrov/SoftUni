@@ -1,19 +1,33 @@
-﻿var values = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
-var maxSum = int.Parse(Console.ReadLine());
-Stack<int> box = new Stack<int>(values);
+﻿var itemValues = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
+Stack<int> stack = new Stack<int>(itemValues);
+var capOfOneRack = int.Parse(Console.ReadLine());
 var racks = 1;
-var sum = 0;
-while(box.Count != 0)
+var currentValue = 0;
+
+while (stack.Count > 0)
 {
-    if (sum + box.Peek() <= maxSum)
+    if (currentValue + stack.Peek() < capOfOneRack)
     {
-        sum += box.Pop();
+        currentValue += stack.Pop();
+    }
+    else if (currentValue + stack.Peek() == capOfOneRack)
+    {
+        if (stack.Count > 1)
+        {
+            stack.Pop();
+            currentValue = 0;
+            racks++;
+        }
+        else
+        {
+            stack.Pop();
+        }
     }
     else
     {
+        currentValue = 0;
         racks++;
-        sum = 0;
-        sum += box.Pop();
+        currentValue += stack.Pop();
     }
 }
 Console.WriteLine(racks);

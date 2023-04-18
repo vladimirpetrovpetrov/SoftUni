@@ -1,21 +1,20 @@
-﻿var input = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray(); 
+﻿var input = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
 var toAdd = input[0];
-var toPop = input[1];
+var toRemove = input[1];
 var toCheck = input[2];
-var nums = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
-Stack<int> stack = new Stack<int>(nums);
-for (int i = 0; i < toPop; i++)
+Stack<int> stack = new Stack<int>();
+var numbers = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+for (int i = 0; i < toAdd; i++)
 {
-    if(stack.Count == 0)
-    {
-        Console.WriteLine(0);
-        return;
-    }
+    stack.Push(numbers[i]);
+}
+for (int i = 0;i< toRemove; i++)
+{
     stack.Pop();
 }
-if (stack.Count > 0)
-{
-    if (stack.Contains(toCheck))
+bool isTrue = stack.Contains(toCheck);
+if (stack.Count() > 0) {
+    if (isTrue)
     {
         Console.WriteLine("true");
     }
