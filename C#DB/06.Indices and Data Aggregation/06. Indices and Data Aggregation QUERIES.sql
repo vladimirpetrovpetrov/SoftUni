@@ -37,9 +37,20 @@ FROM WizzardDeposits AS wd
 GROUP BY wd.DepositGroup,wd.MagicWandCreator
 ORDER BY wd.MagicWandCreator,wd.DepositGroup
 --9 PROBLEM
-
---TODO-----------
-
+SELECT wd.AgeGroup,COUNT(*) AS [WizardCount]
+FROM
+(SELECT
+CASE 
+WHEN [Age] Between 0 AND 10 Then '[0-10]'
+WHEN [Age] Between 11 AND 20 Then '[11-20]'
+WHEN [Age] Between 21 AND 30 Then '[21-30]'
+WHEN [Age] Between 31 AND 40 Then '[31-40]'
+WHEN [Age] Between 41 AND 50 Then '[41-50]'
+WHEN [Age] Between 51 AND 60 Then '[51-60]'
+ELSE '[61+]'
+END AS [AgeGroup]
+FROM WizzardDeposits) AS wd
+GROUP BY wd.AgeGroup
 --10 PROBLEM
 --With Distinct 
 SELECT DISTINCT SUBSTRING(FirstName,1,1)
@@ -53,17 +64,20 @@ WHERE DepositGroup = 'Troll Chest'
 GROUP BY SUBSTRING(FirstName,1,1)
 ORDER BY SUBSTRING(FirstName,1,1)
 --11 PROBLEM
-SELECT DepositGroup,IsDepositExpired,AVG(DepositInterest)
+SELECT DepositGroup,IsDepositExpired,AVG(DepositInterest) AS [AverageInterest]
 FROM WizzardDeposits
 WHERE DepositStartDate > '01.01.1985'
 GROUP BY DepositGroup,IsDepositExpired
-ORDER BY DepositGroup DESC,DepositExpirationDate
---TODO
-
+ORDER BY DepositGroup DESC,IsDepositExpired
 --12 PROBLEM
-
---TODO
-
+SELECT SUM([Difference])
+FROM(
+SELECT FirstName AS [Host Wizard],
+	DepositAmount AS [Host Wizard Deposit],
+	LEAD(FirstName) OVER(ORDER BY [Id]) AS [Guest Wizard],
+	LEAD(DepositAmount) OVER(ORDER BY [Id]) AS [Guest Wizard Deposit],
+	DepositAmount - LEAD(DepositAmount) OVER(ORDER BY [Id]) AS [Difference] 
+FROM WizzardDeposits) AS wd
 --13 PROBLEM
 USE SoftUni
 GO
@@ -79,18 +93,22 @@ WHERE HireDate > '01.01.2000'
 GROUP BY DepartmentID
 HAVING DepartmentID IN (2,5,7)
 --15 PROBLEM
-CREATE VIEW v_Employeess AS 
-SELECT * 
+SELECT *
+INTO [EmployeesWithSalaryOver30k]
 FROM Employees
 WHERE Salary > 30000
-SELECT * FROM v_Employeess
 
-CREATE VIEW v_EmployeessAfterDeleteManagerID AS
-DELETE FROM v_Employeess
+DELETE FROM EmployeesWithSalaryOver30k
 WHERE ManagerID = 42
 
---TODO
+UPDATE EmployeesWithSalaryOver30k
+SET Salary += 5000
+WHERE DepartmentID = 1
 
+SELECT DepartmentID,
+	   AVG(Salary) AS [Average Salary]
+  FROM EmployeesWithSalaryOver30k
+GROUP BY DepartmentID
 --16 PROBLEM
 SELECT DepartmentID,MAX(Salary) AS [MaxSalary]
 FROM Employees
@@ -101,21 +119,30 @@ SELECT COUNT(*) AS [Count]
 FROM Employees
 WHERE ManagerID IS NULL
 --18 PROBLEM
---Need Ranking
-SELECT DepartmentID,Salary 
+SELECT e.DepartmentID ,AVG(e.Salary)
+FROM(
+SELECT DepartmentID,Salary,
+DENSE_RANK() OVER(PARTITION BY DepartmentID ORDER BY Salary DESC) AS [SalaryRank]
 FROM Employees
+) AS e
+WHERE e.SalaryRank = 3
 GROUP BY DepartmentID
---TODO
 --19 PROBLEM
-SELECT DepartmentID,AVG(Salary)
+SELECT TOP(10)
+e.FirstName,
+e.LastName,
+e.DepartmentID
 FROM Employees
-GROUP BY DepartmentID
+AS e
+WHERE e.Salary > (
+					SELECT AVG(es.Salary)
+					AS [AverageSalary]
+					FROM Employees
+					AS es
+					WHERE es.DepartmentID = e.DepartmentID
+					GROUP BY DepartmentID
+				)
+ORDER BY e.DepartmentID
 
-SELECT FirstName,LastName,DepartmentID 
-FROM Employees
-WHERE Salary
---TODO
 
 
-
---3 PROBLEM
