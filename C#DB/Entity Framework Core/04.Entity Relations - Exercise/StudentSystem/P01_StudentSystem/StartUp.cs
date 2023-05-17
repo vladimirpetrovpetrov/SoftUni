@@ -1,12 +1,11 @@
 ﻿using P01_StudentSystem.Data;
 
-namespace P01_StudentSystem
+namespace P01_StudentSystem;
+
+public class StartUp
 {
-    internal class StartUp
+    public static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            StudentSystemContext context = new StudentSystemContext();
-        }
+        StudentSystemContext context = new StudentSystemContext();
     }
 }
