@@ -1,13 +1,8 @@
-﻿using System.Reflection;
-
-namespace BookShop.Data
+﻿namespace BookShop.Data
 {
-    using Microsoft.EntityFrameworkCore;
-
-    using Models;
     using EntityConfiguration;
-    using System.Collections.Generic;
-    using System.Reflection.Emit;
+    using Microsoft.EntityFrameworkCore;
+    using Models;
 
     public class BookShopContext : DbContext
     {
@@ -28,7 +23,9 @@ namespace BookShop.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(Configuration.ConnectionString);
+                optionsBuilder
+                    .UseSqlServer(Configuration.ConnectionString)
+                    .UseLazyLoadingProxies();
             }
         }
 
