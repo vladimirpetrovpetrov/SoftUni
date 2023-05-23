@@ -1,4 +1,4 @@
-using FastFood.Core.MappingConfiguration;
+using FastFood.Services.Mapping;
 using FastFood.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;

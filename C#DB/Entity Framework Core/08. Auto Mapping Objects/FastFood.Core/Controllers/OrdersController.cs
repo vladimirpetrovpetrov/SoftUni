@@ -1,12 +1,10 @@
-﻿namespace FastFood.Core.Controllers
-{
-    using System;
-    using System.Linq;
-    using AutoMapper;
-    using Data;
-    using Microsoft.AspNetCore.Mvc;
-    using ViewModels.Orders;
+﻿using AutoMapper;
+using FastFood.Data;
+using FastFood.Web.ViewModels.Orders;
+using Microsoft.AspNetCore.Mvc;
 
+namespace FastFood.Web.Controllers
+{
     public class OrdersController : Controller
     {
         private readonly FastFoodContext _context;

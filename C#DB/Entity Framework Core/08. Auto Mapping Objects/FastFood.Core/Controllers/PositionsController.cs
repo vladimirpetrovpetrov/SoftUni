@@ -1,13 +1,12 @@
-﻿namespace FastFood.Core.Controllers
-{
-    using System.Linq;
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
-    using Data;
-    using FastFood.Models;
-    using Microsoft.AspNetCore.Mvc;
-    using ViewModels.Positions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using FastFood.Data;
+using FastFood.Models;
+using FastFood.Web.ViewModels.Positions;
+using Microsoft.AspNetCore.Mvc;
 
+namespace FastFood.Web.Controllers
+{
     public class PositionsController : Controller
     {
         private readonly FastFoodContext _context;
@@ -18,7 +17,7 @@
             _context = context;
             _mapper = mapper;
         }
-
+        [HttpGet]
         public IActionResult Create()
         {
             return View();

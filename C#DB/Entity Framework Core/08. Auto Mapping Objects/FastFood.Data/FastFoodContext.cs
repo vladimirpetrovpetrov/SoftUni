@@ -25,16 +25,16 @@ public class FastFoodContext : DbContext
         }
         base.OnConfiguring(optionsBuilder);
     }
-    public DbSet<Category> Categories { get; set; }
+    public DbSet<Category> Categories { get; set; } = null!;
 
-    public DbSet<Employee> Employees { get; set; }
-    public DbSet<Item> Items { get; set; }
+    public DbSet<Employee> Employees { get; set; } = null!;
+    public DbSet<Item> Items { get; set; } = null!;
 
-    public DbSet<Order> Orders { get; set; }
+    public DbSet<Order> Orders { get; set; } = null!;
 
-    public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; } = null!;
 
-    public DbSet<Position> Positions { get; set; }
+    public DbSet<Position> Positions { get; set; } = null!;
 
 
     protected override void OnModelCreating(ModelBuilder builder)

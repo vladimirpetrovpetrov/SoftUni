@@ -1,9 +1,9 @@
-﻿namespace FastFood.Core.Controllers
-{
-    using System.Diagnostics;
-    using Microsoft.AspNetCore.Mvc;
-    using ViewModels;
+﻿using System.Diagnostics;
+using FastFood.Web.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
+namespace FastFood.Web.Controllers
+{
     public class HomeController : Controller
     {
         public IActionResult Index()
