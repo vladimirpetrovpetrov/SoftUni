@@ -1,13 +1,16 @@
-﻿using System.Diagnostics;
-using FastFood.Web.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-
-namespace FastFood.Web.Controllers
+﻿namespace FastFood.Web.Controllers
 {
+    using System.Diagnostics;
+
+    using Microsoft.AspNetCore.Mvc;
+
+    using ViewModels;
+
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
+            // If we need any data, we should collect it before rendering
             return View();
         }
 
