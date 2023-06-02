@@ -7,13 +7,16 @@ namespace _04._Add_VAT
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(String.Join(Environment.NewLine , Console.ReadLine().Split(", ").Select(priceString =>
+            Func<string, string> convertAndAddVAT = x =>
             {
-                return (double.Parse(priceString) + double.Parse(priceString) * 0.2).ToString("F2");
-            })));
-
-
+                var toDouble = double.Parse(x);
+                return (toDouble * 1.20).ToString("F2");
+            };
+            var prices = Console.ReadLine()
+                .Split(", ", StringSplitOptions.RemoveEmptyEntries)
+                .Select(convertAndAddVAT)
+                .ToArray();
+            Console.WriteLine(String.Join(Environment.NewLine,prices));
         }
     }
-
 }
