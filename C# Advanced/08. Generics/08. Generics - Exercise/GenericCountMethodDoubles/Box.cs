@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenericCountMethodString;
+namespace GenericCountMethodDoubles;
 
 public class Box<T> where T : IComparable<T>
 {

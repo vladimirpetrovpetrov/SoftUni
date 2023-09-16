@@ -18,6 +18,6 @@ public class Box<T>
 
     public override string ToString()
     {
-        return $"{this.value.GetType()}: {value}";
+        return $"{typeof(T)}: {value}";
     }
 }
