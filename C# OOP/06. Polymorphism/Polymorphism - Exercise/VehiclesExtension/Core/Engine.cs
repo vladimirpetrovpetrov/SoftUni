@@ -74,7 +74,7 @@ namespace VehiclesExtension.Core
                     vehicle.Refuel(double.Parse(commandTokens[2]));
                     break;
                 case "DriveEmpty":
-                    vehicle.Refuel(double.Parse(commandTokens[2]));
+                    vehicle.Drive(double.Parse(commandTokens[2]),true);
                     break;
                 default:
                     break;

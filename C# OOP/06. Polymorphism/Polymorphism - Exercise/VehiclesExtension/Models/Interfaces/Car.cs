@@ -8,11 +8,9 @@ namespace VehiclesExtension.Models.Interfaces;
 
 public class Car : Vehicle
 {
-    private const double fuelConsumptionIncrement = 0.9;
+    private const double FuelConsumptionIncrement = 0.9;
 
-    public Car(double fuelQuantity, double fuelConsumption, double tankCapacity) : base(fuelQuantity, fuelConsumption, tankCapacity)
+    public Car(double fuelQuantity, double fuelConsumption, double tankCapacity) : base(fuelQuantity, fuelConsumption, tankCapacity, FuelConsumptionIncrement)
     {
     }
-    public override double FuelConsumption =>
-        base.FuelConsumption + fuelConsumptionIncrement;
 }

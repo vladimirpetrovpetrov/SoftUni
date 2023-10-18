@@ -2,23 +2,22 @@
 
 public abstract class Vehicle : IVehicle
 {
-    protected Vehicle(double fuelQuantity, double fuelConsumption, double tankCapacity)
+    protected Vehicle(double fuelQuantity, double fuelConsumption,double tankCapacity ,double fuelConsumptionIncrement)
     {
         this.FuelQuantity = fuelQuantity;
-        this.FuelConsumption = fuelConsumption;
+        this.FuelConsumption = fuelConsumption + fuelConsumptionIncrement;
         this.TankCapacity = tankCapacity;
-        if (fuelQuantity > tankCapacity)
+        if(this.FuelQuantity > this.TankCapacity)
         {
-            this.TankCapacity = 0;
+            this.FuelQuantity = 0;
         }
     }
-    public double FuelQuantity { get; private set; }
+    public double FuelQuantity { get; protected set; }
 
-    public virtual double FuelConsumption { get; private set; }
+    public double FuelConsumption { get; private set; }
     public double TankCapacity { get; private set; }
-    public bool IsEmpty { get; private set; }
 
-    public void Drive(double distance, bool isEmpty = true)
+    public virtual void Drive(double distance, bool IsEmpty)
     {
         double requiredFuel = distance * this.FuelConsumption;
         if (requiredFuel > this.FuelQuantity)
@@ -34,21 +33,21 @@ public abstract class Vehicle : IVehicle
 
     public virtual void Refuel(double liters)
     {
-
-        if (this.FuelQuantity + liters > this.TankCapacity)
+        if (liters <= 0)
         {
-            Console.WriteLine($"Cannot fit {liters} fuel in the tank");
+            Console.WriteLine("Fuel must be a positive number");
         }
         else
         {
-            if (liters <= 0)
+            if (this.FuelQuantity + liters > this.TankCapacity)
             {
-                Console.WriteLine("Fuel must be a positive number");
+                Console.WriteLine($"Cannot fit {liters} fuel in the tank");
             }
-            this.FuelQuantity += liters;
+            else
+            {
+                this.FuelQuantity += liters;
+            }
         }
-
-
     }
 
     public override string ToString()

@@ -8,13 +8,13 @@ namespace VehiclesExtension.Models.Interfaces;
 
 public interface IVehicle
 {
-    double FuelQuantity { get;}
-    double FuelConsumption { get;}
+    double FuelQuantity { get; }
+    double FuelConsumption { get; }
     double TankCapacity { get; }
-    bool IsEmpty { get; }
-    void Drive(double distance);
+    void Drive(double distance, bool IsEmpty = false);
     void Refuel(double liters);
 
 
 
 }
+

@@ -2,28 +2,28 @@
 
 public class Truck : Vehicle
 {
-    private const double fuelConsumptionIncrement = 1.6;
+    private const double FuelConsumptionIncrement = 1.6;
 
-    public Truck(double fuelQuantity, double fuelConsumption, double tankCapacity) : base(fuelQuantity, fuelConsumption, tankCapacity)
+    public Truck(double fuelQuantity, double fuelConsumption, double tankCapacity) : base(fuelQuantity, fuelConsumption, tankCapacity, FuelConsumptionIncrement)
     {
     }
 
-    public override double FuelConsumption =>
-        base.FuelConsumption + fuelConsumptionIncrement;
     public override void Refuel(double liters)
     {
-        if (this.FuelQuantity + liters > this.TankCapacity)
+        if (liters <= 0)
         {
-            Console.WriteLine($"Cannot fit {liters} fuel in the tank");
+            Console.WriteLine("Fuel must be a positive number");
         }
         else
         {
-            if (liters <= 0)
+            if (this.FuelQuantity + liters > this.TankCapacity)
             {
-                Console.WriteLine("Fuel must be a positive number");
+                Console.WriteLine($"Cannot fit {liters} fuel in the tank");
             }
-            base.Refuel(liters);
-
+            else
+            {
+                this.FuelQuantity += (liters * 0.9);
+            }
         }
     }
 }
