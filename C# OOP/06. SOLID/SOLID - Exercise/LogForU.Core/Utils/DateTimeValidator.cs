@@ -6,30 +6,22 @@ namespace LogForU.Core.Utils;
 
 public static class DateTimeValidator
 {
-    private static readonly ISet<string> formats
+    private static readonly ISet<string> formats =
+        new HashSet<string> { "M/dd/yyyy h:mm:ss tt" };
 
-        = new HashSet<string> 
-        {
-            "M/dd/yyyy h:mm:ss tt"
-        };
-    internal static bool ValidateDateTime(string createdTime)
+    public static void AddFormat(string format)
+        => formats.Add(format);
+
+    internal static bool ValidateDateTime(string dateTime)
     {
         foreach (var format in formats)
         {
-            if (DateTime.TryParseExact(
-                createdTime,
-                format,
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None,
-                out DateTime result))
+            if (DateTime.TryParseExact(dateTime, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime result))
             {
                 return true;
             }
-
         }
+
         return false;
     }
-    public static void AddFormat(string format)
-        => formats.Add(format);
-    
 }

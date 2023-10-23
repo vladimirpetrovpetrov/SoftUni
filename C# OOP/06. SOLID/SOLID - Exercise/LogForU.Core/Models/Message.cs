@@ -9,6 +9,7 @@ public class Message
 {
     private string createdTime;
     private string text;
+
     public Message(string createdTime, string text, ReportLevel reportLevel)
     {
         CreatedTime = createdTime;
@@ -16,7 +17,7 @@ public class Message
         ReportLevel = reportLevel;
     }
 
-    public string CreatedTime 
+    public string CreatedTime
     {
         get => createdTime;
         private set
@@ -26,14 +27,16 @@ public class Message
                 throw new EmptyCreatedTimeException();
             }
 
-            if (DateTimeValidator.ValidateDateTime(value))
+            if (!DateTimeValidator.ValidateDateTime(value))
             {
                 throw new InvalidDateTimeException();
             }
+
             createdTime = value;
         }
     }
-    public string  Text
+
+    public string Text
     {
         get => text;
         private set
@@ -42,8 +45,10 @@ public class Message
             {
                 throw new EmptyMessageTextException();
             }
+
             text = value;
         }
     }
-    public ReportLevel ReportLevel{ get; private set; }
+
+    public ReportLevel ReportLevel { get; private set; }
 }

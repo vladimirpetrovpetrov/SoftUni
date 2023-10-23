@@ -4,15 +4,12 @@ using LogForU.Core.Loggers;
 using LogForU.Core.Loggers.Interfaces;
 using LogForU.Core.Enums;
 using LogForU.Core.Utils;
+using LogForU.Core.Layouts.Interfaces;
+using LogForU.Core.Layouts;
+using LogForU.Core.IO;
+using LogForU.ConsoleApp.Core.Interfaces;
+using LogForU.ConsoleApp.Core;
 
-var consoleAppender = new ConsoleAppender();
+IEngine engine = new Engine();
 
-DateTimeValidator.AddFormat("M/dd/yyyy h:mm:ss tt");
-
-ILogger logger = new Logger(consoleAppender);
-
-logger.Info("3/31/2015 5:33:07 PM", "Everything seems fine");
-logger.Warning("3/31/2015 5:33:07 PM", "Warning: ping is too high - disconnect imminent");
-logger.Error("3/31/2015 5:33:07 PM", "Error parsing request");
-logger.Critical("3/31/2015 5:33:07 PM", "No connection string found in App.config");
-logger.Fatal("3/31/2015 5:33:07 PM", "mscorlib.dll does not respond");
+engine.Run();

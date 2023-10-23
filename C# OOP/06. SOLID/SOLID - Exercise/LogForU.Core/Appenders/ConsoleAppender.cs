@@ -1,5 +1,6 @@
 ﻿using LogForU.Core.Appenders.Interfaces;
 using LogForU.Core.Enums;
+using LogForU.Core.Layouts.Interfaces;
 using LogForU.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -9,22 +10,17 @@ using System.Threading.Tasks;
 
 namespace LogForU.Core.Appenders;
 
-public class ConsoleAppender : IAppender
+public class ConsoleAppender : Appender
 {
-    public ConsoleAppender(ReportLevel reportLevel = ReportLevel.Info)
+    public ConsoleAppender(ILayout layout, ReportLevel reportLevel = ReportLevel.Info)
+         : base(layout, reportLevel)
     {
-        this.ReportLevel = reportLevel;
     }
-    public ReportLevel ReportLevel { get; set; }
 
-    public int MessagesAppended { get; private set; }
-
-    public void AppendMessage(Message message)
+    public override void AppendMessage(Message message)
     {
-        Console.WriteLine(message.CreatedTime);
-        Console.WriteLine(message.Text);
-        Console.WriteLine(message.ReportLevel.ToString());
+        Console.WriteLine(string.Format(Layout.Format, message.CreatedTime, message.ReportLevel, message.Text));
 
-        this.MessagesAppended++;
+        MessagesAppended++;
     }
 }
