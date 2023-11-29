@@ -15,21 +15,21 @@
 
             ImportEntities(context, projectDir + @"Datasets/", projectDir + @"ImportResults/");
 
-            ExportEntities(context, projectDir + @"ExportResults/");
+            //ExportEntities(context, projectDir + @"ExportResults/");
 
-            using (var transaction = context.Database.BeginTransaction())
-            {
-                transaction.Rollback();
-            }
+            //using (var transaction = context.Database.BeginTransaction())
+            //{
+            //    transaction.Rollback();
+            //}
         }
 
         private static void ImportEntities(BoardgamesContext context, string baseDir, string exportDir)
         {
-            var creators =
-                DataProcessor.Deserializer.ImportCreators(context,
-                    File.ReadAllText(baseDir + "creators.xml"));
+            //var creators =
+            //    DataProcessor.Deserializer.ImportCreators(context,
+            //        File.ReadAllText(baseDir + "creators.xml"));
 
-            PrintAndExportEntityToFile(creators, exportDir + "Actual Result - ImportCreators.txt");
+            //PrintAndExportEntityToFile(creators, exportDir + "Actual Result - ImportCreators.txt");
 
             var sellers =
              DataProcessor.Deserializer.ImportSellers(context,
