@@ -1,6 +1,8 @@
 ﻿namespace Footballers.DataProcessor
 {
     using Data;
+    using Newtonsoft.Json;
+    using System.Globalization;
 
     public class Serializer
     {
