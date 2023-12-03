@@ -3,11 +3,13 @@
     using Medicines.Data;
     using Microsoft.EntityFrameworkCore;
     using System;
+    using System.Globalization;
 
     public class StartUp
     {
         public static void Main()
         {
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
             var context = new MedicinesContext();
 
             ResetDatabase(context, shouldDropDatabase: false);
