@@ -1,0 +1,18 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #CCCCCC;
+}
+
+section{
+    margin-left: 20px;
+}
+p.inHeader{
+    font-style: italic;
+}
+header h1{
+    font-size: 28px;
+}
+p.outsideHeader{
+    font-size: 24px;
+}
