@@ -1,0 +1,20 @@
+@font-face {
+    font-family: GreatVibes;
+    src: url("Fonts/GreatVibes-Regular.ttf");
+}
+@font-face {
+    font-family: Raleway;
+    src: url("Fonts/Raleway-VariableFont_wght.ttf");
+}
+
+body h1{
+    font-family: "GreatVibes", cursive;
+    line-height: 1.2;
+    font-weight: bold;
+}
+
+html{
+    font-family: "Raleway",sans-serif;
+    line-height: 1.5;
+    font-size: 16px;
+}
