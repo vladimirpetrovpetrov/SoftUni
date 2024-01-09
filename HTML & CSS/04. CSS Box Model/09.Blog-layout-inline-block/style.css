@@ -1,0 +1,43 @@
+body{
+    font-family: Helvetica, sans-serif;
+    background-color: rgb(238, 238, 238);
+    color: rgb(51, 51, 51);
+    width: 1300px;
+}
+
+article{
+    width: 750px;
+    float: left;
+}
+
+img{
+    width: 75%;
+}
+
+aside{
+    float: right;
+    width: 30%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+Requirements
+•	Change the document title to "Blog Layout Inline Block"
+•	Add font to the document: Helvetica, sans-serif
+•	Use article tag to create an article
+o	Divide the article content into header, section and footer tags
+•	Use aside tag to create aside for the Latest Posts
+•	Use background with color - rgb(238, 238, 238)
+•	Use rgb(51, 51, 51) color for the text --> */
