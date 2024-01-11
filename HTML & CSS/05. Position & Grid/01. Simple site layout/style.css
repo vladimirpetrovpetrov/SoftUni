@@ -1,0 +1,63 @@
+header h1 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+aside ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 5px;
+}
+
+a {
+    display: block;
+    padding: 5px 0px;
+    color: rgb(86, 40, 129);
+    text-decoration: none;
+}
+
+header {
+    grid-area: head;
+}
+
+aside {
+    grid-area: aside
+}
+
+main {
+    grid-area: main
+}
+
+footer {
+    grid-area: footer;
+}
+
+.inGrid{
+    background-color: rgb(181, 216, 255);
+    border-radius: 3px;
+    padding: 5px 10px;
+
+}
+
+body {
+    
+    
+    display: grid;
+    grid-template-columns: 100px auto;
+    grid-template-areas:
+        "head head"
+        "aside main"
+        "footer footer"
+    ;
+    gap: 10px;
+
+}
+
+
+/*
+•	<main> tag that contain:
+o	<h1> text title for the tasks
+o	<ul> tag with:
+	<li> for the tasks with their status
+•	<footer> tag that contain:
+o	<div> with copyright sign and text */
