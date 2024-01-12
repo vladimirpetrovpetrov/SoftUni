@@ -1,0 +1,49 @@
+.card{
+    display: block;
+    height: 320px;
+    position: relative;
+}
+
+.first{
+    background-image: linear-gradient(to right, blue , lightgreen);
+}
+
+.second{
+    background-image: linear-gradient(to right, purple , orange);
+}
+
+img{
+    width: 175px;
+    position: absolute;
+    border: 1px solid black;
+}
+
+.img1{
+    top: 102px;
+    left: 262.5px;
+}
+
+.img2{
+    top: 29px;
+    left: 262.5px;
+}
+
+.viewport{
+width: 700px;
+}
+
+.fa-link{
+    color: white;
+    display: inline-block;
+    position: absolute;
+    top: 198px;
+    left: 413px;
+}
+
+.fa-star{
+    color: white;
+    display: inline-block;
+    position: absolute;
+    top: 270px;
+    left: 415px;
+}
