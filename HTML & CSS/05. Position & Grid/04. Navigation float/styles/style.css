@@ -1,0 +1,120 @@
+body {
+    padding: 48px 64px;
+    background-color: rgb(238, 238, 238);
+    font-family: Georgia, serif;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 10% 90%;
+    grid-template-areas:
+        "head head head head"
+        "main main main aside"
+    ;
+    row-gap: 20px;
+    column-gap: 50px;
+}
+
+header {
+    grid-area: head;
+    position: relative;
+}
+
+hr {
+    margin: 0px;
+}
+
+main {
+    grid-area: main;
+}
+
+aside {
+    grid-area: aside;
+}
+
+.mainHeading {
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 0px;
+}
+
+nav {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(0, 102, 0);
+}
+
+ul.firstList {
+    list-style: none;
+    margin-bottom: 0px;
+}
+
+ul.firstList li {
+    display: inline;
+    margin-left: 16px;
+}
+
+.img1 {
+    float: right;
+    height: 250px;
+    margin: 12px;
+    border: 2px solid black;
+    padding: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0;
+}
+
+p {
+    margin-bottom: 16px;
+}
+
+h2 {
+    padding-top: 16px;
+}
+
+h1 {
+    padding-bottom: 16px;
+}
+
+h2 {
+    padding-bottom: 16px;
+}
+
+.img2 {
+    float: left;
+    margin-right: 28px;
+    margin-bottom: 12px;
+    border: 2px solid black;
+    padding: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0;
+}
+
+
+div.half p {
+    display: inline-block;
+    width: 47%;
+    vertical-align: top;
+    margin-right: 25px;
+}
+
+div.half blockquote {
+    display: inline-block;
+    width: 49%;
+    font-style: italic;
+    margin-bottom: 16px;
+    vertical-align: top;
+
+}
+
+div.half blockquote p {
+    width: 100%;
+    margin: 0px;
+    padding: 25px;
+    border-left: 2px solid lightgray;
+}
+
+blockquote p:last-child {
+    text-align: right; 
+}
