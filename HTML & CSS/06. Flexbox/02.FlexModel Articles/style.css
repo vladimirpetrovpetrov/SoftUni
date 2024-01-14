@@ -1,0 +1,17 @@
+*{
+    box-sizing: border-box;
+    line-height: 1.5;
+    font-family: Helvetica, sans-serif;
+}
+
+section h2 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+section{
+    display: flex;
+    justify-content: space-between;
+    max-width:  70vw;
+    gap: 26px;
+    padding: 58px 124px;
+}
