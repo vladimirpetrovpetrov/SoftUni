@@ -1,0 +1,30 @@
+body{
+    padding: 48px 62px;
+}
+
+h1{
+    text-transform: uppercase;
+    margin-bottom: 0px;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+}
+
+ul{
+    display: flex;
+    list-style: none;
+    margin-bottom: 0px;
+}
+
+ul li a{
+    text-decoration: 0;
+    color: rgb(0, 153, 0);
+    margin-right: 20px;
+}
+
+ul li:last-child{
+    margin-right: 0px;
+}
+
