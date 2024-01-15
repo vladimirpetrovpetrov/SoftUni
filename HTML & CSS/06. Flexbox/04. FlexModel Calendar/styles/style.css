@@ -1,0 +1,47 @@
+*{
+  box-sizing: border-box;
+}
+
+.container{
+  max-width: 85vw;
+  display: flex;
+}
+
+.container section{
+  display: flex; 
+  text-align: center;
+}
+span{
+  border: 1px solid black;
+  padding: 12px; /*extra*/
+  display: block;
+}
+
+.container .notes{
+  flex-direction: column;
+  width: 25%;
+}
+
+.container .week{
+  width: 75%;
+  flex-wrap: wrap;
+}
+
+.container .week span{
+  width: 20%;
+}
+
+.container .week span:nth-child(1),
+.container .week span:nth-child(7 )
+{
+  width: 100%;
+}
+
+div.container section.week span:nth-child(8),
+div.container section.week span:nth-child(9){
+  width: 50%;
+}
+
+.container .notes span{
+  flex: 1 1 50%
+}
