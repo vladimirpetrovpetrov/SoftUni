@@ -1,0 +1,21 @@
+body{
+    display: flex;
+    flex-wrap: wrap;
+    width: 65vw;
+}
+
+ul{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+li{
+    display: flex;
+}
+ul li img{
+    padding: 24px 12px;
+    border: 6px solid black;
+    object-fit: contain;
+}
+
