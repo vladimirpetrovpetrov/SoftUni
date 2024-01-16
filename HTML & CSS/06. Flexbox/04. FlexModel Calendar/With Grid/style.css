@@ -1,0 +1,40 @@
+.container{
+    display: grid;
+    grid-template-columns: repeat(10,1fr) 25%;
+    grid-template-rows: repeat(4,50px);
+    text-align: center;
+}
+
+.container .item{
+    border: 1px solid black;
+    padding: 12px;
+    display: block;
+}
+
+.container .item:nth-child(1),
+.container .item:nth-child(8){
+    grid-column: 1 / span 10; 
+}
+
+.container .item:nth-child(2){
+    grid-column: 11; 
+    grid-row: 1 / span 2;
+   
+}
+
+.container .item:nth-child(9){
+    grid-column: 11;
+    grid-row: 3/ span 4;
+}
+
+.container .item{
+    grid-column: span 2;
+}
+
+.container .item:nth-child(10){
+    grid-column: span 5;
+}
+.container .item:nth-child(11){
+    grid-column: span 5;
+}
+
