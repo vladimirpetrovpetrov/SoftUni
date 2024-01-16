@@ -13,9 +13,10 @@ body {
   color: #fff;
 }
 
-p{
-color: rgb(126, 139, 182);
+p {
+  color: rgb(126, 139, 182);
 }
+
 /* Navigation Section */
 
 .header {
@@ -23,13 +24,13 @@ color: rgb(126, 139, 182);
   display: flex;
   align-items: center;
   gap: 12px;
-  border-bottom: 1px solid  rgb(126, 139, 182);
+  border-bottom: 1px solid rgb(126, 139, 182);
   position: sticky;
   top: 0px;
   background-color: #070e27;
 }
 
-.header .navigation{
+.header .navigation {
   margin-left: auto;
   margin-right: 24px;
 }
@@ -39,16 +40,17 @@ color: rgb(126, 139, 182);
   gap: 12px;
 }
 
-.header .nav-list a{
+.header .nav-list a {
   text-decoration: none;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 700;
 }
+
 /* Button section */
 
-.btn{
+.btn {
   border: none;
   border-radius: 4px;
   background-color: rgb(22, 32, 68);
@@ -57,17 +59,17 @@ color: rgb(126, 139, 182);
   cursor: pointer;
 }
 
-.btn.btn-primary{
+.btn.btn-primary {
   background-color: rgb(0, 89, 247);
 }
 
 /* Hero section */
 
-#hero{
+#hero {
   padding: 70px 64px;
 }
 
-#hero .welcome{
+#hero .welcome {
   max-width: 900px;
   margin: 0 auto 48px auto;
   display: flex;
@@ -75,32 +77,80 @@ color: rgb(126, 139, 182);
   align-items: center;
 }
 
-#hero .welcome h1:nth-of-type(1){
+#hero .welcome h1:nth-of-type(1) {
   width: 45%;
 }
 
-#hero .welcome div:nth-of-type(1){
+#hero .welcome div:nth-of-type(1) {
   width: 45%;
 }
 
-#hero .welcome .title{
+#hero .welcome .title {
   font-size: 48px;
   line-height: 1.2;
 }
 
-#hero .welcome .info{
+#hero .welcome .info {
   margin-bottom: 12px;
 }
 
-#hero .hero-img{
+#hero .hero-img {
   margin: 0 auto 38px auto;
 }
 
-#hero .partners{
+#hero .partners {
   max-width: 900px;
-  margin: 0 auto ;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 8px;
+}
+
+/* How Section */
+
+#how {
+  padding: 70px 64px;
+}
+
+#how .section-subtitle {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+#how .section-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 48px;
+}
+
+#how .row {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  max-width: 900px;
+  margin: 0 auto 48px auto;
+}
+
+#how .row:nth-child(even){
+  flex-direction: row-reverse;
+}
+
+#how .row:last-child{
+  margin-bottom: 0;
+}
+
+
+#how .row .row-img {
+  width: 65%;
+}
+
+#how .row .title {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+#how .row .title p {
+  font-size: 14px;
 }
