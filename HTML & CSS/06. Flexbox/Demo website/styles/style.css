@@ -1,40 +1,51 @@
-body{
+/* 
+colors:
+background - #070e27;
+primary blue - rgb(0, 89, 247)
+bg-light - rgb(22, 32, 68)
+gray-color - rgb(126, 139, 182)
+*/
+
+
+body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #070e27;
+  color: #fff;
 }
 
-.header{
-    background-color: #234465;
-  box-shadow: 0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12),0 1px 3px 0 rgba(0,0,0,.2);
-  padding: 12px 32px;
+.header {
+  padding: 16px 64px;
   display: flex;
   align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid  rgb(126, 139, 182);
+  position: sticky;
+  top: 0px;
 }
 
-.navigation .nav-item a{
-  color: white;
+.header .navigation{
+  margin-left: auto;
+  margin-right: 24px;
+}
+
+.header .nav-list {
+  display: flex;
+  gap: 12px;
+}
+
+.header .nav-list a{
   text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
 }
 
-.navigation .list{
-display: flex;
-gap: 12px;
-}
-
-button{
-  all: unset;
-  padding: 4px 8px;
+.header .login-btn{
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(22, 32, 68);
+  color: #fff;
+  padding: 8px 20px;
   cursor: pointer;
-  color: white;
-}
-
-.header .logo{
-  margin-right: 50px;
-}
-
-button.btn-search{
-  margin-right: 12px;
-}
-
-.navigation{
-  margin-right: auto;
 }
