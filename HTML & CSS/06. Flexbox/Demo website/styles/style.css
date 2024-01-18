@@ -154,3 +154,74 @@ p {
 #how .row .title p {
   font-size: 14px;
 }
+
+/* Media Query for Section 1 , Less than 768 px */
+
+@media screen and (max-width: 767px){
+
+  #hero .welcome {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+
+  #hero .welcome h1:nth-of-type(1) {
+    width: 100%;
+  }
+
+  #hero .welcome div:nth-of-type(1) {
+    width: 60%;
+  }
+
+  /* How Section */
+
+  #how .row {
+    gap: 18px;
+  }
+  
+  #how .row:last-child{
+    margin-bottom: 36px;
+  }
+  
+  
+  #how .row .row-img {
+    width: 50%;
+  }
+}
+
+
+@media screen and (max-width:600px){
+/* Header Section*/
+.header .navigation {
+  display: none;
+}
+
+.header .btn{
+  margin-left: auto;
+}
+
+
+
+
+/*  Hero Section*/
+
+  #hero .welcome div:nth-of-type(1) {
+    width: 80%;
+}
+
+/* How Section */
+
+  #how .row {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #how .row:nth-child(even){
+    flex-direction: column;
+  }
+  
+  #how .row .row-img {
+    width: 80%;
+  }
+
+}
