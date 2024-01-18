@@ -63,6 +63,21 @@ p {
   background-color: rgb(0, 89, 247);
 }
 
+/* Global Styles */
+
+.section-subtitle {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 48px;
+}
+
+
 /* Hero section */
 
 #hero {
@@ -113,17 +128,6 @@ p {
   padding: 70px 64px;
 }
 
-#how .section-subtitle {
-  text-align: center;
-  font-size: 14px;
-  margin-bottom: 8px;
-}
-
-#how .section-title {
-  text-align: center;
-  font-size: 32px;
-  margin-bottom: 48px;
-}
 
 #how .row {
   display: flex;
@@ -133,11 +137,11 @@ p {
   margin: 0 auto 48px auto;
 }
 
-#how .row:nth-child(even){
+#how .row:nth-child(even) {
   flex-direction: row-reverse;
 }
 
-#how .row:last-child{
+#how .row:last-child {
   margin-bottom: 0;
 }
 
@@ -155,9 +159,9 @@ p {
   font-size: 14px;
 }
 
-/* Media Query for Section 1 , Less than 768 px */
+/* Media Queries*/
 
-@media screen and (max-width: 767px){
+@media screen and (max-width: 767px) {
 
   #hero .welcome {
     flex-direction: column;
@@ -178,50 +182,121 @@ p {
   #how .row {
     gap: 18px;
   }
-  
-  #how .row:last-child{
+
+  #how .row:last-child {
     margin-bottom: 36px;
   }
-  
-  
+
+
   #how .row .row-img {
     width: 50%;
   }
 }
 
 
-@media screen and (max-width:600px){
-/* Header Section*/
-.header .navigation {
-  display: none;
-}
+@media screen and (max-width:600px) {
 
-.header .btn{
-  margin-left: auto;
-}
+  /* Header Section*/
+  .header .navigation {
+    display: none;
+  }
+
+  .header .btn {
+    margin-left: auto;
+  }
 
 
 
 
-/*  Hero Section*/
+  /*  Hero Section*/
 
   #hero .welcome div:nth-of-type(1) {
     width: 80%;
-}
+  }
 
-/* How Section */
+  /* How Section */
 
   #how .row {
     flex-direction: column;
     text-align: center;
   }
 
-  #how .row:nth-child(even){
+  #how .row:nth-child(even) {
     flex-direction: column;
   }
-  
+
   #how .row .row-img {
     width: 80%;
   }
 
+}
+
+/* Pricing + mobile first approach  */
+#pricing{
+  padding: 70px 64px;
+}
+
+#pricing .plans .plan{
+padding: 12px 18px;
+border-radius: 6px;
+background-color: rgb(22, 32, 68);
+}
+
+#pricing .plans .plan:not(:last-child){
+  margin-bottom: 24px;
+}
+
+#pricing .plans .plan .title{
+font-size: 18px;
+font-weight: normal;
+color: #7e8bb6;
+padding-bottom: 36px;
+border-bottom: 1px solid #7e8bb6;
+margin-bottom: 36px;
+}
+
+#pricing .plans .plan .title .price{
+  display: block;
+  font-size: 26px;
+  font-weight: bold;
+  color: #fff;
+}
+
+#pricing .plans .plan .title .price .dollar-sign{
+   color: #7e8bb6;
+}
+
+#pricing .plans .plan .features{
+  color: #7e8bb6;
+  margin: 0 12px 36px 12px;
+}
+
+#pricing .plans .plan .features .feature:not(:last-child){
+  margin-bottom: 16px;
+}
+/* Media Queries Section Pricing */
+
+@media screen and (min-width: 560px) {
+  #pricing .plans{
+    max-width: 900px;
+    margin: 0 auto 48px auto;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 16px;
+  }
+
+  #pricing .plans .plan:not(:last-child){
+    margin-bottom: 0px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #pricing .plans{
+    grid-template-columns: repeat(3,1fr);
+    align-items: end;
+  }
+
+  #pricing .plans .plan.promo{
+    margin-bottom: 36px;
+   }
 }
