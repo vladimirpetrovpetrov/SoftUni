@@ -1,0 +1,114 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(238, 238, 238);
+    font-size: 23px;
+}
+
+.page{
+    max-width: 1100px;
+    padding: 24px 68px;
+    margin: 0px auto 0px auto;
+}
+
+blockquote{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    display: inline-block;
+    width: 49%;
+    vertical-align: top;
+    border-left: 4px solid lightgray;
+    padding-left: 36px;
+    font-style: italic;
+    margin: 0px;
+    color: gray;
+}
+
+img{
+    background-color: rgb(255, 255, 255);
+}
+
+.img1{
+    float: right;
+    border: 2px solid black;
+    padding: 8px;
+    height: 170px;
+}
+
+.img2{
+    float: left;
+    border: 2px solid black;
+    padding: 8px;
+    margin-right: 18px;
+    height: 120px;
+}
+
+.half{
+    display: inline-block;
+    width: 49%;
+    padding-right: 23px ;
+}
+
+ul li a{
+    color: rgb(0, 153, 0);
+}
+
+blockquote p:last-child{
+    text-align: right;
+}
+
+@media screen and (max-width:1800px){
+
+body{
+    font-size: 21px;
+}
+
+
+}
+
+@media screen and (max-width:1300px){
+    body{
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width:800px){
+    body{
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width:600px){
+    body{
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width:500px){
+    body{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width:400px){
+    .img1{
+        float: none;
+    }
+
+    .half{
+        display: block;
+        width: 100%;
+        padding-right: 0px;
+    }
+
+    blockquote{
+        width: 100%;
+    }
+
+    .img2{
+        float: none;
+    }
+
+
+}
