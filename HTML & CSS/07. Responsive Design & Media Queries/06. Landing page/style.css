@@ -1,0 +1,299 @@
+body {
+    max-width: 1400px;
+    padding: 12px 0px;
+    margin: 0px auto 0px auto;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(238, 238, 238);
+}
+
+/* GLOBAL */
+
+h1 {
+    font-size: 42px;
+}
+
+p {
+    font-size: 20px;
+}
+
+h3 {
+    font-weight: 700;
+}
+
+/* HEADER */
+
+header {
+    margin-bottom: 86px;
+}
+
+.header-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1;
+}
+
+header h1 {
+    color: purple;
+}
+
+header ul {
+    display: flex;
+    gap: 48px;
+}
+
+header ul li a {
+    font-size: 24px;
+    color: black;
+}
+
+header p {
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+header div.hidden-menu {
+    display: none;
+}
+
+
+/* MAIN */
+
+/* Section Need a website? */
+
+.need {
+    display: flex;
+    width: 1000px;
+    margin: 0px auto 48px auto;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 86px;
+}
+
+.need h1 {
+    text-align: left;
+}
+
+.need .need-content {
+    width: 70%;
+}
+
+.need i {
+    font-size: 180px;
+    color: black;
+}
+
+.need-content .btn {
+    background-color: rgb(238, 238, 238);
+    border-radius: 2px;
+}
+
+/* Section Our Team */
+.team {
+    width: 1000px;
+    margin: 0px auto 48px auto;
+}
+
+main h1 {
+    text-align: center;
+}
+
+.team-img-cont {
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+    overflow: hidden;
+
+}
+
+.team-img-cont img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-subcont {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.team-main-info {
+    line-height: 1;
+}
+
+.team-cont {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 64px;
+}
+
+.team hr {
+    width: 120px;
+    /* Set the desired width */
+    height: 6px;
+    /* Set the desired thickness */
+    background-color: black;
+    /* Optional: Set a background color */
+    border: none;
+    /* Remove the default border for a cleaner look */
+    margin: 0 auto;
+    /* Center the <hr> with auto margin on the sides */
+    margin-bottom: 48px;
+}
+
+.hr-div {
+    text-align: center;
+}
+
+.team p {
+    font-weight: 600;
+}
+
+/* Section Sign-up */
+
+.signUp {
+    text-align: center;
+    background-color: rgb(102, 40, 131);
+    padding: 36px 0px;
+    margin-bottom: 48px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.6);
+    border-radius: 1px;
+}
+
+.signUp h1 {
+    color: white;
+    font-size: 38px;
+    margin-bottom: 18px;
+}
+
+.signUp input {
+    width: 30%;
+    margin-right: 5px;
+}
+
+.signUp hr {
+    width: 120px;
+    /* Set the desired width */
+    height: 6px;
+    /* Set the desired thickness */
+    background-color: #000000;
+    /* Optional: Set a background color */
+    border: none;
+    /* Remove the default border for a cleaner look */
+    margin: 0 auto;
+    /* Center the <hr> with auto margin on the sides */
+    margin-bottom: 48px;
+}
+
+/* Testimonial */
+.testimonial {}
+
+/* Footer */
+footer {
+    background-color: rgb(238, 238, 238);
+    box-shadow: 0px -10px 20px -10px rgba(0, 0, 0, 0.7);
+}
+
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px;
+}
+
+footer .main-foot {
+    width: 30%;
+}
+
+footer .sitemap-foot {
+    width: 30%;
+}
+
+footer .sitemap-foot ul {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 110px;
+}
+
+footer .contacts-foot {
+    width: 30%;
+}
+
+@media screen and (max-width:1010px) {
+    header nav {
+        display: none;
+    }
+
+    header div.hidden-menu {
+        display: inline-block;
+        display: flex;
+        gap: 4px;
+        justify-content: center;
+        line-height: 1;
+        align-items: center;
+    }
+
+    header div.hidden-menu p {
+        margin: 0px;
+        font-size: 18px;
+    }
+
+    header {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .need {
+        display: flex;
+        width: 1000px;
+        margin: 0px auto 48px auto;
+        margin-bottom: 86px;
+    }
+
+    .need h1 {
+        text-align: left;
+    }
+
+    .need .need-content {
+        width: 50%;
+        margin-left: 16px;
+    }
+
+    .need i {
+        width: 30%;
+        font-size: 180px;
+        color: black;
+        align-self: flex-start;
+    }
+
+    .need-content .btn {
+        background-color: rgb(238, 238, 238);
+        border-radius: 2px;
+    }
+
+    .team-subcont {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        width: 44%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer {
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (max-width:1010px){
+    
+}
