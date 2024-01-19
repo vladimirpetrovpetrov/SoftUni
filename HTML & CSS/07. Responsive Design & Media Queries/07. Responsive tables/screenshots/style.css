@@ -1,0 +1,39 @@
+table{
+    width: 80%;
+    text-align: left;
+    border-collapse: collapse;
+    margin: 24px auto 0 auto;
+}
+
+/* table tr{
+    width: 33%;
+} */
+
+thead{
+    background-color: rgb(32, 32, 32);
+    color: white;
+}
+
+thead th, tbody td{
+    padding-left: 6px;
+}
+
+tbody tr:first-child{
+    background-color: rgb(233, 233, 233);
+}
+
+tbody tr:nth-child(2){
+    background-color: rgb(247, 247, 247);
+}
+
+td, th{
+    border: 1px solid lightgray;
+    margin: 0px;
+    width: 33%;
+}
+
+@media screen and (max-width:1440px) {
+    table{
+        width: 95%;
+    }
+}
