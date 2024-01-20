@@ -1,0 +1,68 @@
+@media (max-width:600px) {
+    .hero img{
+        display: none;
+    }
+
+    .navbar{
+        justify-content: center;
+    }
+
+    .navbar-light .navbar-brand{
+        margin-right: 0px;
+    }
+
+    .container {
+        text-align: center;
+        max-width: 500px;
+    }
+
+    .hero-btns{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 200px;
+    }
+
+    .hero-btns a:first-child{
+        padding-left: 60px;
+        padding-left: 60px;
+    }
+
+    .hero-btns a:last-child{
+        padding-left: 60px;
+        padding-left: 60px;
+    }
+    /* Anything you need */
+    .col-sm-6{
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 50px;
+    }
+
+    .side2-img img{
+        top:2000px;
+    }
+    /* About */
+
+    .about .row {
+        gap: 80px;
+    }
+
+    /* Contancts */
+    #contact-us .contact-btn{
+        display: none;
+    }
+
+     /*Footer  */
+
+    .col-12 .contact-nav{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    footer h6{
+        padding-bottom: 0px;
+    }
+
+}
