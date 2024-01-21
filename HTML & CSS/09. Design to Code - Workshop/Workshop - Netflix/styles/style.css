@@ -168,9 +168,11 @@ body {
 }
 
 /* Trial */
-#trial{
+#trial {
     background-color: black;
+    margin-bottom: 0.3rem;
 }
+
 #trial .trial-div {
     text-align: center;
     padding-top: 1.25rem;
@@ -191,6 +193,33 @@ body {
 
 #trial .trial-div .form .btn {
     padding: 0.5rem 0.75rem;
+}
+
+/* Footer */
+footer{
+    background-color: black;
+}
+footer .wrapper {
+    background-color: black;
+    padding: 2rem 2rem 2rem 2rem;
+    font-size: 0.75rem;
+    color: gray;
+    
+}
+
+footer .wrapper .p-title {
+    margin-bottom: 1.3rem;
+}
+
+footer .wrapper .footer-cont {
+    margin-bottom: 1.3rem;
+}
+
+footer .links{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    /* grid-template-rows: repeat(8,1fr); */
+    gap: 12px;
 }
 
 
@@ -217,8 +246,9 @@ body {
     #hero .form .input {
         border-radius: 0px;
     }
-     /* FAQ */
-     #faq h2 {
+
+    /* FAQ */
+    #faq h2 {
         text-align: center;
         margin-bottom: 1rem;
         font-size: 2rem;
@@ -236,12 +266,18 @@ body {
         width: 55%;
         margin-bottom: 0px;
     }
-    
+
     #trial .trial-div .form .btn {
         padding: 0.5rem 0.75rem;
     }
 
-   
+    /* Footer */
+
+    
+    footer .links{
+        grid-template-columns: repeat(3,1fr);
+    }
+
 
 
 }
@@ -312,21 +348,22 @@ body {
     }
 
     /* Trial */
-    #trial .trial-div{
+    #trial .trial-div {
         max-width: 650px;
         margin-left: auto;
         margin-right: auto;
         padding-left: 0px;
         padding-right: 0px;
     }
-    #trial .trial-div .form{
+
+    #trial .trial-div .form {
         justify-content: flex-start;
         /* border:1px var(--clr-gray) solid; */
         border-radius: 4px;
         overflow: hidden;
     }
 
-    #trial .trial-div .form{
+    #trial .trial-div .form {
         margin-bottom: 2rem;
     }
 
@@ -335,13 +372,19 @@ body {
         margin-bottom: 0px;
         border: none;
     }
-    
+
     #trial .trial-div .form .btn {
         width: 40%;
         padding: 0.5rem 0.75rem;
         border-radius: 0;
     }
-    
+
+    /* Footer */
+    footer .wrapper {
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
 }
 
@@ -370,7 +413,9 @@ body {
         margin-bottom: 1rem;
         font-size: 2rem;
     }
-
+    footer .links{
+        grid-template-columns: repeat(4,1fr);
+    }
 
 
 
