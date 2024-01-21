@@ -5,6 +5,7 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--clr-gray);
 }
 
 /* Global */
@@ -15,6 +16,33 @@ body {
     padding: 0.25rem 1rem;
     color: white;
 }
+
+/* Sections */
+
+
+.content-section{
+    background-color: black;
+    padding: 2rem 1rem;
+    color: white;
+    text-align: center;
+    margin-top: 0.35rem;
+}
+
+.content-section .content{
+    margin-bottom: 1.25rem;
+}
+
+.content-section .title{
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.content-section .desc{
+    font-size: 1rem;
+}
+
+
+
 
 
 /* Header */
