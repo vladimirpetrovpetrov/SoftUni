@@ -137,6 +137,39 @@ body {
     font-weight: normal;
 }
 
+/* FAQ */
+#faq {
+    color: white;
+    background-color: black;
+    margin-top: 0.35rem;
+    padding-top: 3rem;
+}
+
+#faq .faq-list .faq-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    background-color: var(--clr-gray);
+    align-items: center;
+    height: 3rem;
+}
+
+#faq .faq-list .faq-item:not(:last-child){
+    margin-bottom: 0.5rem;
+}
+
+#faq .faq-list .faq-item span{
+    font-size: 2rem;
+}
+
+#faq h2{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+
+
+
 @media screen and (min-width:640px) {
 
     /* Hero */
@@ -167,30 +200,30 @@ body {
     /* Sections */
 
     .content-section {
-        
+
         padding: 4rem 2rem;
         text-align: left;
         margin-top: 0.35rem;
 
-        
+
     }
 
-    .content-section .wrapper{
+    .content-section .wrapper {
         max-width: 1000px;
         margin-left: auto;
         margin-right: auto;
         display: grid;
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
         align-items: center;
     }
-    
+
     .content-section .content {
         margin-bottom: 0;
     }
-    
-    .content-section:nth-of-type(odd) .content{
-        order:2;
+
+    .content-section:nth-of-type(odd) .content {
+        order: 2;
     }
 
     /* Hero */
