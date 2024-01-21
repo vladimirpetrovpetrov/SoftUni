@@ -154,19 +154,44 @@ body {
     height: 3rem;
 }
 
-#faq .faq-list .faq-item:not(:last-child){
+#faq .faq-list .faq-item:not(:last-child) {
     margin-bottom: 0.5rem;
 }
 
-#faq .faq-list .faq-item span{
+#faq .faq-list .faq-item span {
     font-size: 2rem;
 }
 
-#faq h2{
+#faq h2 {
     text-align: center;
     margin-bottom: 1rem;
 }
 
+/* Trial */
+#trial{
+    background-color: black;
+}
+#trial .trial-div {
+    text-align: center;
+    padding-top: 1.25rem;
+    background-color: black;
+    color: white;
+    padding: 1.25rem 1rem 2.75rem 1rem;
+}
+
+#trial .trial-div .trial-desc {
+    margin-bottom: 0.75rem;
+}
+
+#trial .trial-div .form .trial-input {
+    width: 100%;
+    margin-bottom: 0.75rem;
+    padding: 0.5rem 0.45rem;
+}
+
+#trial .trial-div .form .btn {
+    padding: 0.5rem 0.75rem;
+}
 
 
 
@@ -192,6 +217,33 @@ body {
     #hero .form .input {
         border-radius: 0px;
     }
+     /* FAQ */
+     #faq h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+    }
+
+    /* Trial */
+    #trial .trial-div .form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.25px;
+    }
+
+    #trial .trial-div .form .trial-input {
+        width: 55%;
+        margin-bottom: 0px;
+    }
+    
+    #trial .trial-div .form .btn {
+        padding: 0.5rem 0.75rem;
+    }
+
+   
+
+
 }
 
 @media screen and (min-width:768px) {
@@ -252,7 +304,44 @@ body {
         max-width: 100%;
     }
 
+    /* FAQ */
+    #faq .wrapper {
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
+    /* Trial */
+    #trial .trial-div{
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    #trial .trial-div .form{
+        justify-content: flex-start;
+        /* border:1px var(--clr-gray) solid; */
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    #trial .trial-div .form{
+        margin-bottom: 2rem;
+    }
+
+    #trial .trial-div .form .trial-input {
+        width: 60%;
+        margin-bottom: 0px;
+        border: none;
+    }
+    
+    #trial .trial-div .form .btn {
+        width: 40%;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0;
+    }
+    
 
 }
 
@@ -273,4 +362,17 @@ body {
     #hero .subtitle {
         margin-bottom: 2rem;
     }
+
+    /* FAQ */
+
+    #faq h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+    }
+
+
+
+
+
 }
