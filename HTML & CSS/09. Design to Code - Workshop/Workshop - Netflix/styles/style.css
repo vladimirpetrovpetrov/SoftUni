@@ -1,0 +1,110 @@
+:root {
+    --clr-red: #e30914;
+    --clr-gray: #222222;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Global */
+.btn {
+    background-color: var(--clr-red);
+    border: none;
+    border-radius: 4px;
+    padding: 0.25rem 1rem;
+    color: white;
+}
+
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    padding: 0 1rem;
+    z-index: 10;
+}
+
+/* Hero */
+#hero {
+    height: 100vh;
+    position: relative;
+    color: white;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#hero::before{
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+height: 100%;
+width: 100%;
+background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,1) 100%); 
+z-index: -1;
+opacity: 0.8;
+}
+
+
+#hero .hero-bg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+#hero .wrapper {
+    width: 90%;
+}
+
+#hero .title {
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+}
+
+#hero .subtitle {
+    font-size: 1rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    font-weight: normal;
+}
+
+#hero form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+#hero .form input {
+    border: 1px solid var(--clr-gray);
+    padding: 0.75rem 1.25rem;
+    width: 100%;
+    border-radius: 4px;
+}
+
+#hero .form .btn{
+    padding: .75rem 1.25rem;
+}
+
+#hero .desc {
+    font-size: 1rem;
+    line-height: 1.2;
+    font-weight: normal;
+}
