@@ -84,7 +84,7 @@ opacity: 0.8;
     font-weight: normal;
 }
 
-#hero form {
+#hero .form {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -108,3 +108,76 @@ opacity: 0.8;
     line-height: 1.2;
     font-weight: normal;
 }
+
+@media screen and (min-width:640px){
+    /* Hero */
+    #hero .form {
+        flex-direction: row;
+        gap: 0;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    #hero .form .btn {
+        width: 180px;
+        flex-shrink: 0;
+        border-radius: 0px;
+    }
+
+    #hero .form .input{
+        border-radius: 0px;
+    }
+}
+
+@media screen and (min-width:768px){
+/* Hero */
+#hero .wrapper{
+    max-width: 760px;
+}
+
+
+
+#hero .title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+#hero .subtitle{
+    font-size: 1.5rem;
+}
+
+#hero .form,
+#hero .desc,
+#hero .subtitle {
+    margin-bottom: 1.5rem;
+}
+
+#hero .form{
+    max-width: 100%;
+}
+
+
+
+}
+
+@media screen and (min-width:1440px){
+    /* Hero */
+    
+    #hero .title {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
+    
+    #hero .subtitle{
+        font-size: 2rem;
+    }
+    
+    #hero .form,
+    #hero .desc,
+    #hero .subtitle {
+        margin-bottom: 2rem;
+    }
+    }
