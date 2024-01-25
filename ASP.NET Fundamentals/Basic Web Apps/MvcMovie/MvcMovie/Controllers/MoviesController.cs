@@ -22,26 +22,21 @@ namespace MvcMovie.Controllers
         // GET: Movies
         public async Task<IActionResult> Index(string movieGenre, string searchString)
         {
-            if(_context.Movie == null)
-            {
-                return Problem("Entity set 'MvcMovieContext.Movie' is null.");
-            }
-
+            // Use LINQ to get list of genres.
             IQueryable<string> genreQuery = from m in _context.Movie
                                             orderby m.Genre
                                             select m.Genre;
-
             var movies = from m in _context.Movie
                          select m;
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
                 movies = movies.Where(s => s.Title!.Contains(searchString));
             }
 
             if (!string.IsNullOrEmpty(movieGenre))
             {
-                movies = movies.Where(x=>x.Genre == movieGenre);
+                movies = movies.Where(x => x.Genre == movieGenre);
             }
 
             var movieGenreVM = new MovieGenreViewModel
@@ -50,20 +45,13 @@ namespace MvcMovie.Controllers
                 Movies = await movies.ToListAsync()
             };
 
-
-
             return View(movieGenreVM);
-        }
-        [HttpPost]
-        public string Index(string searchString, bool notUsed)
-        {
-            return "From [HttpPost]Index: filter on " + searchString;
         }
 
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Movie == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -101,10 +89,9 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Movies/Edit/5
-        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Movie == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -155,7 +142,7 @@ namespace MvcMovie.Controllers
         // GET: Movies/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Movie == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -175,23 +162,15 @@ namespace MvcMovie.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Movie == null)
-            {
-                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
-            }
             var movie = await _context.Movie.FindAsync(id);
-            if (movie != null)
-            {
-                _context.Movie.Remove(movie);
-            }
-            
+            _context.Movie.Remove(movie);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MovieExists(int id)
         {
-          return (_context.Movie?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _context.Movie.Any(e => e.Id == id);
         }
     }
 }
