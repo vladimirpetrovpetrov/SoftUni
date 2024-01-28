@@ -30,6 +30,17 @@ namespace MVCIntroDemo.Controllers
             return View();
         }
 
+        public IActionResult Numbers ()
+        {
+            ViewBag.Title = "Nums 1 ... 50";
+            return View();
+        }
+
+        public IActionResult NumbersToN(int n = 3)
+        {
+            ViewBag.Count = n;
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
