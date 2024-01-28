@@ -1,9 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreIntro2024.Contracts;
+using AspNetCoreIntro2024.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreIntro2024.Controllers
 {
     public class IntroController : Controller
     {
+        private readonly IStudentService studentService;
+
+       public IntroController(IStudentService _studentService)
+        {
+            studentService = _studentService;
+        }
+
         public IActionResult Index()
         {
             ViewData["Title"] = "Intro";
@@ -17,6 +26,30 @@ namespace AspNetCoreIntro2024.Controllers
 
                 return View("Number", number);
             }
+        }
+
+        public IActionResult GetStudentData(int id)
+        {
+            ViewBag.Title = "GetStudentData";
+
+            var model = studentService.GetStudent(id);
+
+            return View("StudentData",model);
+        }
+
+        public IActionResult EditStudent(Student model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View("StudentDate", model);
+            }
+
+            if (studentService.UpdateStudent(model))
+            {
+                return RedirectToAction(nameof(GetStudentData), new {id = model.Id});
+            };
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Article()
