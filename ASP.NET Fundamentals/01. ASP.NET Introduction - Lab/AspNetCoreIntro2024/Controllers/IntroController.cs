@@ -41,7 +41,7 @@ namespace AspNetCoreIntro2024.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return View("StudentDate", model);
+                return View("StudentData", model);
             }
 
             if (studentService.UpdateStudent(model))
