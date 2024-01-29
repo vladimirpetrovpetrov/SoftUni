@@ -15,6 +15,9 @@ namespace MVCIntroDemo.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Index page opened.");
+            _logger.LogDebug("This is logdebug message");
+
             return View();
         }
 

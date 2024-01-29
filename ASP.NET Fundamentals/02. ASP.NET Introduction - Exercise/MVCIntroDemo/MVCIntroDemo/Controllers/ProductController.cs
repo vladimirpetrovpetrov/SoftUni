@@ -1,10 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVCIntroDemo.Models.Product;
+using System.Text.Json;
 
 namespace MVCIntroDemo.Controllers
 {
     public class ProductController : Controller
     {
+        private readonly ILogger<ProductController> logger;
+
+        public ProductController(ILogger<ProductController> logger)
+        {
+            this.logger = logger;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -24,6 +32,15 @@ namespace MVCIntroDemo.Controllers
             }
 
             return View(product);
+        }
+
+        public IActionResult AllAsJson()
+        {
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+            };
+            return Json(_products,options);
         }
 
         private IEnumerable<ProductViewModel> _products = new List<ProductViewModel>()
