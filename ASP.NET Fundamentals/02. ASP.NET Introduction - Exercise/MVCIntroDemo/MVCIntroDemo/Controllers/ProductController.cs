@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using MVCIntroDemo.Models.Product;
 using System.Text;
 using System.Text.Json;
@@ -46,14 +47,29 @@ namespace MVCIntroDemo.Controllers
 
         public IActionResult AllAsText()
         {
+            return Content(GetAllProductsAsString());
+        }
+
+        public IActionResult AllAsTextFile()
+        {
+            string content = GetAllProductsAsString();
+
+            Response.Headers.Add(HeaderNames.ContentDisposition,@"attachment;filename=products.txt");
+
+            return File(Encoding.UTF8.GetBytes(content), "text/plain");
+
+        }
+
+        private string GetAllProductsAsString()
+        {
             StringBuilder st = new StringBuilder();
             foreach (var p in _products)
             {
                 st.AppendLine($"Product {p.Id}: {p.Name} - {p.Price:f1} lv.");
             }
-
-            return Content(st.ToString().Trim());
+            return st.ToString();
         }
+
 
         private IEnumerable<ProductViewModel> _products = new List<ProductViewModel>()
         {
