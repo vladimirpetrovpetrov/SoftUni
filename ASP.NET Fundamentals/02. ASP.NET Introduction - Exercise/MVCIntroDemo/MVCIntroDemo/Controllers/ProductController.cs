@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVCIntroDemo.Models.Product;
+using System.Text;
 using System.Text.Json;
 
 namespace MVCIntroDemo.Controllers
@@ -41,6 +42,17 @@ namespace MVCIntroDemo.Controllers
                 WriteIndented = true,
             };
             return Json(_products,options);
+        }
+
+        public IActionResult AllAsText()
+        {
+            StringBuilder st = new StringBuilder();
+            foreach (var p in _products)
+            {
+                st.AppendLine($"Product {p.Id}: {p.Name} - {p.Price:f1} lv.");
+            }
+
+            return Content(st.ToString().Trim());
         }
 
         private IEnumerable<ProductViewModel> _products = new List<ProductViewModel>()
