@@ -20,15 +20,25 @@ namespace MVCIntroDemo.Controllers
             return View();
         }
 
-        public IActionResult All()
+        [ActionName("My-Products")]
+        public IActionResult All(string kw)
         {
-            return View(_products);
+            if (kw == null)
+            {
+                return View(_products);
+            }
+
+            var filteredProducts = _products.Where(
+               p => p.Name.ToLower()
+                     .Contains(kw.ToLower()));
+
+            return View(filteredProducts);
         }
 
         public IActionResult ById(int id)
         {
             var product = _products.FirstOrDefault(x => x.Id == id);
-            if(product == null)
+            if (product == null)
             {
                 return BadRequest();
             }
@@ -42,7 +52,7 @@ namespace MVCIntroDemo.Controllers
             {
                 WriteIndented = true,
             };
-            return Json(_products,options);
+            return Json(_products, options);
         }
 
         public IActionResult AllAsText()
@@ -54,7 +64,7 @@ namespace MVCIntroDemo.Controllers
         {
             string content = GetAllProductsAsString();
 
-            Response.Headers.Add(HeaderNames.ContentDisposition,@"attachment;filename=products.txt");
+            Response.Headers.Add(HeaderNames.ContentDisposition, @"attachment;filename=products.txt");
 
             return File(Encoding.UTF8.GetBytes(content), "text/plain");
 
