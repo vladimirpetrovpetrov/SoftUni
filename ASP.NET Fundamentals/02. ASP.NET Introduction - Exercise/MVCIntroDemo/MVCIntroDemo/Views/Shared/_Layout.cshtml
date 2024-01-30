@@ -34,6 +34,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="NumbersToN">NumbersToN</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Products
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="Product" asp-action="My-Products">All</a></li>
+                                <li><a class="dropdown-item" asp-controller="Product" asp-action="AllAsJson">All (JSON)</a></li>
+                                <li><a class="dropdown-item" asp-controller="Product" asp-action="AllAsText">All (Plain Text)</a></li>
+                                <li><a class="dropdown-item" asp-controller="Product" asp-action="AllAsTextFile">All (Text File)</a></li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </div>
             </div>
