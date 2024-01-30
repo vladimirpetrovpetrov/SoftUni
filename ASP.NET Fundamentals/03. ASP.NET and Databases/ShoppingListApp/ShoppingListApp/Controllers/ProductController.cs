@@ -12,9 +12,11 @@ namespace ShoppingListApp.Controllers
             productService = _productService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = await productService.GetAllAsync();
+
+            return View(model);
         }
     }
 }
