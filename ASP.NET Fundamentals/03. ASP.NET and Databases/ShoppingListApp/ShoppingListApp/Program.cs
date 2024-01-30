@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using ShoppingListApp.Contracts;
 using ShoppingListApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IProductService, IProductService>();
 
 //Add EF Core context
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
