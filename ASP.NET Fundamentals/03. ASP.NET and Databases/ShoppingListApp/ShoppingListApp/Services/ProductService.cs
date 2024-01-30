@@ -24,9 +24,16 @@ namespace ShoppingListApp.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ProductViewModel>> GetAllAsync()
+        public async Task<IEnumerable<ProductViewModel>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await context.Products
+                .AsNoTracking() //without change tracker , cuz we will not be doing any changes
+                .Select(p => new ProductViewModel //we are getting data model , and want to convert it to viewMdoel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                })
+                .ToListAsync(); // we are working async
         }
 
         public Task<ProductViewModel> GetByIdAsync(int id)
