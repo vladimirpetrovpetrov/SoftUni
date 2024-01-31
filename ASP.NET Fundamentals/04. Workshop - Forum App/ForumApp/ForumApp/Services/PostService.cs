@@ -62,5 +62,16 @@ namespace ForumApp.Services
             }
             await context.SaveChangesAsync();
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            var modelToRemove = await context.Posts.FindAsync(id);
+
+            if (modelToRemove != null)
+            {
+                context.Posts.Remove(modelToRemove);
+            }
+            await context.SaveChangesAsync();
+        }
     }
 }
