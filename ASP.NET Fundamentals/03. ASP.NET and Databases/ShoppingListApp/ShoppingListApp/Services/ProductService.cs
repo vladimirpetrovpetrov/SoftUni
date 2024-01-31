@@ -26,9 +26,17 @@ namespace ShoppingListApp.Services
             await context.SaveChangesAsync();
         }
 
-        public Task DeleteProductAsync(int id)
+        public async Task DeleteProductAsync(int id)
         {
-            throw new NotImplementedException();
+            var entity = await context.Products.FindAsync(id);
+
+            if (entity == null)
+            {
+                throw new ArgumentException("Invalid product");
+            }
+
+            context.Products.Remove(entity);
+            await context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<ProductViewModel>> GetAllAsync()
@@ -43,14 +51,38 @@ namespace ShoppingListApp.Services
                 .ToListAsync(); // we are working async
         }
 
-        public Task<ProductViewModel> GetByIdAsync(int id)
+        public async Task<ProductViewModel> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+
+            var entity = await context.Products.FindAsync(id);
+
+            if(entity == null)
+            {
+                throw new ArgumentException("Invalid product");
+            }
+
+            return new ProductViewModel()
+            {
+                Id = entity.Id,
+                Name = entity.Name
+            };
+
         }
 
-        public Task UpdateProductAsync(ProductViewModel model)
+        public async Task UpdateProductAsync(ProductViewModel model)
         {
-            throw new NotImplementedException();
+
+            var entity = await context.Products.FindAsync(model.Id);
+
+            if (entity == null)
+            {
+                throw new ArgumentException("Invalid product");
+            }
+
+            entity.Name = model.Name;
+
+            await context.SaveChangesAsync();
+
         }
     }
 }
