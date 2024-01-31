@@ -1,4 +1,6 @@
-﻿using ForumApp.Models;
+﻿
+
+using ForumApp.Models;
 
 namespace ForumApp.Contracts
 {
