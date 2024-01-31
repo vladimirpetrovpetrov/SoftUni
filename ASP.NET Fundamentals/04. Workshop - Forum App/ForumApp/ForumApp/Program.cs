@@ -1,7 +1,14 @@
+using ForumApp.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Add EF Core context
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ForumAppDbContext>(opt => opt.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
