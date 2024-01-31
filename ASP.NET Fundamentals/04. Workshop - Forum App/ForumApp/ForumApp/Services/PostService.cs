@@ -38,9 +38,29 @@ namespace ForumApp.Services
 
             await context.AddAsync(post);
             await context.SaveChangesAsync();
+        }
 
+        public async Task<PostViewModel> GetByIdAsync(int id)
+        {
+            var post = await context.Posts.FindAsync(id);
+            PostViewModel model = new PostViewModel()
+            {
+                Id = post.Id,
+                Title = post.Title,
+                Content = post.Content,
+            };
+            return model;
+        }
 
-
+        public async Task UpdateAsync(PostViewModel model)
+        {
+            var post = await context.Posts.FindAsync(model.Id);
+            if(post != null)
+            {
+                post.Title = model.Title;
+                post.Content = model.Content;
+            }
+            await context.SaveChangesAsync();
         }
     }
 }

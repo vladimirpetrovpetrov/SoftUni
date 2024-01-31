@@ -7,5 +7,7 @@ namespace ForumApp.Contracts
         //We will use this for showing all posts
         Task<IEnumerable<PostViewModel>> GetAllAsync();
         Task AddAsync(PostViewModel model);
+        Task<PostViewModel> GetByIdAsync(int id);
+        Task UpdateAsync(PostViewModel model);
     }
 }
