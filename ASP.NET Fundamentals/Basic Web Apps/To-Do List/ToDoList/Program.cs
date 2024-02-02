@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using ToDoList.Core.Contracts;
+using ToDoList.Core.Services;
 using ToDoList.Infrastructure.Data;
 
 namespace ToDoList;
@@ -11,6 +13,7 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+        builder.Services.AddScoped<ITaskService, TaskService>();
 
         //Add EF Core context
         string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

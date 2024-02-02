@@ -1,21 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using ToDoList.Core.Contracts;
 using ToDoList.Models;
 
 namespace ToDoList.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<HomeController> logger;
+    private readonly ITaskService taskService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> _logger, ITaskService _taskService)
     {
-        _logger = logger;
+        logger = _logger;
+        taskService = _taskService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var model = await taskService.GetAllTasksAsync();
+        return View(model);
     }
 
     public IActionResult Privacy()

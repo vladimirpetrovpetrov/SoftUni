@@ -1,9 +1,10 @@
-﻿using ToDoList.Infrastructure.Data.Models;
+﻿using ToDoList.Core.Models;
+using ToDoList.Infrastructure.Data;
 
 namespace ToDoList.Core.Contracts;
 
 public interface ITaskService
 {
-    public Task<IEnumerable<>> GetAllTasksAsync();
+    public Task<IEnumerable<TaskViewModel>> GetAllTasksAsync();
 
 }

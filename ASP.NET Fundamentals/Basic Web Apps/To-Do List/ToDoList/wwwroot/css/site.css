@@ -20,3 +20,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+img.button{
+    width:25px;
+}

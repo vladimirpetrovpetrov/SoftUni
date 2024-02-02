@@ -8,12 +8,13 @@ public class Task
 {
     [Key]
     [Comment("Id of the task")]
-    public int Id { get; set; }
+    public int Id { get; init; }
     [Comment("Task title")]
     [Required]
     [MaxLength(30)]
     public string Title { get; set; } = string.Empty;
     [Comment("Task description")]
+    [Required]
     [MaxLength(250)]
     public string Description { get; set; } = string.Empty;
     [Comment("Task deadline")]
