@@ -18,7 +18,7 @@
                         <p>@t.Description</p>
                     </div>
                     <div class="card-footer">
-                        <a href="#"><img src="~/images/pen.png" class="button" /></a>
+                       <a class="btn btn-primary" asp-action="Edit" asp-route-id="@t.Id" id="editAnchor">Edit</a>
                         <a class="btn btn-primary">Done</a>
                         <a href="#"><img src="~/images/delete.png" class="button" /></a>
                     </div>

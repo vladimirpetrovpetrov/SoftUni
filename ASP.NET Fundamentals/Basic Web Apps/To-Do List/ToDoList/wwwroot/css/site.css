@@ -46,3 +46,10 @@ form.addForm{
     flex-direction:column;
     gap:5px;
 }
+
+a#editAnchor{
+    letter-spacing:1px;
+    border:0px;
+    background-color:orangered;
+    color:white;
+}

@@ -1,12 +1,14 @@
 ﻿@using ToDoList.Core.Models
 @model TaskViewModel
 @{
-    ViewBag.Title = "Add new task.";
+    ViewBag.Title = "Edit Task";
 }
 
-<form method="post" asp-action="Add" class="addForm">
+<h1>PAGE FOR EDITING TASK</h1>
+
+<form method="post" class="addForm">
     <label asp-for="Title">Task Title:</label>
-    <input type="text" asp-for="Title"/>
+    <input type="text" asp-for="Title" />
     <span asp-validation-for="@Model.Title" class="small text-danger"></span>
 
     <label asp-for="Description">Task Description:</label>
@@ -17,11 +19,8 @@
     <input asp-for="Deadline" class="form-control" type="datetime-local" />
     <span asp-validation-for="Deadline" class="text-danger"></span>
 
-    <input type="submit" value="Add Task"/>
+    <input type="submit" value="Edit Task" />
 </form>
-
-
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

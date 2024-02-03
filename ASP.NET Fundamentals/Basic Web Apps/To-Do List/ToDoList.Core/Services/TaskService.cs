@@ -46,4 +46,32 @@ public class TaskService : ITaskService
         await context.Tasks.AddAsync(task);
         await context.SaveChangesAsync();
     }
+
+    public async Task<TaskViewModel> GetByIdAsync(int id)
+    {
+        var model = await context.Tasks.FindAsync(id);
+        var viewModel = new TaskViewModel()
+        {
+            Id = model.Id,
+            Title = model.Title,
+            Description = model.Description,
+            Deadline = model.Deadline,
+            IsCompleted = model.IsCompleted,
+        };
+        return viewModel;
+
+    }
+
+    public async System.Threading.Tasks.Task UpdateTaskAsync(TaskViewModel model)
+    {
+        var entity = await context.Tasks.FindAsync(model.Id);
+        if (entity != null)
+        {
+            entity.Title = model.Title;
+            entity.Description = model.Description;
+            entity.Deadline = model.Deadline;
+        }
+
+        await context.SaveChangesAsync();
+    }
 }

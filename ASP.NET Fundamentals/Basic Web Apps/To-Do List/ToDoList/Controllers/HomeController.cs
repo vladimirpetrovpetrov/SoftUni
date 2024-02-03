@@ -42,6 +42,28 @@ public class HomeController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var model = await taskService.GetByIdAsync(id);
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(TaskViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        await taskService.UpdateTaskAsync(model);
+
+        return RedirectToAction(nameof(Index));
+    }
+
+
     public IActionResult Privacy()
     {
         return View();
