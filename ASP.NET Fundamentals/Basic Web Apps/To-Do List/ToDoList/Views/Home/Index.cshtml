@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "To-Do List";
 }
-
+<h1 class="text-center">@ViewBag.Title</h1>
 
 @if (Model.Count() > 0)
 {
@@ -12,7 +12,7 @@
         @foreach (var t in Model)
         {
             <div class="col-sm-6 mb-3 mb-sm-3">
-                <div class="card">
+                <div class="card" id="customTaskDiv">
                     <div class="card-title text-center">@t.Title</div>
                     <div class="card-body">
                         <p>@t.Description</p>
@@ -31,4 +31,6 @@ else
 {
     <p>You completed everything.</p>
 }
-
+<div class="addBtnDiv">
+    <a class="btn btn-dark" asp-controller="Home" asp-action="Add">Add Task</a>
+</div>

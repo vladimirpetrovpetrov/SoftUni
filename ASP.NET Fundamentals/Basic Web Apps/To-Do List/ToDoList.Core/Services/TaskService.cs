@@ -1,6 +1,8 @@
-﻿using ToDoList.Core.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using ToDoList.Core.Contracts;
 using ToDoList.Core.Models;
 using ToDoList.Infrastructure.Data;
+using ToDoList.Infrastructure.Data.Models;
 
 namespace ToDoList.Core.Services;
 
@@ -13,20 +15,35 @@ public class TaskService : ITaskService
         context = _context;
     }
 
+
     public async Task<IEnumerable<TaskViewModel>> GetAllTasksAsync()
     {
-         var model = context.Tasks
+         var model = await context.Tasks
             .Where(t=>t.IsCompleted == false)
             .Select(t => new TaskViewModel()
         {
             Id = t.Id,
             Title = t.Title,
             Description = t.Description,
-            HoursLeft = (t.Deadline - DateTime.Now).Hours,
+            Deadline = t.Deadline,
             IsCompleted = t.IsCompleted,
         })
-            .ToList();
+            .ToListAsync();
 
         return model;
+    }
+    public async System.Threading.Tasks.Task AddAsync(TaskViewModel model)
+    {
+        var task = new Infrastructure.Data.Models.Task()
+        {
+            Title = model.Title,
+            Description = model.Description,
+            Deadline = model.Deadline,
+            IsCompleted = model.IsCompleted
+
+        };
+
+        await context.Tasks.AddAsync(task);
+        await context.SaveChangesAsync();
     }
 }

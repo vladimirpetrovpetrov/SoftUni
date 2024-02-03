@@ -16,6 +16,6 @@ public class TaskViewModel
     public string Description { get; set; } = string.Empty;
     [Required(ErrorMessage = RequiredErrorMessage)]
     [DataType(DataType.Date)]
-    public int HoursLeft { get; set; }
+    public DateTime Deadline { get; set; }
     public bool IsCompleted { get; set; }
 }

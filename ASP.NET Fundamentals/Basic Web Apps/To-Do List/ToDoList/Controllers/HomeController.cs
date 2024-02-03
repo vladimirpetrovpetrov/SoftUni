@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ToDoList.Core.Contracts;
+using ToDoList.Core.Models;
 using ToDoList.Models;
 
 namespace ToDoList.Controllers;
@@ -20,6 +21,25 @@ public class HomeController : Controller
     {
         var model = await taskService.GetAllTasksAsync();
         return View(model);
+    }
+    [HttpGet]
+    public IActionResult Add()
+    {
+        var model = new TaskViewModel();
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Add(TaskViewModel model)
+    {
+        if(!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        await taskService.AddAsync(model);
+
+        return RedirectToAction(nameof(Index));
     }
 
     public IActionResult Privacy()

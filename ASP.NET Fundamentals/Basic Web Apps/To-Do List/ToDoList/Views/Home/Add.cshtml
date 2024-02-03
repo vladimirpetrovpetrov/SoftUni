@@ -1,0 +1,29 @@
+﻿@using ToDoList.Core.Models
+@model TaskViewModel
+@{
+    ViewBag.Title = "Add new task.";
+}
+<h1>View for adding new Task.</h1>
+
+<form method="post" asp-action="Add" class="addForm">
+    <label asp-for="Title">Task Title:</label>
+    <input type="text" asp-for="Title"/>
+    <span asp-validation-for="@Model.Title" class="small text-danger"></span>
+
+    <label asp-for="Description">Task Description:</label>
+    <textarea asp-for="Description" placeholder="Add your description here..."></textarea>
+    <span asp-validation-for="@Model.Description" class="small text-danger"></span>
+
+    <label asp-for="Deadline" class="control-label"></label>
+    <input asp-for="Deadline" class="form-control" type="datetime-local" />
+    <span asp-validation-for="Deadline" class="text-danger"></span>
+
+    <input type="submit" value="Add Task"/>
+</form>
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
