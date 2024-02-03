@@ -27,7 +27,9 @@ img.button {
 }
 
 div.addBtnDiv {
-    text-align: center;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
     font-family: Arial;
     margin-top: 25px;
 }
@@ -37,21 +39,19 @@ div.addBtnDiv {
     padding-top: 15px;
 }
 
-h1 {
-    margin-bottom: 55px;
+
+form.addForm {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-form.addForm{
-    display:flex;
-    flex-direction:column;
-    gap:5px;
-}
-
-a#editAnchor{
-    letter-spacing:1px;
-    border:0px;
-    background-color:orangered;
-    color:white;
+a#editAnchor {
+    letter-spacing: 1px;
+    border: 0px;
+    background-color: orangered;
+    color: white;
+    width:90px;
 }
 
 a#deleteAnchor {
@@ -59,6 +59,7 @@ a#deleteAnchor {
     border: 0px;
     background-color: darkred;
     color: white;
+    width: 90px;
 }
 
 a#doneAnchor {
@@ -66,4 +67,41 @@ a#doneAnchor {
     border: 0px;
     background-color: green;
     color: white;
+    width: 90px;
+}
+
+#headingDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 55px;
+}
+
+    #headingDiv a {
+        all:unset;
+        cursor:pointer;
+    }
+
+    #headingDiv span {
+        font-size: 32px;
+        padding: 2px 12px;
+        border-radius: 10%;
+    }
+
+        #headingDiv span:last-child {
+            background-color: gray;
+            color: white;
+        }
+
+        #headingDiv span:first-child {
+            background-color: darkgreen;
+            color: white;
+        }
+
+div.buttonsDiv {
+    display:flex;
+    justify-content:space-evenly;
+    align-content:center;
+    padding: 8px 16px;
+    background-color: #f4f4f4;
 }

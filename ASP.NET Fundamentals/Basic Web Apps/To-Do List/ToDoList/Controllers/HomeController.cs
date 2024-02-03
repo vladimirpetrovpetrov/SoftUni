@@ -20,6 +20,16 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var model = await taskService.GetAllPendingTasksAsync();
+        var completedModel = await taskService.GetAllCompletedTasksAsync();
+        ViewBag.PendingTasksCount = model.Count();
+        ViewBag.CompletedTasksCount = completedModel.Count();
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Completed()
+    {
+        var model = await taskService.GetAllCompletedTasksAsync();
         return View(model);
     }
 

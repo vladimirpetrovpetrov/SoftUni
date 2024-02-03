@@ -32,6 +32,24 @@ public class TaskService : ITaskService
 
         return model;
     }
+
+    public async Task<IEnumerable<TaskViewModel>> GetAllCompletedTasksAsync()
+    {
+        var model = await context.Tasks
+           .Where(t => t.IsCompleted == true)
+           .Select(t => new TaskViewModel()
+           {
+               Id = t.Id,
+               Title = t.Title,
+               Description = t.Description,
+               Deadline = t.Deadline,
+               IsCompleted = t.IsCompleted,
+           })
+           .ToListAsync();
+
+        return model;
+    }
+
     public async System.Threading.Tasks.Task AddAsync(TaskViewModel model)
     {
         var task = new Infrastructure.Data.Models.Task()
