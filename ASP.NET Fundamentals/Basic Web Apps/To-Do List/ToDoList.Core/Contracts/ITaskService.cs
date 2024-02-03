@@ -9,5 +9,5 @@ public interface ITaskService
     public Task AddAsync(TaskViewModel model);
     public Task<TaskViewModel> GetByIdAsync(int id);
     public Task UpdateTaskAsync(TaskViewModel model);
-
+    public Task DeleteASync(int id);
 }

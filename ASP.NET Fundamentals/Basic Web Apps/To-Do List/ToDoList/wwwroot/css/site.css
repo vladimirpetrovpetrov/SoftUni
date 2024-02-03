@@ -53,3 +53,17 @@ a#editAnchor{
     background-color:orangered;
     color:white;
 }
+
+a#deleteAnchor {
+    letter-spacing: 1px;
+    border: 0px;
+    background-color: darkred;
+    color: white;
+}
+
+a#doneAnchor {
+    letter-spacing: 1px;
+    border: 0px;
+    background-color: green;
+    color: white;
+}

@@ -74,4 +74,15 @@ public class TaskService : ITaskService
 
         await context.SaveChangesAsync();
     }
+
+    public async System.Threading.Tasks.Task DeleteASync(int id)
+    {
+        var modelToDelete = await context.Tasks.FindAsync(id);
+        if(modelToDelete != null)
+        {
+            context.Remove(modelToDelete);
+        }
+
+        await context.SaveChangesAsync();
+    }
 }

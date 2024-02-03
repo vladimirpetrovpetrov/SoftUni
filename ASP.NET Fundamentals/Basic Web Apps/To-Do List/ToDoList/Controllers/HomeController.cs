@@ -63,6 +63,11 @@ public class HomeController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    public async Task<IActionResult> Delete(int id)
+    {
+        await taskService.DeleteASync(id);
+        return RedirectToAction(nameof(Index));
+    }
 
     public IActionResult Privacy()
     {
