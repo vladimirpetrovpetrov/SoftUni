@@ -5,9 +5,10 @@ namespace ToDoList.Core.Contracts;
 
 public interface ITaskService
 {
-    public Task<IEnumerable<TaskViewModel>> GetAllTasksAsync();
+    public Task<IEnumerable<TaskViewModel>> GetAllPendingTasksAsync();
     public Task AddAsync(TaskViewModel model);
     public Task<TaskViewModel> GetByIdAsync(int id);
     public Task UpdateTaskAsync(TaskViewModel model);
-    public Task DeleteASync(int id);
+    public Task DeleteAsync(int id);
+    public Task DoneAsync(int id);
 }

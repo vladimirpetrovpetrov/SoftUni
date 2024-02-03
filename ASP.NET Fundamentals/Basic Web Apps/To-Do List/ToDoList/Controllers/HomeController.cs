@@ -19,9 +19,10 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var model = await taskService.GetAllTasksAsync();
+        var model = await taskService.GetAllPendingTasksAsync();
         return View(model);
     }
+
     [HttpGet]
     public IActionResult Add()
     {
@@ -65,7 +66,13 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Delete(int id)
     {
-        await taskService.DeleteASync(id);
+        await taskService.DeleteAsync(id);
+        return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> Done(int id)
+    {
+        await taskService.DoneAsync(id);
         return RedirectToAction(nameof(Index));
     }
 

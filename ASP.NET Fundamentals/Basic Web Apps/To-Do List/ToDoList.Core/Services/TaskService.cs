@@ -16,7 +16,7 @@ public class TaskService : ITaskService
     }
 
 
-    public async Task<IEnumerable<TaskViewModel>> GetAllTasksAsync()
+    public async Task<IEnumerable<TaskViewModel>> GetAllPendingTasksAsync()
     {
          var model = await context.Tasks
             .Where(t=>t.IsCompleted == false)
@@ -75,7 +75,7 @@ public class TaskService : ITaskService
         await context.SaveChangesAsync();
     }
 
-    public async System.Threading.Tasks.Task DeleteASync(int id)
+    public async System.Threading.Tasks.Task DeleteAsync(int id)
     {
         var modelToDelete = await context.Tasks.FindAsync(id);
         if(modelToDelete != null)
@@ -83,6 +83,16 @@ public class TaskService : ITaskService
             context.Remove(modelToDelete);
         }
 
+        await context.SaveChangesAsync();
+    }
+
+    public async System.Threading.Tasks.Task DoneAsync(int id)
+    {
+        var model = await context.Tasks.FindAsync(id);
+        if(model != null)
+        {
+            model.IsCompleted = true;
+        }
         await context.SaveChangesAsync();
     }
 }
