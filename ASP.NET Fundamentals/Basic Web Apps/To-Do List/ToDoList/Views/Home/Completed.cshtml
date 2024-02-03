@@ -4,7 +4,11 @@
 @{
     ViewData["Title"] = "Completed Tasks";
 }
-<h1 class="text-center">@ViewBag.Title</h1>
+<div id="headingDiv">
+    <span><a asp-action="Index">@ViewBag.PendingTasksCount</a></span>
+    <h1 class="text-center">@ViewBag.Title</h1>
+    <span><a asp-action="Completed">@ViewBag.CompletedTasksCount</a></span>
+</div>
 
 @if (Model.Count() > 0)
 {

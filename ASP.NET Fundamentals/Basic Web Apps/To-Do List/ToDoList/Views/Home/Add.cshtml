@@ -1,20 +1,22 @@
 ﻿@using ToDoList.Core.Models
 @model TaskViewModel
 @{
-    ViewBag.Title = "Add Task.";
+    ViewBag.Title = "Add Task";
 }
+
+<h1 class="text-center">@ViewBag.Title</h1>
 
 <form method="post" asp-action="Add" class="addForm">
     <label asp-for="Title">Task Title:</label>
-    <input type="text" asp-for="Title"/>
+    <input type="text" asp-for="Title" placeholder="Add title here..." />
     <span asp-validation-for="@Model.Title" class="small text-danger"></span>
 
     <label asp-for="Description">Task Description:</label>
-    <textarea asp-for="Description" placeholder="Add your description here..."></textarea>
+    <textarea rows="3" cols="50" asp-for="Description" placeholder="Add description here..."></textarea>
     <span asp-validation-for="@Model.Description" class="small text-danger"></span>
 
     <label asp-for="Deadline" class="control-label"></label>
-    <input asp-for="Deadline" class="form-control" type="datetime-local" />
+    <input asp-for="Deadline" class="form-control" type="date" />
     <span asp-validation-for="Deadline" class="text-danger"></span>
 
     <input type="submit" value="Add Task"/>
