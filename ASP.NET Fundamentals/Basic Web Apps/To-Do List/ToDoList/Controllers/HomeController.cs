@@ -99,4 +99,12 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+    public async Task<IActionResult> Filter(string keyWord)
+    {
+        var model = await taskService.FilterTasksAsync(keyWord);
+
+
+        return View(model);
+    }
 }

@@ -2,13 +2,9 @@
 @model IEnumerable<TaskViewModel>
 
 @{
-    ViewData["Title"] = "To-Do List";
+    ViewData["Title"] = "Filtered Tasks";
 }
-<div id="headingDiv">
-    <span><a asp-action="Index">@ViewBag.PendingTasksCount</a></span>
-    <h1 class="text-center">@ViewBag.Title</h1>
-    <span><a asp-action="Completed">@ViewBag.CompletedTasksCount</a></span>
-</div>
+    <h1 class="text-center mb-5">@ViewBag.Title</h1>
 
 <form class="text-center" asp-action="Filter">
     <input type="text" name="keyWord" />
@@ -40,12 +36,8 @@
 }
 else
 {
-    <p>You completed everything.</p>
+    <p>No results.</p>
 }
 <div class="addBtnDiv">
     <a class="btn btn-dark" asp-controller="Home" asp-action="Completed">Completed Tasks</a>
-</div>
-
-<div class="fixedDiv">
-    <a class="addAnchorFixed" asp-controller="Home" asp-action="Add">+</a>
 </div>

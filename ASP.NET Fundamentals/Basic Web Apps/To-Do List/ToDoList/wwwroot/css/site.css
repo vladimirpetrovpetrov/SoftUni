@@ -164,3 +164,13 @@ a.addAnchorFixed {
         height: 100px;
     }
 }
+
+button.filtered {
+    all: unset;
+    width: 70px;
+    height: 30px;
+    background-color: rgb(33, 33, 31);
+    border-radius: 10%;
+    cursor: pointer;
+    color:white;
+}

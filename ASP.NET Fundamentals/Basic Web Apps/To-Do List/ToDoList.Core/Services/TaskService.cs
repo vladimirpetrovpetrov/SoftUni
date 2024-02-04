@@ -113,4 +113,16 @@ public class TaskService : ITaskService
         }
         await context.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<TaskViewModel>> FilterTasksAsync(string keyWord)
+    {
+        var model = await GetAllPendingTasksAsync();
+        if (keyWord==null)
+        {
+            return model;
+        }
+        var result = model.Where(t => t.Title.ToLower().Contains(keyWord.ToLower())).ToList();
+        return result;
+    }
+
 }
