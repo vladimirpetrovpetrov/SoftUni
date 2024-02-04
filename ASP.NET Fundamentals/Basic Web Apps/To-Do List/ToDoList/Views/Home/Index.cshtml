@@ -10,7 +10,7 @@
     <span><a asp-action="Completed">@ViewBag.CompletedTasksCount</a></span>
 </div>
 
-<form class="text-center searchBar" asp-action="Filter">
+<form class="text-center searchBar mb-3" asp-action="Filter">
     <input type="text" name="keyWord" class="keyWord" />
     <select name="searchOption" class="searchOption">
         <option value="Title">Title</option>
@@ -19,6 +19,20 @@
     <button class="filtered">Search</button>
     <button asp-controller="Home" asp-action="Index" class="filtered">Clear</button>
 </form>
+
+<form class="text-center searchBar" asp-action="Sort">
+
+    <select name="sorter" class="searchOption">
+        <option value="Expiring">Expiring</option>
+        <option value="Newest">Newest</option>
+    </select>
+
+    <button class="filtered">Sort</button>
+
+    <button asp-controller="Home" asp-action="Index" class="filtered">Clear</button>
+
+</form>
+
 <hr />
 
 @if (Model.Count() > 0)

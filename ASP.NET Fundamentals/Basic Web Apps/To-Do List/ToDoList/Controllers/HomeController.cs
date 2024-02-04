@@ -94,12 +94,6 @@ public class HomeController : Controller
         return View();
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
-
     public async Task<IActionResult> Filter(string keyWord, string searchOption)
     {
         var model = await taskService.FilterTasksAsync(keyWord, searchOption);
@@ -107,4 +101,17 @@ public class HomeController : Controller
 
         return View(model);
     }
+
+    public async Task<IActionResult> Sort(string sorter) 
+    {
+        var model = await taskService.SortAsync(sorter);
+        return View("Index", model); 
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
 }

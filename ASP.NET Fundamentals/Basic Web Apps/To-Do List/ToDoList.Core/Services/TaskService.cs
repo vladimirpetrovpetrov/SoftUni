@@ -131,7 +131,19 @@ public class TaskService : ITaskService
             return FilterInDescriptions(keyWord, model);
         }
     }
+    public async Task<IEnumerable<TaskViewModel>> SortAsync(string sorter)
+    {
+        switch (sorter)
+        {
+            case "Newest":
+                return await SortByNewestAsync();
+            case "Expiring":
+                return await SortByExpiringAsync();
+            default:
+                return await GetAllPendingTasksAsync();
+        }
 
+    }
     private IEnumerable<TaskViewModel> FilterInTitles(string keyWord, IEnumerable<TaskViewModel> model)
     {
         return model.Where(t =>
@@ -149,4 +161,36 @@ public class TaskService : ITaskService
                     .Contains(keyWord.ToLower()))
                     .ToList();
     }
+
+    private async Task<IEnumerable<TaskViewModel>> SortByNewestAsync()
+    {
+        return await context.Tasks
+                   .Where(t => t.IsCompleted == false)
+                   .Select(t => new TaskViewModel()
+                   {
+                       Id = t.Id,
+                       Title = t.Title,
+                       Description = t.Description,
+                       Deadline = t.Deadline,
+                       IsCompleted = t.IsCompleted,
+                   })
+                   .OrderByDescending(t => t.Id)
+                   .ToListAsync();
+    }
+    private async Task<IEnumerable<TaskViewModel>> SortByExpiringAsync()
+    {
+        return await context.Tasks
+                   .Where(t => t.IsCompleted == false)
+                   .Select(t => new TaskViewModel()
+                   {
+                       Id = t.Id,
+                       Title = t.Title,
+                       Description = t.Description,
+                       Deadline = t.Deadline,
+                       IsCompleted = t.IsCompleted,
+                   })
+                   .OrderBy(t => t.Deadline)
+                   .ToListAsync();
+    }
+
 }
