@@ -46,7 +46,7 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> Add(TaskViewModel model)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return View(model);
         }
@@ -100,9 +100,9 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-    public async Task<IActionResult> Filter(string keyWord)
+    public async Task<IActionResult> Filter(string keyWord, string searchOption)
     {
-        var model = await taskService.FilterTasksAsync(keyWord);
+        var model = await taskService.FilterTasksAsync(keyWord, searchOption);
 
 
         return View(model);

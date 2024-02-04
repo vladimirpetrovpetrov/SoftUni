@@ -10,8 +10,12 @@
     <span><a asp-action="Completed">@ViewBag.CompletedTasksCount</a></span>
 </div>
 
-<form class="text-center" asp-action="Filter">
-    <input type="text" name="keyWord" />
+<form class="text-center searchBar" asp-action="Filter">
+    <input type="text" name="keyWord" class="keyWord" />
+    <select name="searchOption" class="searchOption">
+        <option value="Title">Title</option>
+        <option value="Description">Description</option>
+    </select>
     <button class="filtered">Search</button>
     <button asp-controller="Home" asp-action="Index" class="filtered">Clear</button>
 </form>

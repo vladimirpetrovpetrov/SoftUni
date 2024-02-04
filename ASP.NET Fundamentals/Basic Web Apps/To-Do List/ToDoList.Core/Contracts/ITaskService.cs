@@ -12,5 +12,5 @@ public interface ITaskService
     public Task UpdateTaskAsync(TaskViewModel model);
     public Task DeleteAsync(int id);
     public Task DoneAsync(int id);
-    public Task<IEnumerable<TaskViewModel>> FilterTasksAsync(string keyWord);
+    public Task<IEnumerable<TaskViewModel>> FilterTasksAsync(string keyWord, string searchOption);
 }

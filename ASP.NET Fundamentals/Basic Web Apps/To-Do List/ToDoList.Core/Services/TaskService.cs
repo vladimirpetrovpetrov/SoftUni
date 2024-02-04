@@ -18,17 +18,17 @@ public class TaskService : ITaskService
 
     public async Task<IEnumerable<TaskViewModel>> GetAllPendingTasksAsync()
     {
-         var model = await context.Tasks
-            .Where(t=>t.IsCompleted == false)
-            .Select(t => new TaskViewModel()
-        {
-            Id = t.Id,
-            Title = t.Title,
-            Description = t.Description,
-            Deadline = t.Deadline,
-            IsCompleted = t.IsCompleted,
-        })
-            .ToListAsync();
+        var model = await context.Tasks
+           .Where(t => t.IsCompleted == false)
+           .Select(t => new TaskViewModel()
+           {
+               Id = t.Id,
+               Title = t.Title,
+               Description = t.Description,
+               Deadline = t.Deadline,
+               IsCompleted = t.IsCompleted,
+           })
+           .ToListAsync();
 
         return model;
     }
@@ -96,7 +96,7 @@ public class TaskService : ITaskService
     public async System.Threading.Tasks.Task DeleteAsync(int id)
     {
         var modelToDelete = await context.Tasks.FindAsync(id);
-        if(modelToDelete != null)
+        if (modelToDelete != null)
         {
             context.Remove(modelToDelete);
         }
@@ -107,22 +107,46 @@ public class TaskService : ITaskService
     public async System.Threading.Tasks.Task DoneAsync(int id)
     {
         var model = await context.Tasks.FindAsync(id);
-        if(model != null)
+        if (model != null)
         {
             model.IsCompleted = true;
         }
         await context.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<TaskViewModel>> FilterTasksAsync(string keyWord)
+    public async Task<IEnumerable<TaskViewModel>> FilterTasksAsync(string keyWord, string searchOption)
     {
         var model = await GetAllPendingTasksAsync();
-        if (keyWord==null)
+        if (keyWord == null)
         {
             return model;
         }
-        var result = model.Where(t => t.Title.ToLower().Contains(keyWord.ToLower())).ToList();
-        return result;
+
+        if (searchOption == "Title")
+        {
+            return FilterInTitles(keyWord, model);
+        }
+        else
+        {
+            return FilterInDescriptions(keyWord, model);
+        }
     }
 
+    private IEnumerable<TaskViewModel> FilterInTitles(string keyWord, IEnumerable<TaskViewModel> model)
+    {
+        return model.Where(t =>
+                    t.Title
+                    .ToLower()
+                    .Contains(keyWord.ToLower()))
+                    .ToList();
+    }
+
+    private IEnumerable<TaskViewModel> FilterInDescriptions(string keyWord, IEnumerable<TaskViewModel> model)
+    {
+        return model.Where(t =>
+                    t.Description
+                    .ToLower()
+                    .Contains(keyWord.ToLower()))
+                    .ToList();
+    }
 }
