@@ -23,6 +23,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     .AddEntityFrameworkStores<TaskBoardAppDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+});
+
 //Added Services
 builder.Services.AddScoped<IBoardService, BoardService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
@@ -33,6 +38,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseDeveloperExceptionPage();
 }
 else
 {
