@@ -9,5 +9,6 @@ public interface ITaskService
     public Task<TaskDetailViewModel> DetailsAsync(int id);
     public Task<TaskFormModel> GetByIdAsync(int id);
     public Task UpdateAsync(TaskFormModel model);
-    public Task<string> GetOwnerId(int id);
+    public Task<string> GetOwnerIdAsync(int id);
+    public Task DeleteAsync(TaskFormModel model);
 }

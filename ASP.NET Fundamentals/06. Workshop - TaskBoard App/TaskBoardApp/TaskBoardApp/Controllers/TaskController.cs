@@ -69,7 +69,7 @@ public class TaskController : Controller
             return BadRequest();
         }
 
-        if (currentUserId != await taskService.GetOwnerId(id))
+        if (currentUserId != await taskService.GetOwnerIdAsync(id))
         {
             return Unauthorized();
         }
@@ -85,6 +85,32 @@ public class TaskController : Controller
             return(View(model));
         }
         await taskService.UpdateAsync(model);
+        return RedirectToAction("All", "Board");
+    }
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var model = await taskService.GetByIdAsync(id);
+        return View(model);
+    }
+    [HttpPost]
+    public async Task<IActionResult> Delete(TaskFormModel model)
+    {
+        if(model == null)
+        {
+            return BadRequest();
+        }
+
+        string currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (currentUserId != await taskService.GetOwnerIdAsync(model.Id))
+        {
+            return Unauthorized();
+        }
+
+        await taskService.DeleteAsync(model);
+
+
         return RedirectToAction("All", "Board");
     }
 

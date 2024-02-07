@@ -94,10 +94,21 @@ public class TaskService : ITaskService
         await dbContext.SaveChangesAsync();
     }
 
-    public async Task<string> GetOwnerId(int id)
+    public async Task<string> GetOwnerIdAsync(int id)
     {
         var entity = await dbContext.Tasks
             .FindAsync(id);
         return entity.OwnerId;
+    }
+
+    public async System.Threading.Tasks.Task DeleteAsync(TaskFormModel model)
+    {
+        var entityToDelete = await dbContext.Tasks.FindAsync(model.Id);
+
+        if( entityToDelete != null)
+        {
+            dbContext.Tasks.Remove(entityToDelete);
+            await dbContext.SaveChangesAsync();
+        }
     }
 }
