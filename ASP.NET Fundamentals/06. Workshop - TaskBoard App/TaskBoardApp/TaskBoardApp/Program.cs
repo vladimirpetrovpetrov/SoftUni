@@ -25,6 +25,7 @@ builder.Services.AddControllersWithViews();
 
 //Added Services
 builder.Services.AddScoped<IBoardService, BoardService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 var app = builder.Build();
 

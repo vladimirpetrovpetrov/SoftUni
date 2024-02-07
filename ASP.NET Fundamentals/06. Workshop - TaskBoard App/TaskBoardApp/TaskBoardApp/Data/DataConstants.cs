@@ -2,6 +2,9 @@
 
 public static class DataConstants
 {
+    //General
+    public const string LengthError = "{0} should be between {2} and {1}character long.";
+
     //Task Title
     public const int TaskTitleMaxLength = 70;
     public const int TaskTitleMinLength = 5;
