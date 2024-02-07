@@ -45,6 +45,17 @@ public class TaskController : Controller
         return RedirectToAction("All","Board");
     }
 
+    public async Task<IActionResult> Details(int id)
+    {
+        var model = await taskService.DetailsAsync(id);
+        if(model == null)
+        {
+            return BadRequest();
+        }
+
+        return View(model);
+    }
+
 }
 
 

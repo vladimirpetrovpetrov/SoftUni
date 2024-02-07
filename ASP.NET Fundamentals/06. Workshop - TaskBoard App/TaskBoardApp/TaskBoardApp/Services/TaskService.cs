@@ -1,4 +1,5 @@
-﻿using Microsoft.Build.Framework;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TaskBoardApp.Contracts;
 using TaskBoardApp.Data;
 using TaskBoardApp.Models.Task;
@@ -30,6 +31,27 @@ public class TaskService : ITaskService
 
         await dbContext.AddAsync(model);
         await dbContext.SaveChangesAsync();
+    }
+
+    public async Task<TaskDetailViewModel> DetailsAsync(int id)
+    {
+        var entity = dbContext.Tasks
+            .Include(t => t.Board)
+            .Include(t=>t.Owner)
+            .First(t => t.Id == id);
+
+        //.First(t => t.Id == id);
+        var model = new TaskDetailViewModel
+        {
+            Id = entity.Id,
+            Title = entity.Title,
+            Description = entity.Description,
+            CreatedOn = entity.CreatedOn.ToString("dd/MM/yyyy HH:mm"),
+            Board = entity.Board.Name,
+            Owner = entity.Owner.UserName
+        };
+
+        return model;
     }
 
     public async Task<IEnumerable<TaskBoardModel>> GetBoardsAsync()
