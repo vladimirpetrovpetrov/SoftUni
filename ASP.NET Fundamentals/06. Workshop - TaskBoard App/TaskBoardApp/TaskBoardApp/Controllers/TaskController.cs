@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Security.Claims;
 using TaskBoardApp.Contracts;
 using TaskBoardApp.Models.Task;
@@ -42,13 +43,13 @@ public class TaskController : Controller
 
         await taskService.CreateAsync(model, currentUserId);
 
-        return RedirectToAction("All","Board");
+        return RedirectToAction("All", "Board");
     }
 
     public async Task<IActionResult> Details(int id)
     {
         var model = await taskService.DetailsAsync(id);
-        if(model == null)
+        if (model == null)
         {
             return BadRequest();
         }
@@ -56,8 +57,38 @@ public class TaskController : Controller
         return View(model);
     }
 
-}
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        string currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+        var model = await taskService.GetByIdAsync(id);
+
+        if (model == null)
+        {
+            return BadRequest();
+        }
+
+        if (currentUserId != await taskService.GetOwnerId(id))
+        {
+            return Unauthorized();
+        }
+
+
+        return View(model);
+    }
+    [HttpPost]
+    public async Task<IActionResult> Edit(TaskFormModel model)
+    {
+        if(!ModelState.IsValid)
+        {
+            return(View(model));
+        }
+        await taskService.UpdateAsync(model);
+        return RedirectToAction("All", "Board");
+    }
+
+}
 
 
 

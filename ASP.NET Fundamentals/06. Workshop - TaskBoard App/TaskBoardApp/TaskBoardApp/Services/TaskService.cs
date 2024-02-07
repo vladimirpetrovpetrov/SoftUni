@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TaskBoardApp.Contracts;
 using TaskBoardApp.Data;
 using TaskBoardApp.Models.Task;
@@ -54,6 +55,21 @@ public class TaskService : ITaskService
         return model;
     }
 
+    public async Task<TaskFormModel> GetByIdAsync(int id)
+    {
+        var entity = dbContext.Tasks
+            .First(t=>t.Id == id);
+        TaskFormModel model = new TaskFormModel()
+        {
+            Id = entity.Id,
+            Title = entity.Title,
+            Description = entity.Description,
+            BoardId= entity.BoardId,
+            Boards = await GetBoardsAsync()
+        };
+        return model;
+    }
+
     public async Task<IEnumerable<TaskBoardModel>> GetBoardsAsync()
     {
         var boards = await boardService.GetAllAsync();
@@ -64,5 +80,24 @@ public class TaskService : ITaskService
                 Name = tb.Name,
             }).ToList();
         return taskBoards;
+    }
+
+    public async System.Threading.Tasks.Task UpdateAsync(TaskFormModel model)
+    {
+        var entity = await dbContext.Tasks.FirstAsync(t => t.Id == model.Id);
+        if(entity !=  null)
+        {
+            entity.Title = model.Title;
+            entity.Description = model.Description;
+            entity.BoardId = model.BoardId;
+        }
+        await dbContext.SaveChangesAsync();
+    }
+
+    public async Task<string> GetOwnerId(int id)
+    {
+        var entity = await dbContext.Tasks
+            .FindAsync(id);
+        return entity.OwnerId;
     }
 }

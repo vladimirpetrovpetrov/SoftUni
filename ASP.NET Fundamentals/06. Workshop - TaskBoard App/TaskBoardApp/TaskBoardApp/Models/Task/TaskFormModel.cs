@@ -5,6 +5,7 @@ namespace TaskBoardApp.Models.Task;
 
 public class TaskFormModel
 {
+    public int Id { get; set; }
     [Required]
     [Display(Name = "Title")]
     [StringLength(TaskTitleMaxLength, MinimumLength = TaskTitleMinLength,ErrorMessage = LengthError)]
