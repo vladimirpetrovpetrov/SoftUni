@@ -28,4 +28,19 @@ public class BookService : IBookService
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<AllBookViewModel>> GetMyBooksAsync(string userId)
+    {
+        return await context.UsersBooks
+             .Where(u => u.CollectorId == userId)
+             .Select(b => new AllBookViewModel
+             {
+                 Id = b.Book.Id,
+                 Title = b.Book.Title,
+                 Author = b.Book.Author,
+                 Description = b.Book.Description,
+                 ImageUrl = b.Book.ImageUrl,
+                 CategoryName = b.Book.Category.Name
+             })
+             .ToListAsync();
+    }
 }

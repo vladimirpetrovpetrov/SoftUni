@@ -1,4 +1,5 @@
-﻿@*@{
+﻿@model IEnumerable<AllBookViewModel>
+@{
     ViewBag.Title = "My Books";
 }
 
@@ -7,17 +8,17 @@
 
 
 <div class="text-center row">
-    @foreach (var book in Model.Books)
+    @foreach (var book in Model)
     {
         <div class="card col-4" style="width: 20rem; ">
             <img class="card-img-top" style="width: 18rem;"
-             src="@book.ImageUrl" alt="Book Image">
+                 src="@book.ImageUrl" alt="Book Image">
             <div class="card-body">
 
                 <h5 class="card-title mt-1">@book.Title</h5>
                 <p class="mb-0">Author: @book.Author</p>
                 <p class="mb-0">Description: @book.Description</p>
-                <p>Category: @book.Category</p>
+                <p>Category: @book.CategoryName</p>
             </div>
 
             <form class="input-group-sm" asp-controller="Book" asp-action="RemoveFromCollection" asp-route-id="@book.Id">
@@ -26,4 +27,4 @@
         </div>
     }
 </div>
-*@
+
