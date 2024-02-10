@@ -1,12 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Library.Contracts;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Library.Controllers
+namespace Library.Controllers;
+
+public class BookController : BaseController
 {
-    public class BookController : BaseController
+    private readonly IBookService bookService;
+    public BookController(IBookService _bookService)
     {
-        public IActionResult All()
-        {
-            return View();
-        }
+        bookService = _bookService;
+    }
+    public  async Task<IActionResult> All()
+    {
+        var model = await bookService.GetBooksAsync();
+
+        return View(model);
     }
 }
