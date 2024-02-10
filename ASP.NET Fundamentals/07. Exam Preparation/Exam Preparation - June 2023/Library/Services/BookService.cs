@@ -1,5 +1,6 @@
 ﻿using Library.Contracts;
 using Library.Data;
+using Library.Data.Models;
 using Library.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,5 +43,49 @@ public class BookService : IBookService
                  CategoryName = b.Book.Category.Name
              })
              .ToListAsync();
+    }
+
+    public async Task AddBookToMyCollection(string userId, BookViewModel book)
+    {
+        var isAlreadyAdded = await context.UsersBooks.AnyAsync(ub => ub.CollectorId == userId && ub.BookId == book.Id);
+        if(!isAlreadyAdded)
+        {
+            var userBook = new IdentityUserBook
+            {
+                CollectorId = userId,
+                BookId = book.Id
+            };
+            await context.UsersBooks.AddAsync(userBook);
+            await context.SaveChangesAsync();
+        }
+        
+    }
+
+    public async Task<BookViewModel?> GetBookByIdAsync(int id)
+    {
+        return await context.Books
+            .Where(b => b.Id == id)
+            .Select(b => new BookViewModel
+            {
+                Id = b.Id,
+                Title = b.Title,
+                Author = b.Author,
+                Description = b.Description,
+                ImageUrl = b.ImageUrl,
+                CategoryId = b.CategoryId
+            })
+            .FirstOrDefaultAsync();
+
+    }
+
+    public async Task RemoveBookFromMyCollection(string userId, int bookId)
+    {
+        var modelToDelete = await context.UsersBooks.FirstOrDefaultAsync(ub=> ub.CollectorId == userId && ub.BookId == bookId);
+
+        if(modelToDelete != null)
+        {
+            context.UsersBooks.Remove(modelToDelete);
+            await context.SaveChangesAsync();
+        }
     }
 }
