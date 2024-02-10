@@ -1,6 +1,6 @@
 ﻿using Library.Contracts;
+using Library.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Policy;
 
 namespace Library.Controllers;
 
@@ -55,5 +55,38 @@ public class BookController : BaseController
         await bookService.RemoveBookFromMyCollection(userId, id);
 
         return RedirectToAction("Mine");
+    }
+    [HttpGet]
+    public async Task<IActionResult> Add()
+    {
+        var categories = await bookService.GetCategoriesAsync();
+        var model = new AddBookViewModel
+        {
+            Categories = categories
+        };
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Add(AddBookViewModel model)
+    {
+        decimal rating;
+
+        if(!decimal.TryParse(model.Rating, out rating) || rating< 0 || rating > 10)
+        {
+            ModelState.AddModelError(model.Rating, "Rating must be a number between 0.00 and 10.00");
+
+            return View(model); 
+        }
+
+        if(!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        await bookService.AddBookAsync(model);
+
+        return RedirectToAction("All");
     }
 }

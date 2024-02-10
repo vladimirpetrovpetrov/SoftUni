@@ -88,4 +88,29 @@ public class BookService : IBookService
             await context.SaveChangesAsync();
         }
     }
+    public async Task<IEnumerable<CategoryViewModel>> GetCategoriesAsync()
+    {
+        return await context.Categories
+            .Select(c => new CategoryViewModel
+            {
+                Id = c.Id,
+                Name = c.Name
+            })
+            .ToListAsync();
+    }
+
+    public async Task AddBookAsync(AddBookViewModel book)
+    {
+        Book bookToAdd = new Book
+        {
+            Title = book.Title,
+            Author = book.Author,
+            Description = book.Description,
+            ImageUrl = book.Url,
+            CategoryId = book.CategoryId,
+            Rating = decimal.Parse(book.Rating)
+        };
+        await context.Books.AddAsync(bookToAdd);
+        await context.SaveChangesAsync();
+    }
 }
