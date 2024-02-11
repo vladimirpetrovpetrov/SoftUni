@@ -3,6 +3,7 @@ using Homies.Data;
 using Homies.Data.Models;
 using Homies.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using static Homies.Data.DataConstants.EventConstants;
 
 namespace Homies.Service;
@@ -14,6 +15,23 @@ public class EventService : IEventService
     public EventService(HomiesDbContext context)
     {
         this.context = context;
+    }
+
+    public async Task AddEventAsync(string userId, AddEventViewModel model, DateTime start, DateTime end)
+    {
+        var eventToAdd = new Event()
+        {
+            Name = model.Name,
+            Description = model.Description,
+            CreatedOn = DateTime.Now,
+            Start = start,
+            End = end,
+            OrganiserId = userId,
+            TypeId = model.TypeId
+        };
+
+        await context.Events.AddAsync(eventToAdd);
+        await context.SaveChangesAsync();
     }
 
     public async Task<bool> AddEventToJoinedAsync(string userId, EventViewModel model)
@@ -46,6 +64,16 @@ public class EventService : IEventService
                 Start = x.Start.ToString(DateFormat),
                 Type = x.Type.Name,
                 Organiser = x.Organiser.UserName
+            }).ToListAsync();
+    }
+
+    public async Task<List<TypeViewModel>> GetAllEventTypesAsync()
+    {
+        return await context.Types
+            .Select(t => new TypeViewModel
+            {
+                Id = t.Id,
+                Name = t.Name,
             }).ToListAsync();
     }
 
@@ -85,7 +113,7 @@ public class EventService : IEventService
     {
         var isJoined = await context.EventsParticipants
             .AnyAsync(ep => ep.HelperId == userId && ep.EventId == model.Id);
-        if(isJoined)
+        if (isJoined)
         {
             EventParticipant toRemove = new EventParticipant()
             {

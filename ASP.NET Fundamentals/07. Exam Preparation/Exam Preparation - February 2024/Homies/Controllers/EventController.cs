@@ -1,5 +1,8 @@
 ﻿using Homies.Contracts;
+using Homies.Data;
+using Homies.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace Homies.Controllers;
 
@@ -55,6 +58,60 @@ public class EventController : BaseController
         var userId = GetUserId();
 
         await eventService.RemoveEventFromJoinedAsync(userId, eventToRemove);
+
+        return RedirectToAction("All");
+    }
+    [HttpGet]
+    public async Task<IActionResult> Add()
+    {
+        List<TypeViewModel> tpm = await eventService.GetAllEventTypesAsync();
+
+        AddEventViewModel model = new AddEventViewModel
+        {
+            Types = tpm
+        };
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Add(AddEventViewModel model)
+    {
+        DateTime start = DateTime.Now;
+        DateTime end = DateTime.Now;
+
+        if(!DateTime.TryParseExact(
+            model.Start,
+            DataConstants.EventConstants.DateFormat
+            ,CultureInfo.InvariantCulture,
+            DateTimeStyles.None,
+            out start)
+            )
+        {
+            ModelState.AddModelError(nameof(model.Start), $"Invalid date! Format must be: {DataConstants.EventConstants.DateFormat}");
+        }
+
+        if (!DateTime.TryParseExact(
+            model.End,
+            DataConstants.EventConstants.DateFormat
+            , CultureInfo.InvariantCulture,
+            DateTimeStyles.None,
+            out end)
+            )
+        {
+            ModelState.AddModelError(nameof(model.End), $"Invalid date! Format must be: {DataConstants.EventConstants.DateFormat}");
+        }
+
+        if (!ModelState.IsValid)
+        {
+            model.Types = await eventService.GetAllEventTypesAsync();
+
+            return View(model);
+        }
+
+        var userId = GetUserId();
+
+        await eventService.AddEventAsync(userId, model, start,end);
 
         return RedirectToAction("All");
     }
