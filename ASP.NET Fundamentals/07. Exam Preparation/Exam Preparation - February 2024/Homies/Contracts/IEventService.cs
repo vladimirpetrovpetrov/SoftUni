@@ -13,4 +13,5 @@ public interface IEventService
     public Task<List<TypeViewModel>> GetAllEventTypesAsync();
     public Task AddEventAsync(string userId, AddEventViewModel model, DateTime start, DateTime end);
     Task EditEventAsync(string userId, AddEventViewModel model, DateTime start, DateTime end);
+    public Task<DetailsEventViewModel> GetDetailsAsync(int id);
 }

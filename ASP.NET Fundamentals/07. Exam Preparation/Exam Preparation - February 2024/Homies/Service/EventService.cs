@@ -69,7 +69,7 @@ public class EventService : IEventService
             await context.SaveChangesAsync();
         }
 
-        
+
     }
 
     public async Task<IEnumerable<AllEventViewModel>> GetAllEventsAsync()
@@ -93,6 +93,23 @@ public class EventService : IEventService
                 Id = t.Id,
                 Name = t.Name,
             }).ToListAsync();
+    }
+
+    public async Task<DetailsEventViewModel?> GetDetailsAsync(int id)
+    {
+        return await context.Events
+             .Where(e => e.Id == id)
+             .Select(e => new DetailsEventViewModel
+             {
+                 Id = e.Id,
+                 Name = e.Name,
+                 Description = e.Description,
+                 Start = e.Start.ToString(DateFormat),
+                 Type = e.Type.Name,
+                 Organiser = e.Organiser.UserName,
+                 End = e.End.ToString(DateFormat),
+                 CreatedOn = e.CreatedOn.ToString(DateFormat),
+             }).FirstOrDefaultAsync();
     }
 
     public async Task<EventViewModel?> GetEventByIdAsync(int id)
@@ -122,7 +139,7 @@ public class EventService : IEventService
                 Id = e.Id,
                 Name = e.Name,
                 Description = e.Description,
-                Start = e.Start.ToString(DateFormat,CultureInfo.InvariantCulture),
+                Start = e.Start.ToString(DateFormat, CultureInfo.InvariantCulture),
                 End = e.End.ToString(DateFormat, CultureInfo.InvariantCulture),
                 TypeId = e.TypeId,
                 Types = types,

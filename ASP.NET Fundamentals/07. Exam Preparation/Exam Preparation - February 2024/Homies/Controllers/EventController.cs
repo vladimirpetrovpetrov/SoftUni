@@ -181,4 +181,16 @@ public class EventController : BaseController
         return RedirectToAction("All");
     }
 
+    public async Task<IActionResult> Details(int id)
+    {
+        var model = await eventService.GetDetailsAsync(id);
+
+        if(model == null)
+        {
+            return BadRequest();
+        }
+
+        return View(model);
+    }
+
 }
