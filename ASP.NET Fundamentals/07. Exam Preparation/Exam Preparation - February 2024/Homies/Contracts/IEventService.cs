@@ -7,8 +7,10 @@ public interface IEventService
     public Task<IEnumerable<AllEventViewModel>> GetAllEventsAsync();
     public Task<IEnumerable<AllEventViewModel>> GetJoinedEventsAsync(string userId);
     public Task<EventViewModel> GetEventByIdAsync(int id);
+    public Task<AddEventViewModel> GetEventByIdForEditAsync(int id);
     public Task<bool> AddEventToJoinedAsync(string userId,EventViewModel model);
     public Task RemoveEventFromJoinedAsync(string userId, EventViewModel model);
     public Task<List<TypeViewModel>> GetAllEventTypesAsync();
     public Task AddEventAsync(string userId, AddEventViewModel model, DateTime start, DateTime end);
+    Task EditEventAsync(string userId, AddEventViewModel model, DateTime start, DateTime end);
 }

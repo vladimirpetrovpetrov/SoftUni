@@ -14,6 +14,7 @@ public static class DataConstants
 
         //Datetime required format
         public const string DateFormat = "yyyy-MM-dd H:mm";
+        public const string DateFormatForEdit = "dd-MMM-yyyy HH:mm";
     }
 
     public static class TypeConstants

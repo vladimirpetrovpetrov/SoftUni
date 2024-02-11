@@ -115,4 +115,70 @@ public class EventController : BaseController
 
         return RedirectToAction("All");
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var model = await eventService.GetEventByIdForEditAsync(id);
+
+        if (model == null)
+        {
+            return BadRequest();
+        }
+
+        var userId = GetUserId();
+        if(userId != model.Organiser)
+        {
+            return Unauthorized();
+        }
+        return View(model);
+    }
+    [HttpPost]
+    public async Task<IActionResult> Edit(AddEventViewModel model)
+    {
+        if (model == null)
+        {
+            return BadRequest();
+        }
+
+        var userId = GetUserId();
+
+
+        DateTime start = DateTime.Now;
+        DateTime end = DateTime.Now;
+
+        if (!DateTime.TryParseExact(
+            model.Start,
+            DataConstants.EventConstants.DateFormat
+            , CultureInfo.InvariantCulture,
+            DateTimeStyles.None,
+            out start)
+            )
+        {
+            ModelState.AddModelError(nameof(model.Start), $"Invalid date! Format must be: {DataConstants.EventConstants.DateFormat}");
+        }
+
+        if (!DateTime.TryParseExact(
+            model.End,
+            DataConstants.EventConstants.DateFormat
+            , CultureInfo.InvariantCulture,
+            DateTimeStyles.None,
+            out end)
+            )
+        {
+            ModelState.AddModelError(nameof(model.End), $"Invalid date! Format must be: {DataConstants.EventConstants.DateFormat}");
+        }
+
+        if (!ModelState.IsValid)
+        {
+            model.Types = await eventService.GetAllEventTypesAsync();
+            model.Organiser = model.Organiser;
+            return View(model);
+        }
+
+        await eventService.EditEventAsync(userId, model, start, end);
+
+        return RedirectToAction("All");
+    }
+
 }

@@ -54,6 +54,24 @@ public class EventService : IEventService
         return true;
     }
 
+    public async Task EditEventAsync(string userId, AddEventViewModel model, DateTime start, DateTime end)
+    {
+        var eventToEdit = await context.Events
+            .FindAsync(model.Id);
+        if (eventToEdit != null)
+        {
+            eventToEdit.Name = model.Name;
+            eventToEdit.Description = model.Description;
+            eventToEdit.Start = start;
+            eventToEdit.End = end;
+            eventToEdit.TypeId = model.TypeId;
+
+            await context.SaveChangesAsync();
+        }
+
+        
+    }
+
     public async Task<IEnumerable<AllEventViewModel>> GetAllEventsAsync()
     {
         return await context.Events
@@ -91,6 +109,24 @@ public class EventService : IEventService
                 Start = e.Start,
                 End = e.End,
                 Type = e.Type.Name
+            }).FirstOrDefaultAsync();
+    }
+
+    public async Task<AddEventViewModel?> GetEventByIdForEditAsync(int id)
+    {
+        var types = await GetAllEventTypesAsync();
+        return await context.Events
+            .Where(e => e.Id == id)
+            .Select(e => new AddEventViewModel
+            {
+                Id = e.Id,
+                Name = e.Name,
+                Description = e.Description,
+                Start = e.Start.ToString(DateFormat,CultureInfo.InvariantCulture),
+                End = e.End.ToString(DateFormat, CultureInfo.InvariantCulture),
+                TypeId = e.TypeId,
+                Types = types,
+                Organiser = e.Organiser.Id
             }).FirstOrDefaultAsync();
     }
 
