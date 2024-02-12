@@ -100,4 +100,58 @@ public class AdService : IAdService
         context.AdsBuyers.Remove(ab);
         await context.SaveChangesAsync();
     }
+
+    public async Task AddAdAsync(string userId, AddAdModel model)
+    {
+        if(model != null)
+        {
+            var ad = new Ad()
+            {
+                Name = model.Name,
+                Description = model.Description,
+                Price = model.Price,
+                OwnerId = userId,
+                CreatedOn = DateTime.UtcNow,
+                ImageUrl = model.ImageUrl,
+                CategoryId = model.CategoryId
+            };
+
+            await context.Ads.AddAsync(ad);
+            await context.SaveChangesAsync();
+        }
+    }
+
+    public async Task<EditAdModel?> GetModelForEditByIdAsync(int id)
+    {
+        return await context.Ads
+            .Where(ad => ad.Id == id)
+            .Select(ad => new EditAdModel
+            {
+                Id = ad.Id,
+                Description = ad.Description,
+                Price = ad.Price,
+                Name = ad.Name,
+                ImageUrl = ad.ImageUrl,
+                CategoryId = ad.CategoryId,
+                OwnerId = ad.Owner.Id
+            }).FirstOrDefaultAsync();
+    }
+
+    public async Task EditAdAsync(EditAdModel model)
+    {
+        var adToEdit = await context.Ads
+            .Where(a => a.Id == model.Id)
+            .FirstOrDefaultAsync();
+
+        if(adToEdit != null)
+        {
+            adToEdit.Name = model.Name;
+            adToEdit.Description = model.Description;
+            adToEdit.Price = model.Price;
+            adToEdit.ImageUrl = model.ImageUrl;
+            adToEdit.CategoryId = model.CategoryId;
+
+            await context.SaveChangesAsync();
+        }
+    }
 }

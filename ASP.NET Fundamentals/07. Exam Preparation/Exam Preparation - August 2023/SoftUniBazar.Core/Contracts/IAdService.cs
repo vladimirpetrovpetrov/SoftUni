@@ -10,4 +10,7 @@ public interface IAdService
     public Task AddToCardAsync(string userId, int adId);
     public Task<IEnumerable<AllAdModel>> GetAllAdInCartAsync(string userId);
     public Task RemoveFromCartAsync(string userId, int adId);
+    public Task AddAdAsync(string userId, AddAdModel model);
+    public Task<EditAdModel> GetModelForEditByIdAsync(int id);
+    public Task EditAdAsync(EditAdModel model);
 }

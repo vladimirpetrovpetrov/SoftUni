@@ -29,4 +29,8 @@ public static class AdDataConstants
     /// The required date format for Advertisement creation date.
     /// </summary>
     public const string AdDateFormat = "yyyy-MM-dd H:mm";
+    /// <summary>
+    /// Minimal price value.
+    /// </summary>
+    public const int MinPriceValue = 0;
 }
