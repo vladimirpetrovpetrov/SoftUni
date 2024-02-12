@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SoftUniBazar.Data;
 
@@ -11,9 +12,10 @@ using SoftUniBazar.Data;
 namespace SoftUniBazar.Data.Migrations
 {
     [DbContext(typeof(BazarDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240212142357_CreatedEntities")]
+    partial class CreatedEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -316,33 +318,6 @@ namespace SoftUniBazar.Data.Migrations
                     b.ToTable("Categories");
 
                     b.HasComment("Category of an Advertisement");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Books"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Cars"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Clothes"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Home"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Technology"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
