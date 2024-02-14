@@ -18,7 +18,7 @@ public class PokemonController : Controller
         this.mapper = mapper;
     }
     [HttpGet]
-    [ProducesResponseType(200,Type = typeof(IEnumerable<Pokemon>))]
+    [ProducesResponseType(200,Type = typeof(IEnumerable<PokemonDto>))]
     public IActionResult GetPokemons()
     {
         var pokemons = mapper.Map<List<PokemonDto>>(pokemonRepository.GetPokemons());
@@ -32,7 +32,7 @@ public class PokemonController : Controller
     }
 
     [HttpGet("{pokeId}")]
-    [ProducesResponseType(200, Type = typeof(Pokemon))]
+    [ProducesResponseType(200, Type = typeof(PokemonDto))]
     [ProducesResponseType(400)]
     public IActionResult GetPokemon(int pokeId)
     {
