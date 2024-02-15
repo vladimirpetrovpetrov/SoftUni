@@ -1,0 +1,46 @@
+@media (max-width : 600px){
+    body{
+        font-size: 12px;
+    }
+
+    .home-container{
+        margin-top: 50px;
+        padding-top: 0;
+    }
+
+
+    .home-header{
+        padding: 12px 0;
+    }
+
+    .home-header .navbar-link{
+        display: none;
+    }
+
+    .Heading-2 {
+        font-size: 21px;
+    }
+
+    h1.section-heading-text{
+        margin: 0;
+    }
+
+    .section-heading-section-heading{
+        margin: 0 0 30px 0;
+    }
+
+    .max-width-container{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .home-cards-container{
+        grid-gap: 14px;
+    }
+
+    .category-card-image{
+        width: 185px;
+        height: auto;
+        aspect-ratio: 1/1;
+    }
+}
