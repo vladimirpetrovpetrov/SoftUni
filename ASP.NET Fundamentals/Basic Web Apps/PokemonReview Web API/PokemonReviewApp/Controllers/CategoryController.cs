@@ -62,4 +62,40 @@ public class CategoryController : Controller
         return Ok(pokemons);
     }
 
+    [HttpPost]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(400)]
+    public IActionResult CreateCategory([FromBody] CategoryAddDto categoryCreate)
+    {
+        if(categoryCreate == null)
+        {
+            return BadRequest();
+        }
+
+        var category = categoryRepository.GetCategories()
+            .Where(c=> c.Name.Trim().ToLower() == categoryCreate.Name.Trim().ToLower())
+            .FirstOrDefault();
+
+        if(category != null)
+        {
+            ModelState.AddModelError("", "Category already exists!");
+            return StatusCode(402, ModelState);
+        }
+
+        if(!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var categoryMap = mapper.Map<Category>(categoryCreate);
+
+        if (!categoryRepository.CreateCategory(categoryMap))
+        {
+            ModelState.AddModelError("", "Something went wrong while saving!");
+            return StatusCode(500, ModelState);
+        }
+
+        return Ok("Successfully created!");
+    }
+
 }

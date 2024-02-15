@@ -1,4 +1,5 @@
 ﻿using PokemonReviewApp.Data;
+using PokemonReviewApp.Dto;
 using PokemonReviewApp.Interfaces;
 using PokemonReviewApp.Models;
 
@@ -56,5 +57,49 @@ public class PokemonRepository : IPokemonRepository
         return context
             .Pokemons
             .Any(p => p.Id == pokeId);
+    }
+
+    public bool CreatePokemon(int ownerId, int categoryId, Pokemon pokemon)
+    {
+        var pokemonOwnerEntity = context
+            .Owners
+            .Where(o => o.Id == ownerId)
+            .FirstOrDefault();
+
+        var category = context
+            .Categories
+            .Where(c=>c.Id == categoryId)
+            .FirstOrDefault ();
+
+        var pokemonOwner = new PokemonOwner()
+        {
+            Owner = pokemonOwnerEntity,
+            Pokemon = pokemon
+        };
+
+        context.Add(pokemonOwner);
+
+        var pokemonCategory = new PokemonCategory()
+        {
+            Category = category,
+            Pokemon = pokemon
+        };
+
+        context.Add(pokemonCategory);
+
+        context.Add(pokemon);
+
+        return Save();
+    }
+
+    public bool Save()
+    {
+        var saved = context.SaveChanges();
+        return saved > 0 ? true : false;
+    }
+    public Pokemon? GetPokemonTrimToUpper(PokemonDto pokemonCreate)
+    {
+        return GetPokemons().Where(c => c.Name.Trim().ToUpper() == pokemonCreate.Name.TrimEnd().ToUpper())
+            .FirstOrDefault();
     }
 }

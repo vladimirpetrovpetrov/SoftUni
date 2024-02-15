@@ -17,6 +17,13 @@ public class CategoryRepository : ICategoryRepository
         return context.Categories.Any(c=>c.Id == categoryId);
     }
 
+    public bool CreateCategory(Category category)
+    {
+        context.Add(category);
+        return Save();
+
+    }
+
     public ICollection<Category> GetCategories()
     {
         return context.Categories.ToList();
@@ -37,5 +44,11 @@ public class CategoryRepository : ICategoryRepository
             .Where(pc=>pc.CategoryId == categoryId)
             .Select(pc=> pc.Pokemon)
             .ToList();
+    }
+
+    public bool Save()
+    {
+        var save = context.SaveChanges();
+        return save > 0 ? true : false;
     }
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PokemonReviewApp.Data;
+﻿using PokemonReviewApp.Data;
 using PokemonReviewApp.Interfaces;
 using PokemonReviewApp.Models;
 
@@ -13,6 +12,13 @@ public class CountryRepository : ICountryRepository
     {
         this.context = context;
     }
+
+    public bool CreateCountry(Country country)
+    {
+        context.Add(country);
+        return Save();
+    }
+
     public ICollection<Country> GetCountries()
     {
         return context
@@ -46,5 +52,11 @@ public class CountryRepository : ICountryRepository
             .Owners
             .Where(o => o.CountryId == countryId)
             .ToList();
+    }
+
+    public bool Save()
+    {
+        var save = context.SaveChanges();
+        return save > 0 ? true : false;
     }
 }

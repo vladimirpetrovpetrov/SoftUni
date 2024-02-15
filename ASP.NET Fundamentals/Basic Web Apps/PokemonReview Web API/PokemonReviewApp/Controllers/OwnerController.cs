@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PokemonReviewApp.Dto;
 using PokemonReviewApp.Interfaces;
 using PokemonReviewApp.Models;
+using PokemonReviewApp.Repository;
 using System.Collections.Generic;
 
 namespace PokemonReviewApp.Controllers;
@@ -88,5 +89,41 @@ public class OwnerController : Controller
 
         return Ok(pokemons);
     }
+
+    [HttpPost]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(400)]
+    public IActionResult CreateOwner([FromBody] OwnerAddDto ownerCreate)
+    {
+        if (ownerCreate == null)
+        {
+            return BadRequest();
+        }
+
+        var owner = ownerRepository.GetOwners()
+            .Where(o => o.FirstName.Trim().ToLower() == ownerCreate.FirstName.Trim().ToLower() && o.LastName.Trim().ToLower() == ownerCreate.LastName.Trim().ToLower())
+            .FirstOrDefault();
+
+        if (owner != null)
+        {
+            ModelState.AddModelError("", "Owner already exists!");
+            return StatusCode(402, ModelState);
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var ownerMap = mapper.Map<Owner>(ownerCreate);
+
+        if (!ownerRepository.CreateOwner(ownerMap))
+        {
+            ModelState.AddModelError("", "Something went wrong while saving!");
+            return StatusCode(500, ModelState);
+        }
+
+        return Ok("Successfully created!");
+    }
+
 }
-//GetPokemonByOwner
