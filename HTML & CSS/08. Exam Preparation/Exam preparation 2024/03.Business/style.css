@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Serif');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,70');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    font: 20px/1.5 "PT Sans", sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: "PT Serif";
+}
+
+.site-section {
+    padding: 2em;
+}
+
+body{
+    background-image: url(images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: top center;
+}
+
+.site-section.banner{
+    color: white;
+    padding-bottom: 240px;
+}
+
+.site-section.banner h2{
+    font-size: 68px;
+    font-weight: normal;
+    line-height: 1.26;
+    margin-bottom: 20px;
+}
+
+.site-section.banner p{
+    max-width: 790px;
+    font-size: 24px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-header nav ul {
+    display: flex;
+}
+
+.site-header nav li{
+    list-style: none outside;
+    padding: 0 10px;
+}
+
+.site-header nav a{
+    text-decoration: none;
+    color: white;
+}
+
+.site-title a{
+    display: block;
+    width: 130px;
+    height: 110px;
+    overflow: hidden;
+    text-indent: -200vw;
+    background-image: url('images/logo.webp');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.site-footer{
+    background-color: #171720;
+    color: white;
+}
+
+.site-section.columns{
+    border-bottom: 2px solid lightgray;
+    background: #fff;
+}
+
+.site-section.partners,
+.site-section.sponsors{
+    background: #fff;
+    text-align: center;
+}
+
+.column-container .container{
+    display: flex;
+    gap: 40px;
+    flex-direction: row;
+}
+
+.site-section.site-footer .container{
+    display:flex;
+    gap: 40px;
+}
+
+.site-section.site-footer .container li{
+    color: #7a7d7e;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.site-section.site-footer .container h4{
+margin-bottom: 40px;
+}
+
+.images-container{
+    width: 350px;
+    display: flex;
+    gap:80px;
+    margin: 20px auto;
+}
+
+.image-container{
+    background-color: lightgray;
+    padding: 12px 24px;
+    border-radius: 50%;
+}
+
+.img1, .img2{
+    width: 100%;
+}
