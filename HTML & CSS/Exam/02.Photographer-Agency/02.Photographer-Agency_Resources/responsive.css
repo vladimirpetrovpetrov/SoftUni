@@ -1,0 +1,77 @@
+@media(max-width: 600px) {
+
+    /* Header Section */
+  
+    header nav {
+      margin-left: 0px;
+      justify-content: center;
+    }
+  
+    header nav ul {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+  
+    header nav ul li {
+      font-size: 20px;
+      padding-right: 0;
+    }
+  
+    .header-title {
+      padding: 24px 24px;
+    }
+  
+    .header-title h1 {
+      font-size: 42px;
+    }
+  
+    .header-title p {
+      font-weight: bold;
+    }
+  
+    /* Choose Us Section */
+  
+    .choose-us {
+      display: flex;
+      justify-content: center;
+    }
+  
+    .choose-us ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 70%;
+      gap: 20px;
+    }
+  
+    /* About Us Section */
+  
+    .about-us {
+      width: 70%;
+    }
+  
+    /* Team Section */
+  
+    .team-description-wrapper {
+      width: 50%;
+    }
+    
+    .team-description ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+    }
+  
+    .team-description ul li img {
+      width: 120px;
+      height: 140px;
+    }
+  
+    .team-description ul li p{
+      font-size: 12px;
+    }
+  }
