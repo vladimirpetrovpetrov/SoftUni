@@ -11,9 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HouseRentingSystem.Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240227210606_DomainTablesAdded")]
-    partial class DomainTablesAdded
+    [DbContext(typeof(HouseRentingDbContext))]
+    [Migration("20240228201736_DomainTableAdded")]
+    partial class DomainTableAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -350,15 +350,15 @@ namespace HouseRentingSystem.Infrastructure.Migrations
             modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Models.House", b =>
                 {
                     b.HasOne("HouseRentingSystem.Infrastructure.Data.Models.Agent", "Agent")
-                        .WithMany()
+                        .WithMany("Houses")
                         .HasForeignKey("AgentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HouseRentingSystem.Infrastructure.Data.Models.Category", "Category")
                         .WithMany("Houses")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Agent");
@@ -415,6 +415,11 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Models.Agent", b =>
+                {
+                    b.Navigation("Houses");
                 });
 
             modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Models.Category", b =>

@@ -4,7 +4,7 @@
 
 namespace HouseRentingSystem.Infrastructure.Migrations
 {
-    public partial class DomainTablesAdded : Migration
+    public partial class DomainTableAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,13 +66,13 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                         column: x => x.AgentId,
                         principalTable: "Agents",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Houses_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 },
                 comment: "House to rent");
 

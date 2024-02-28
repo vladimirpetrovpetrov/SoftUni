@@ -39,4 +39,8 @@ public class Agent
     /// </summary>
     [ForeignKey(nameof(UserId))]
     public IdentityUser User { get; set; } = null!;
+    /// <summary>
+    /// Gets or sets the collection of houses managed by this agent.
+    /// </summary>
+    public ICollection<House> Houses { get; set; } = new HashSet<House>();
 }
