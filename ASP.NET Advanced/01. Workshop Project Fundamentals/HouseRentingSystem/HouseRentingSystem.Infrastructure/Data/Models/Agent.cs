@@ -6,6 +6,7 @@ using static HouseRentingSystem.Infrastructure.Constants.DataConstants.Agent;
 
 namespace HouseRentingSystem.Infrastructure.Data.Models;
 
+[Index(nameof(PhoneNumber), IsUnique = true)]
 /// <summary>
 /// Represents an agent responsible for managing houses.
 /// </summary>
