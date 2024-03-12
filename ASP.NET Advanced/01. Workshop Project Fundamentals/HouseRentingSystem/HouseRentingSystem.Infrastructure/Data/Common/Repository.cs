@@ -31,7 +31,7 @@ public class Repository : IRepository
         await DbSet<T>().AddAsync(entity);
     }
 
-    public async Task<int> SaveChanges()
+    public async Task<int> SaveChangesAsync()
     {
         return await context.SaveChangesAsync();
     }
