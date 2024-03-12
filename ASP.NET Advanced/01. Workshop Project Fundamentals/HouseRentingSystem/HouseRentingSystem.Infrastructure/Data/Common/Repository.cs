@@ -25,4 +25,14 @@ public class Repository : IRepository
         return DbSet<T>()
             .AsNoTracking();
     }
+
+    public async Task AddAsync<T>(T entity) where T : class
+    {
+        await DbSet<T>().AddAsync(entity);
+    }
+
+    public async Task<int> SaveChanges()
+    {
+        return await context.SaveChangesAsync();
+    }
 }
