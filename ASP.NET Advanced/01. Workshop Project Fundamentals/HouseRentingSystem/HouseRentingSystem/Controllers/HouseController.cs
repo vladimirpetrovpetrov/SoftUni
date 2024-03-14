@@ -91,7 +91,7 @@ public class HouseController : BaseController
     public async Task<IActionResult> Add(HouseFormModel model)
     {
         if(await houseService.CategoryExistsAsync(model.CategoryId) == false){
-            ModelState.AddModelError(nameof(model.CategoryId), "");
+            ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist!");
         }
 
         if (!ModelState.IsValid)
@@ -110,14 +110,48 @@ public class HouseController : BaseController
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
-        var model = new HouseFormModel();
+        if(await houseService.ExistsAsync(id) == false)
+        {
+            return BadRequest();
+        }
+
+        if(await houseService.HasAgentWithIdAsync(id, User.Id()) == false)
+        {
+            return Unauthorized();
+        }
+
+        var model = await houseService.GetHouseForModelByIdAsync(id);
+
         return View(model);
     }
 
     [HttpPost]
     public async Task<IActionResult> Edit(int id, HouseFormModel model)
     {
-        return RedirectToAction(nameof(Details), new { id = 1 });
+        if (await houseService.ExistsAsync(id) == false)
+        {
+            return BadRequest();
+        }
+
+        if (await houseService.HasAgentWithIdAsync(id, User.Id()) == false)
+        {
+            return Unauthorized();
+        }
+
+        if (await houseService.CategoryExistsAsync(model.CategoryId) == false)
+        {
+            ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist!");
+        }
+
+        if (!ModelState.IsValid)
+        {
+            model.Categories = await houseService.AllCategoriesAsync();
+            return View(model);
+        }
+
+        await houseService.EditAsync(id,model);
+
+        return RedirectToAction(nameof(Details), new { id });
     }
 
     [HttpGet]

@@ -17,4 +17,8 @@ public interface IHouseService
 
     Task<bool> ExistsAsync(int id);
     Task<HouseDetailsServiceModel> HouseDetailsByIdAsync(int id);
+    Task EditAsync(int houseId, HouseFormModel model);
+
+    Task<bool> HasAgentWithIdAsync(int houseId, string userId);
+    Task<HouseFormModel?> GetHouseForModelByIdAsync(int id);
 }
