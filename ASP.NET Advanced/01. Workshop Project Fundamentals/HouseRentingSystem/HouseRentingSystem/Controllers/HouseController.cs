@@ -20,7 +20,7 @@ public class HouseController : BaseController
 
     [AllowAnonymous]
     [HttpGet]
-    public async Task<IActionResult> All([FromQuery]AllHousesQueryModel query)
+    public async Task<IActionResult> All([FromQuery] AllHousesQueryModel query)
     {
         var model = await houseService.AllAsync(
             query.Category,
@@ -43,7 +43,7 @@ public class HouseController : BaseController
         var userId = User.Id();
         IEnumerable<HouseServiceModel> model;
 
-        if(await agentService.ExistsByIdAsync(userId))
+        if (await agentService.ExistsByIdAsync(userId))
         {
             int agentId = await agentService.GetAgentIdAsync(userId) ?? 0;
             model = await houseService.AllHousesByAgentIdAsync(agentId);
@@ -59,7 +59,7 @@ public class HouseController : BaseController
     [HttpGet]
     public async Task<IActionResult> Details(int id)
     {
-        if(await houseService.ExistsAsync(id) == false)
+        if (await houseService.ExistsAsync(id) == false)
         {
             return BadRequest();
         }
@@ -90,7 +90,8 @@ public class HouseController : BaseController
     [MustBeAgent]
     public async Task<IActionResult> Add(HouseFormModel model)
     {
-        if(await houseService.CategoryExistsAsync(model.CategoryId) == false){
+        if (await houseService.CategoryExistsAsync(model.CategoryId) == false)
+        {
             ModelState.AddModelError(nameof(model.CategoryId), "Category does not exist!");
         }
 
@@ -110,12 +111,12 @@ public class HouseController : BaseController
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
-        if(await houseService.ExistsAsync(id) == false)
+        if (await houseService.ExistsAsync(id) == false)
         {
             return BadRequest();
         }
 
-        if(await houseService.HasAgentWithIdAsync(id, User.Id()) == false)
+        if (await houseService.HasAgentWithIdAsync(id, User.Id()) == false)
         {
             return Unauthorized();
         }
@@ -149,7 +150,7 @@ public class HouseController : BaseController
             return View(model);
         }
 
-        await houseService.EditAsync(id,model);
+        await houseService.EditAsync(id, model);
 
         return RedirectToAction(nameof(Details), new { id });
     }
@@ -157,13 +158,45 @@ public class HouseController : BaseController
     [HttpGet]
     public async Task<IActionResult> Delete(int id)
     {
-        var model = new HouseDetailsViewModel();
+        if (await houseService.ExistsAsync(id) == false)
+        {
+            return BadRequest();
+        }
+
+        if(await houseService.HasAgentWithIdAsync(id, User.Id()) == false)
+        {
+            return Unauthorized();
+        }
+
+        var house = await houseService.HouseDetailsByIdAsync(id);
+        var model = new HouseDetailsViewModel()
+        {
+            Title = house.Title,
+            Address = house.Address,
+            ImageUrl = house.ImageUrl
+        };
+
+        //TO DO - CHECK WHAT WE DO IF THA HOUES IS RENTED 
+
+
         return View(model);
     }
 
     [HttpPost]
     public async Task<IActionResult> Delete(HouseDetailsViewModel model)
     {
+        if (await houseService.ExistsAsync(model.Id) == false)
+        {
+            return BadRequest();
+        }
+
+        if (await houseService.HasAgentWithIdAsync(model.Id, User.Id()) == false)
+        {
+            return Unauthorized();
+        }
+
+        await houseService.DeleteAsync(model.Id);
+
         return RedirectToAction(nameof(All));
     }
 

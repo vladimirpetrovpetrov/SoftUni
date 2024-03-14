@@ -134,6 +134,17 @@ public class HouseService : IHouseService
         return house.Id;
     }
 
+    public async Task DeleteAsync(int houseId)
+    {
+        if (await ExistsAsync(houseId))
+        {
+            var houseToDelete = await repository
+                .GetByIdAsync<House>(houseId);
+            repository.Delete(houseToDelete!);
+        }
+        await repository.SaveChangesAsync();
+    }
+
     public async Task EditAsync(int houseId, HouseFormModel model)
     {
         var house = await repository.GetByIdAsync<House>(houseId); 
