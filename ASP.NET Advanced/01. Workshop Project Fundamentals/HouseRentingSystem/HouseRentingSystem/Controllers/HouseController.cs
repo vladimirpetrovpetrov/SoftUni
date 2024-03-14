@@ -203,6 +203,23 @@ public class HouseController : BaseController
     [HttpPost]
     public async Task<IActionResult> Rent(int id)
     {
+        if (await houseService.ExistsAsync(id) == false)
+        {
+            return BadRequest();
+        }
+
+        if(await houseService.IsRentedAsync(id))
+        {
+            return BadRequest();
+        }
+
+        if(await agentService.ExistsByIdAsync(User.Id()))
+        {
+            return Unauthorized();
+        }
+
+        await houseService.RentAsync(id, User.Id());
+
         return RedirectToAction(nameof(Mine));
     }
 
