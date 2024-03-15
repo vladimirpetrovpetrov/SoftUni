@@ -2,9 +2,12 @@
 @using System.Security.Claims
 @model HouseServiceModel
 @inject IHouseService HouseService
+@inject IAgentService AgentService
 
 @{
     bool hasAgentWithId = await HouseService.HasAgentWithIdAsync(Model.Id, User.Id());
+    bool isAgent = await AgentService.ExistsByIdAsync(User.Id());
+    bool userRentedThisHouse = await HouseService.IsRentedByUserWithIdAsync(Model.Id, User.Id());
 }
 
 <div class="col-md-4">
@@ -31,7 +34,7 @@
                        class="btn btn-danger">Delete</a>
                 }
                 <p></p>
-                @if (!Model.IsRented)
+                @if (!Model.IsRented && !isAgent)
                 {
                     <form class="input-group-sm" asp-controller="House"
                           asp-action="Rent" asp-route-id="@Model.Id" method="post">
@@ -40,10 +43,13 @@
                 }
                 else
                 {
-                    <form asp-controller="House" asp-action="Leave"
-                          asp-route-id="@Model.Id" method="post">
-                        <input class="btn btn-primary" type="submit" value="Leave" />
-                    </form>
+                    if (!isAgent && userRentedThisHouse)
+                    {
+                        <form asp-controller="House" asp-action="Leave"
+                              asp-route-id="@Model.Id" method="post">
+                            <input class="btn btn-primary" type="submit" value="Leave" />
+                        </form>
+                    }
                 }
             }
         </div>
