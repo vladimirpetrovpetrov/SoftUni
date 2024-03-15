@@ -1,4 +1,13 @@
-﻿<ul class="navbar-nav flex-grow-1">
+﻿@using HouseRentingSystem.Core.Contracts
+@using System.Security.Claims
+
+@inject IAgentService AgentService
+
+@{
+    bool isAgent = await AgentService.ExistsByIdAsync(this.User.Id());
+}
+
+<ul class="navbar-nav flex-grow-1">
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="House" asp-action="All">All Houses</a>
     </li>
@@ -7,8 +16,11 @@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="House" asp-action="Mine">My Houses</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="House" asp-action="Add">Add Houses</a>
-        </li>
+        @if (isAgent)
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="House" asp-action="Add">Add Houses</a>
+            </li>
+        }
     }
 </ul>
