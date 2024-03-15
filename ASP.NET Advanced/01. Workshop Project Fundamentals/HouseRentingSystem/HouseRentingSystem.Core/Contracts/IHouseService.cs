@@ -1,6 +1,7 @@
 ﻿using HouseRentingSystem.Core.Enums;
 using HouseRentingSystem.Core.Models.Home;
 using HouseRentingSystem.Core.Models.House;
+using HouseRentingSystem.Core.Models.Statistics;
 
 namespace HouseRentingSystem.Core.Contracts;
 
@@ -26,4 +27,5 @@ public interface IHouseService
     Task<bool> IsRentedByUserWithIdAsync(int houseId, string userId);
     Task RentAsync(int houseId, string userId);
     Task LeaveAsync(int houseId);
+    Task<StatisticsServiceModel> GetStatisticsAsync();
 }

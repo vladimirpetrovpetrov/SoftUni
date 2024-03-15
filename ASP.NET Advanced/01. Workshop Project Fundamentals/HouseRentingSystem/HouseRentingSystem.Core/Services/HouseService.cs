@@ -2,6 +2,7 @@
 using HouseRentingSystem.Core.Enums;
 using HouseRentingSystem.Core.Models.Home;
 using HouseRentingSystem.Core.Models.House;
+using HouseRentingSystem.Core.Models.Statistics;
 using HouseRentingSystem.Infrastructure.Data.Common;
 using HouseRentingSystem.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -191,6 +192,20 @@ public class HouseService : IHouseService
         }
 
         return house;
+    }
+
+    public async Task<StatisticsServiceModel> GetStatisticsAsync()
+    {
+        return  new StatisticsServiceModel()
+        {
+            TotalHouses = await repository
+            .AllReadOnly<House>()
+            .CountAsync(),
+            TotalRents = await repository
+            .AllReadOnly<House>()
+            .Where(h=> h.RenterId != null)
+            .CountAsync()
+        };
     }
 
     public async Task<bool> HasAgentWithIdAsync(int houseId, string userId)
