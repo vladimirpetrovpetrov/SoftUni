@@ -75,4 +75,25 @@ public static class DataConstants
         /// </summary>
         public const int MaxPhoneNumberLength = 15;
     }
+
+    public class ApplicationUser
+    {
+        /// <summary>
+        /// Minimum length of the User First Name
+        /// </summary>
+        public const int MinFirstNameLength = 1;
+        /// <summary>
+        /// Maximum length of the User First Name
+        /// </summary>
+        public const int MaxFirstNameLength = 12;
+
+        /// <summary>
+        /// Minimum length of the User Last Name
+        /// </summary>
+        public const int MinLastNameLength = 3;
+        /// <summary>
+        /// Maximum length of the User Last Name
+        /// </summary>
+        public const int MaxLastNameLength = 15;
+    }
 }

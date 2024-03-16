@@ -39,7 +39,7 @@ public class Agent
     /// Gets or sets the user associated with the agent.
     /// </summary>
     [ForeignKey(nameof(UserId))]
-    public IdentityUser User { get; set; } = null!;
+    public ApplicationUser User { get; set; } = null!;
     /// <summary>
     /// Gets or sets the collection of houses managed by this agent.
     /// </summary>
