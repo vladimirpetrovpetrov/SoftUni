@@ -3,6 +3,7 @@ using HouseRentingSystem.Core.Services;
 using HouseRentingSystem.Infrastructure.Data;
 using HouseRentingSystem.Infrastructure.Data.Common;
 using HouseRentingSystem.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -40,10 +41,41 @@ public static class ServiceCollectionExtension
             options.Password.RequireLowercase = false;
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequireUppercase = false;
-        }).AddEntityFrameworkStores<HouseRentingDbContext>();
+        })
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<HouseRentingDbContext>();
 
         return services;
     }
 
+    public static IApplicationBuilder SeedAdmin(this IApplicationBuilder app)
+    {
+        using var scopedServices = app.ApplicationServices.CreateScope();
+
+        var services = scopedServices.ServiceProvider;
+
+        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+        Task.Run(async () =>
+        {
+            if(await roleManager.RoleExistsAsync("Admin"))
+            {
+                return;
+            }
+
+            var role = new IdentityRole { Name = "Admin" };
+
+            await roleManager.CreateAsync(role);
+
+            var admin = await userManager.FindByNameAsync("admin@mail.com");
+
+            await userManager.AddToRoleAsync(admin, role.Name);
+        })
+            .GetAwaiter()
+            .GetResult();
+
+        return app;
+    }
 
 }

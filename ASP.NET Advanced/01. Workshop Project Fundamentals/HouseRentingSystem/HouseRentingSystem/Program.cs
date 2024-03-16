@@ -38,6 +38,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.SeedAdmin();
+
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
 
