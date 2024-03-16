@@ -12,10 +12,12 @@ namespace HouseRentingSystem.Core.Services;
 public class HouseService : IHouseService
 {
     private readonly IRepository repository;
+    private readonly IApplicationUserService applicationUserService;
 
-    public HouseService(IRepository repository)
+    public HouseService(IRepository repository, IApplicationUserService applicationUserService)
     {
         this.repository = repository;
+        this.applicationUserService = applicationUserService;
     }
 
     public async Task<HouseQueryServiceModel> AllAsync(
@@ -50,9 +52,9 @@ public class HouseService : IHouseService
                 .OrderBy(h => h.PricePerMonth),
             HouseSorting.NotRented => housesToShow
                 .OrderBy(h => h.RenterId != null)
-                .ThenByDescending(h=>h.Id),
+                .ThenByDescending(h => h.Id),
             _ => housesToShow
-                .OrderByDescending(h=>h.Id)
+                .OrderByDescending(h => h.Id)
         };
 
         var houses = await housesToShow
@@ -63,7 +65,7 @@ public class HouseService : IHouseService
 
         int totalHouses = await housesToShow.CountAsync();
 
-        return new HouseQueryServiceModel() 
+        return new HouseQueryServiceModel()
         {
             Houses = houses,
             TotalHousesCount = totalHouses
@@ -148,9 +150,9 @@ public class HouseService : IHouseService
 
     public async Task EditAsync(int houseId, HouseFormModel model)
     {
-        var house = await repository.GetByIdAsync<House>(houseId); 
-        
-        if(house != null)
+        var house = await repository.GetByIdAsync<House>(houseId);
+
+        if (house != null)
         {
             house.Address = model.Address;
             house.CategoryId = model.CategoryId;
@@ -172,7 +174,7 @@ public class HouseService : IHouseService
 
     public async Task<HouseFormModel?> GetHouseForModelByIdAsync(int id)
     {
-        var house =  await repository
+        var house = await repository
             .AllReadOnly<House>()
             .Where(h => h.Id == id)
             .Select(h => new HouseFormModel
@@ -186,7 +188,7 @@ public class HouseService : IHouseService
             })
             .FirstOrDefaultAsync();
 
-        if(house != null)
+        if (house != null)
         {
             house.Categories = await AllCategoriesAsync();
         }
@@ -196,14 +198,14 @@ public class HouseService : IHouseService
 
     public async Task<StatisticsServiceModel> GetStatisticsAsync()
     {
-        return  new StatisticsServiceModel()
+        return new StatisticsServiceModel()
         {
             TotalHouses = await repository
             .AllReadOnly<House>()
             .CountAsync(),
             TotalRents = await repository
             .AllReadOnly<House>()
-            .Where(h=> h.RenterId != null)
+            .Where(h => h.RenterId != null)
             .CountAsync()
         };
     }
@@ -217,6 +219,16 @@ public class HouseService : IHouseService
 
     public async Task<HouseDetailsServiceModel> HouseDetailsByIdAsync(int id)
     {
+        var house = await repository
+       .AllReadOnly<House>()
+       .Include(h=>h.Agent)
+       .Where(h => h.Id == id)
+       .FirstAsync();
+
+        var agentFullName = await applicationUserService.GetUserNameAsync(house.Agent.UserId);
+
+
+
         return await repository
             .AllReadOnly<House>()
             .Where(h => h.Id == id)
@@ -226,6 +238,7 @@ public class HouseService : IHouseService
                 Address = h.Address,
                 Agent = new Models.Agent.AgentServiceModel()
                 {
+                    FullName = agentFullName,
                     Email = h.Agent.User.Email,
                     PhoneNumber = h.Agent.PhoneNumber
                 },
@@ -251,7 +264,7 @@ public class HouseService : IHouseService
     {
         var house = await repository
             .GetByIdAsync<House>(houseId);
-        if(house == null)
+        if (house == null)
         {
             return false;
         }
@@ -278,7 +291,7 @@ public class HouseService : IHouseService
     {
         var house = await repository
             .GetByIdAsync<House>(houseId);
-        if(house != null)
+        if (house != null)
         {
             house.RenterId = null;
         }

@@ -116,7 +116,7 @@ public class HouseController : BaseController
             return BadRequest();
         }
 
-        if (await houseService.HasAgentWithIdAsync(id, User.Id()) == false)
+        if (await houseService.HasAgentWithIdAsync(id, User.Id()) == false && User.IsAdmin() == false)
         {
             return Unauthorized();
         }
@@ -134,7 +134,7 @@ public class HouseController : BaseController
             return BadRequest();
         }
 
-        if (await houseService.HasAgentWithIdAsync(id, User.Id()) == false)
+        if (await houseService.HasAgentWithIdAsync(id, User.Id()) == false && User.IsAdmin() == false)
         {
             return Unauthorized();
         }
@@ -163,7 +163,7 @@ public class HouseController : BaseController
             return BadRequest();
         }
 
-        if(await houseService.HasAgentWithIdAsync(id, User.Id()) == false)
+        if(await houseService.HasAgentWithIdAsync(id, User.Id()) == false && User.IsAdmin() == false)
         {
             return Unauthorized();
         }
@@ -176,9 +176,6 @@ public class HouseController : BaseController
             ImageUrl = house.ImageUrl
         };
 
-        //TO DO - CHECK WHAT WE DO IF THA HOUES IS RENTED 
-
-
         return View(model);
     }
 
@@ -190,7 +187,7 @@ public class HouseController : BaseController
             return BadRequest();
         }
 
-        if (await houseService.HasAgentWithIdAsync(model.Id, User.Id()) == false)
+        if (await houseService.HasAgentWithIdAsync(model.Id, User.Id()) == false && User.IsAdmin() == false)
         {
             return Unauthorized();
         }
@@ -213,7 +210,7 @@ public class HouseController : BaseController
             return BadRequest();
         }
 
-        if(await agentService.ExistsByIdAsync(User.Id()))
+        if(await agentService.ExistsByIdAsync(User.Id()) && User.IsAdmin() == false)
         {
             return Unauthorized();
         }

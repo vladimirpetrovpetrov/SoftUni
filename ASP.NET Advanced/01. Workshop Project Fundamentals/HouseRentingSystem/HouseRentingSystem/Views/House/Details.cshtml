@@ -10,6 +10,7 @@
     bool userRentedThisHouse = await HouseService.IsRentedByUserWithIdAsync(Model.Id, User.Id());
     bool isAgent = await AgentService.ExistsByIdAsync(User.Id());
     string fullName = await UserService.GetUserNameAsync(User.Id());
+    bool isAdmin = User.IsAdmin();
 }
 @{
     ViewBag.Title = "House Details";
@@ -37,38 +38,37 @@
             <div class="form-inline">
                 @if (this.User.Identity.IsAuthenticated)
                 {
-                    if (hasAgentWithId){
-                    <a class="btn btn-warning" asp-controller="House" asp-action="Edit"
-                       asp-route-id="@Model.Id">Edit</a>
-                    <a class="ml-2 btn btn-danger" asp-controller="House" asp-action="Delete"
-                       asp-route-id="@Model.Id">Delete</a>
+                    if (hasAgentWithId || isAdmin)
+                    {
+                        <a class="btn btn-warning" asp-controller="House" asp-action="Edit"
+                           asp-route-id="@Model.Id">Edit</a>
+                        <a class="ml-2 btn btn-danger" asp-controller="House" asp-action="Delete"
+                           asp-route-id="@Model.Id">Delete</a>
                     }
-                    @if (!Model.IsRented && !isAgent)
+                    @if ((!Model.IsRented && !isAgent) || (isAdmin && !Model.IsRented && !hasAgentWithId))
                     {
                         <form class="input-group-sm" asp-controller="House"
                               asp-action="Rent" asp-route-id="@Model.Id" method="post">
                             <input class="btn btn-primary" type="submit" value="Rent" />
                         </form>
                     }
-                    else
+                    if ((!isAgent && userRentedThisHouse) || (isAdmin && userRentedThisHouse))
                     {
-                        if (!isAgent && userRentedThisHouse)
-                        {
-                            <form asp-controller="House" asp-action="Leave"
-                                  asp-route-id="@Model.Id" method="post">
-                                <input class="btn btn-primary" type="submit" value="Leave" />
-                            </form>
-                        }
+                        <form asp-controller="House" asp-action="Leave"
+                              asp-route-id="@Model.Id" method="post">
+                            <input class="btn btn-primary" type="submit" value="Leave" />
+                        </form>
                     }
+
                 }
             </div>
             <p></p>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Agent Info</h5>
-                    @if(fullName != null)
+                    @if (Model.Agent.FullName != null)
                     {
-                        <p class="card-text">Full Name: @fullName</p>
+                        <p class="card-text">Full Name: @Model.Agent.FullName</p>
                     }
                     <p class="card-text">Email:  @Model.Agent.Email</p>
                     <p class="card-text">Phone Number: @Model.Agent.PhoneNumber</p>
