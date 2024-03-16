@@ -232,8 +232,8 @@ public class HouseController : BaseController
         {
             return BadRequest();
         }
-
-        if (await agentService.ExistsByIdAsync(User.Id()))
+        
+        if (await agentService.ExistsByIdAsync(User.Id()) && !User.IsAdmin())
         {
             return Unauthorized();
         }
