@@ -3,11 +3,13 @@
 @using System.Security.Claims
 @inject IHouseService HouseService
 @inject IAgentService AgentService
+@inject IApplicationUserService UserService
 
 @{
     bool hasAgentWithId = await HouseService.HasAgentWithIdAsync(Model.Id, User.Id());
     bool userRentedThisHouse = await HouseService.IsRentedByUserWithIdAsync(Model.Id, User.Id());
     bool isAgent = await AgentService.ExistsByIdAsync(User.Id());
+    string fullName = await UserService.GetUserNameAsync(User.Id());
 }
 @{
     ViewBag.Title = "House Details";
@@ -64,6 +66,10 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Agent Info</h5>
+                    @if(fullName != null)
+                    {
+                        <p class="card-text">Full Name: @fullName</p>
+                    }
                     <p class="card-text">Email:  @Model.Agent.Email</p>
                     <p class="card-text">Phone Number: @Model.Agent.PhoneNumber</p>
                 </div>
