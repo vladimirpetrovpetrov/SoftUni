@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@inject IApplicationUserService UserService
 @using HouseRentingSystem.Core.Contracts
 @using System.Security.Claims
 
@@ -9,6 +10,7 @@
 
 @{
     bool isAgent = await AgentService.ExistsByIdAsync(this.User.Id());
+    // string fullName = await userService.GetUserNameAsync(this.User.Id());
 }
 
 
@@ -22,7 +24,14 @@
             </li>
         }
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+            @if (await UserService.GetUserNameAsync(User.Id()) is var fullName && fullName != null)
+            {
+                <a class="nav-link text-dark">Hello, @fullName</a>
+            }
+            else
+            {
+                <a class="nav-link text-dark">Hello, @User.Identity.Name!</a>
+            }
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
