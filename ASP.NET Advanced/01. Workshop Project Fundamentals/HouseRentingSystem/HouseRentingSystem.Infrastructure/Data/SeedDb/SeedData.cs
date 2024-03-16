@@ -1,5 +1,7 @@
 ﻿using HouseRentingSystem.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Reflection.Metadata;
+using System.Runtime.Intrinsics.X86;
 
 namespace HouseRentingSystem.Infrastructure.Data.SeedDb;
 
@@ -7,6 +9,8 @@ internal class SeedData
 {
     public ApplicationUser AgentUser { get; set; }
     public ApplicationUser GuestUser { get; set; }
+    public ApplicationUser AdminUser { get; set; }
+    public Agent AdminAgent { get; set; }
     public Agent Agent { get; set; }
     public Category CottageCategory { get; set; }
     public Category SingleCategory { get; set; }
@@ -56,6 +60,18 @@ internal class SeedData
 
         GuestUser.PasswordHash =
         hasher.HashPassword(AgentUser, "guest123");
+
+        AdminUser = new ApplicationUser()
+        {
+            Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
+            Email = "admin@mail.com",
+            NormalizedEmail = "admin@mail.com",
+            UserName = "admin@mail.com",
+            NormalizedUserName = "admin@mail.com",
+            FirstName = "Great",
+            LastName = "Admin"
+        };
+        AdminUser.PasswordHash = hasher.HashPassword(AgentUser, "admin123");
     }
 
     private void SeedAgents()
@@ -65,6 +81,13 @@ internal class SeedData
             Id = 1,
             PhoneNumber = "+359888888888",
             UserId = AgentUser.Id
+        };
+
+        AdminAgent = new Agent()
+        {
+            Id = 8,
+            PhoneNumber = "+359123456789",
+            UserId = AdminUser.Id
         };
     }
 
