@@ -1,4 +1,5 @@
 using HouseRentingSystem.ModelBinders;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,7 +40,17 @@ app.UseAuthorization();
 
 app.SeedAdmin();
 
-app.MapDefaultControllerRoute();
-app.MapRazorPages();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "Areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapControllerRoute(
+        name: "House Details",
+        pattern: "/Houses/Details/{id}/{information}",
+        defaults : new {Controller = "House", Action = "Details"});
+    app.MapDefaultControllerRoute();
+    app.MapRazorPages();
+});
 
 await app.RunAsync();
