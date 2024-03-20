@@ -40,6 +40,11 @@ public class HouseController : BaseController
     [HttpGet]
     public async Task<IActionResult> Mine()
     {
+        if (User.IsInRole("Admin"))
+        {
+            return RedirectToAction(actionName: "Mine", controllerName: "House", new { area = "Admin" });
+        }
+
         var userId = User.Id();
         IEnumerable<HouseServiceModel> model;
 
