@@ -13,7 +13,9 @@ namespace TestJWT.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly JwtTokenGeneratorService _jwtTokenGeneratorService;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, JwtTokenGeneratorService jwtTokenGeneratorService)
+        public AccountController(UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
+            JwtTokenGeneratorService jwtTokenGeneratorService)
         {
             _userManager = userManager;
             _signInManager = signInManager;

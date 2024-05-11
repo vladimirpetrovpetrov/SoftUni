@@ -12,6 +12,6 @@ public class TestController : ControllerBase
     [Authorize]
     public IActionResult Get()
     {
-        return Ok("Това съобщение е видимо само за авторизирани потребители.");
+        return Ok("This message is only visible for authorized users!");
     }
 }
