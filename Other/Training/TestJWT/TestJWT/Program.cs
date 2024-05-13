@@ -43,6 +43,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
         };
     });
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("TestPolicy", policy => policy.RequireClaim("Permission", "TestPermission"));
+        });
 
 
 builder.Services.AddEndpointsApiExplorer();

@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 [Route("[controller]")]
 public class TestController : ControllerBase
 {
-    
+
     [HttpGet]
-    [Authorize]
+    [Authorize(Policy = "TestPolicy")]
     public IActionResult Get()
     {
         return Ok("This message is only visible for authorized users!");
