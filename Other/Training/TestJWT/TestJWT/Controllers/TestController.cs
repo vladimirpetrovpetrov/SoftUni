@@ -23,4 +23,12 @@ public class TestController : ControllerBase
     {
         return Ok("This message is only visible for users with Role that has CreateZone permission!");
     }
+
+    [HttpGet]
+    [Route("delete")]
+    [Authorize(Roles = "LevelOne")]
+    public IActionResult Delete()
+    {
+        return Ok("This message is only visible for users with Role that has CreateZone permission!");
+    }
 }

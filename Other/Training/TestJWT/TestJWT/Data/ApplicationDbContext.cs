@@ -21,7 +21,7 @@ public class ApplicationDbContext : IdentityDbContext
         modelBuilder.Entity<RolePermission>()
         .HasKey(rp => new { rp.RoleId, rp.PermissionId });
 
-        // Seed roles
+        // Seed 
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
