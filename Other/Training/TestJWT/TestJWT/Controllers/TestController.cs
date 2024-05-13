@@ -9,9 +9,18 @@ public class TestController : ControllerBase
 {
 
     [HttpGet]
-    [Authorize(Policy = "TestPolicy")]
-    public IActionResult Get()
+    [Route("read")]
+    [Authorize(Policy = "ReadZone")]
+    public IActionResult Read()
     {
-        return Ok("This message is only visible for authorized users!");
+        return Ok("This message is only visible for users with Role that has ReadZone permission!");
+    }
+
+    [HttpGet]
+    [Route("create")]
+    [Authorize(Policy = "CreateZone")]
+    public IActionResult Create()
+    {
+        return Ok("This message is only visible for users with Role that has CreateZone permission!");
     }
 }

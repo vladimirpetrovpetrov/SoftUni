@@ -45,7 +45,7 @@ namespace TestJWT.Controllers
             if (result.Succeeded)
             {
                 var user = await _userManager.FindByNameAsync(email);
-                return Ok(new { Token = _jwtTokenGeneratorService.GenerateToken(user) });
+                return Ok(new { Token = await _jwtTokenGeneratorService.GenerateToken(user) });
             }
 
             return Unauthorized();

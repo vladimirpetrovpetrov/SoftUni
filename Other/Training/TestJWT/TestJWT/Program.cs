@@ -27,6 +27,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 1;
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -43,10 +44,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
         };
     });
-        builder.Services.AddAuthorization(options =>
-        {
-            options.AddPolicy("TestPolicy", policy => policy.RequireClaim("Permission", "TestPermission"));
-        });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ReadZone", policy => policy.RequireClaim("Permission", "ReadZone"));
+    options.AddPolicy("CreateZone", policy => policy.RequireClaim("Permission", "CreateZone"));
+});
 
 
 builder.Services.AddEndpointsApiExplorer();
