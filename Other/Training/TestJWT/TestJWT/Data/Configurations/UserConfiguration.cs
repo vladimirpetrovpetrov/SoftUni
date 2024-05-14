@@ -27,9 +27,22 @@ namespace TestJWT.Data.Configurations
                 EmailConfirmed = true,
                 LockoutEnabled = false,
             };
-
             userOne.PasswordHash = hasher.HashPassword(userOne, "password");
             users.Add(userOne);
+
+            var userTwo = new IdentityUser()
+            {
+                Id = "ef210b4c-f90b-47b0-8750-aeb9aa036264",
+                UserName = "admin@gmail.com",
+                NormalizedUserName = "ADMIN@GMAIL.COM",
+                Email = "admin@gmail.com",
+                NormalizedEmail = "ADMIN@GMAIL.COM",
+                EmailConfirmed = true,
+                LockoutEnabled = false,
+            };
+
+            userTwo.PasswordHash = hasher.HashPassword(userTwo, "admin");
+            users.Add(userTwo);
             return users.ToArray();
         }
     }

@@ -35,7 +35,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireLowercase = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
-    options.Password.RequiredLength = 6;
+    options.Password.RequiredLength = 5;
     options.Password.RequiredUniqueChars = 1;
 })
     .AddRoles<IdentityRole>()
@@ -70,6 +70,7 @@ builder.Services.AddSwaggerGen();
 //Add the Service, generating Jwt
 builder.Services.AddScoped<JwtTokenGeneratorService>();
 builder.Services.AddScoped<IProductService,ProductService>();
+builder.Services.AddScoped<IPermissionService,PermissionService>();
 
 var app = builder.Build();
 

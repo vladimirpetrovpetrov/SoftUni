@@ -39,6 +39,14 @@ namespace TestJWT.Data.Configurations
                 ConcurrencyStamp = "3882b86e-4ce3-49e6-83a1-a0294c57a8ff"
             });
 
+            roles.Add(new IdentityRole()
+            {
+                Name = "Admin",
+                NormalizedName = "ADMIN",
+                Id = "00535050-d3db-47c6-a29f-64c26430a191",
+                ConcurrencyStamp = "af593598-7041-4d59-ae63-418a1b784b75"
+            });
+
             return roles.ToArray();
         }
     }

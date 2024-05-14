@@ -12,8 +12,8 @@ using TestJWT.Data;
 namespace TestJWT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240514115835_AddedDateTimePropertyInProduct")]
-    partial class AddedDateTimePropertyInProduct
+    [Migration("20240514160856_seedData")]
+    partial class seedData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,6 +72,13 @@ namespace TestJWT.Migrations
                             ConcurrencyStamp = "3882b86e-4ce3-49e6-83a1-a0294c57a8ff",
                             Name = "LevelThree",
                             NormalizedName = "LEVELTHREE"
+                        },
+                        new
+                        {
+                            Id = "00535050-d3db-47c6-a29f-64c26430a191",
+                            ConcurrencyStamp = "af593598-7041-4d59-ae63-418a1b784b75",
+                            Name = "Admin",
+                            NormalizedName = "ADMINISTRATOR"
                         });
                 });
 
@@ -169,17 +176,33 @@ namespace TestJWT.Migrations
                         {
                             Id = "f99c5e20-d91e-4a5e-9b73-fdb38b89ffc3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cd25a8e6-a163-433d-8991-dbe1e0d3dd40",
+                            ConcurrencyStamp = "f8b9741d-5b52-44fd-8ede-c1884f42a10c",
                             Email = "levelOne@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "LEVELONE@GMAIL.COM",
                             NormalizedUserName = "LEVELONE@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGNEGaREm/yLiSG/iKePkIPSAOZ+sRMxDvb4MfNafQA0ohkNS8pCuEtt1c88lZgPOg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFZMW48FKKVoCQsLWuuA6eeS8grBLwZR1va/WyJp50Cyj40gGcrwl6cVpRmSf0C9pg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "efe0b279-d6e4-4110-8ad0-306c3a70dee1",
+                            SecurityStamp = "b6f0d2d5-ff07-4eb7-b476-ade3a68cbad9",
                             TwoFactorEnabled = false,
                             UserName = "levelOne@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "ef210b4c-f90b-47b0-8750-aeb9aa036264",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b79a0940-929d-474c-ab4f-87176af019d8",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFaHTc8p5py4UiLDdcZXecQSBjZiQuJS26VCtfW70Dp/izmxSZCgLye3MVHm1IlNrw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7c5753fb-6f8f-46b1-86a2-7c4c2d1addca",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@gmail.com"
                         });
                 });
 
@@ -251,6 +274,11 @@ namespace TestJWT.Migrations
                         {
                             UserId = "f99c5e20-d91e-4a5e-9b73-fdb38b89ffc3",
                             RoleId = "44a539b2-223a-4c1b-9d1c-954ef8d889ff"
+                        },
+                        new
+                        {
+                            UserId = "ef210b4c-f90b-47b0-8750-aeb9aa036264",
+                            RoleId = "00535050-d3db-47c6-a29f-64c26430a191"
                         });
                 });
 

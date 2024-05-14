@@ -69,6 +69,13 @@ namespace TestJWT.Migrations
                             ConcurrencyStamp = "3882b86e-4ce3-49e6-83a1-a0294c57a8ff",
                             Name = "LevelThree",
                             NormalizedName = "LEVELTHREE"
+                        },
+                        new
+                        {
+                            Id = "00535050-d3db-47c6-a29f-64c26430a191",
+                            ConcurrencyStamp = "af593598-7041-4d59-ae63-418a1b784b75",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         });
                 });
 
@@ -166,17 +173,33 @@ namespace TestJWT.Migrations
                         {
                             Id = "f99c5e20-d91e-4a5e-9b73-fdb38b89ffc3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cd25a8e6-a163-433d-8991-dbe1e0d3dd40",
+                            ConcurrencyStamp = "430dfbfd-8294-43cc-ab8d-f2e036651349",
                             Email = "levelOne@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "LEVELONE@GMAIL.COM",
                             NormalizedUserName = "LEVELONE@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGNEGaREm/yLiSG/iKePkIPSAOZ+sRMxDvb4MfNafQA0ohkNS8pCuEtt1c88lZgPOg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ6E+TmpXSz0DLwAXF5jg4y4CBhy34HQqZDVFFAfYbpjrjdepv+Og6uVUJ5azQA/MA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "efe0b279-d6e4-4110-8ad0-306c3a70dee1",
+                            SecurityStamp = "839c1084-7c98-48d4-b464-28df9de5315c",
                             TwoFactorEnabled = false,
                             UserName = "levelOne@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "ef210b4c-f90b-47b0-8750-aeb9aa036264",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b79ca8a6-1168-4484-b119-ff3bda5838b1",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDTKpHoAPBVSZfAofeRIo1dqqTZvwMAukFlHvLl7AOA9z4P+8GcoNI5lXvuPupeCfA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6b85b20e-3d25-4166-8475-861c6d91d997",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@gmail.com"
                         });
                 });
 
@@ -248,6 +271,11 @@ namespace TestJWT.Migrations
                         {
                             UserId = "f99c5e20-d91e-4a5e-9b73-fdb38b89ffc3",
                             RoleId = "44a539b2-223a-4c1b-9d1c-954ef8d889ff"
+                        },
+                        new
+                        {
+                            UserId = "ef210b4c-f90b-47b0-8750-aeb9aa036264",
+                            RoleId = "00535050-d3db-47c6-a29f-64c26430a191"
                         });
                 });
 
