@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NuGet.DependencyResolver;
 using Serilog;
 using System.Security;
@@ -45,7 +46,7 @@ public class AdminController : ControllerBase
             foreach (var permission in roleDto.Permissions)
             {
                 //If the permission exists , add it to the role
-                if(!await perService.PermissionExistAsync(permission))
+                if(await perService.PermissionExistAsync(permission))
                 {
                     await perService.AddRolePermission(permission,role.Name);
                 }
@@ -59,6 +60,24 @@ public class AdminController : ControllerBase
 
     }
 
+    [HttpGet]
+    [Route("permissions/{roleId}")]
+    public async Task<IActionResult> GetRolePermissions(string roleId)
+    {
+        
+        var role = await _roleManager.FindByIdAsync(roleId);
+
+        if (role == null)
+        {
+            return NotFound($"Role with ID '{roleId}' does not exist.");
+        }
+
+       
+        var rolePermissions = await perService.GetAllPermissionsForRoleAsync(roleId);
+
+
+        return Ok(rolePermissions);
+    }
 
 
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Data;
 using TestJWT.Contracts;
 using TestJWT.Data;
 using TestJWT.Data.Models;
@@ -31,6 +32,17 @@ namespace TestJWT.Services
                 await context.RolesPermissions.AddAsync(rolePermission);
                 await context.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<string>> GetAllPermissionsForRoleAsync(string roleId)
+        {
+            return await context.RolesPermissions
+                .Include(rp => rp.Permission)
+                .Include(rp => rp.Role)
+                .Where(rp => rp.RoleId == roleId)
+                .Select(rp => rp.Permission.Name)
+                .ToListAsync();
+
         }
 
         public async Task<bool> PermissionExistAsync(string name)
