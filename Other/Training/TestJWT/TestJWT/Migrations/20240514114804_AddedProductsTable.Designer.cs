@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestJWT.Data;
 
@@ -11,9 +12,11 @@ using TestJWT.Data;
 namespace TestJWT.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240514114804_AddedProductsTable")]
+    partial class AddedProductsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,15 +169,15 @@ namespace TestJWT.Migrations
                         {
                             Id = "f99c5e20-d91e-4a5e-9b73-fdb38b89ffc3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cd25a8e6-a163-433d-8991-dbe1e0d3dd40",
+                            ConcurrencyStamp = "89f34e39-e5c7-47e1-bcd9-590fbd1a668f",
                             Email = "levelOne@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "LEVELONE@GMAIL.COM",
                             NormalizedUserName = "LEVELONE@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGNEGaREm/yLiSG/iKePkIPSAOZ+sRMxDvb4MfNafQA0ohkNS8pCuEtt1c88lZgPOg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELkVnlS/dLFJAW4o1lnZgq4PSNAYmrqm9EQ49MX5JjMPUGBDq9iWMXZ7qZTaHtBAIA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "efe0b279-d6e4-4110-8ad0-306c3a70dee1",
+                            SecurityStamp = "f70b9852-3752-4025-bb01-4729196f3b92",
                             TwoFactorEnabled = false,
                             UserName = "levelOne@gmail.com"
                         });
@@ -318,9 +321,6 @@ namespace TestJWT.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DateAdded")
-                        .HasColumnType("datetime2");
 
                     b.Property<bool>("InProgress")
                         .HasColumnType("bit");

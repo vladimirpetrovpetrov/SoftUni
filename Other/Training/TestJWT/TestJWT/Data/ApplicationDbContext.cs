@@ -14,6 +14,7 @@ public class ApplicationDbContext : IdentityDbContext
     }
     public DbSet<Permission> Permissions { get; set; }
     public DbSet<RolePermission> RolesPermissions { get; set; }
+    public DbSet<Product> Products { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

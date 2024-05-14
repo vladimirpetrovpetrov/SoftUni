@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 [ApiController]
 [Route("[controller]")]
 public class TestController : ControllerBase
@@ -21,7 +22,7 @@ public class TestController : ControllerBase
     [Authorize(Policy = "CreateZone")]
     public IActionResult Create()
     {
-        return Ok("This message is only visible for users with Role that has CreateZone permission!");
+        return Ok("This message is only visible for users with CreateZone permission installed in their Role!");
     }
 
     [HttpGet]

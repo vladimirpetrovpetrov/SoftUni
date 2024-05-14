@@ -1,15 +1,26 @@
-using Microsoft.EntityFrameworkCore;
-using TestJWT.Data;
-using Microsoft.AspNetCore.Identity;
-using TestJWT.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Text;
+using TestJWT.Contracts;
+using TestJWT.Data;
+using TestJWT.Middleware;
+using TestJWT.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllers();
+
+//Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
 
 //Add DBContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -58,6 +69,7 @@ builder.Services.AddSwaggerGen();
 
 //Add the Service, generating Jwt
 builder.Services.AddScoped<JwtTokenGeneratorService>();
+builder.Services.AddScoped<IProductService,ProductService>();
 
 var app = builder.Build();
 
@@ -69,6 +81,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//Add the middleware for the LoggingUnauthorized attempts
+app.UseUnauthorizedAccessLogging();
+
 //Add Authentication
 app.UseAuthentication();
 app.UseAuthorization();
@@ -76,3 +91,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+Log.CloseAndFlush();

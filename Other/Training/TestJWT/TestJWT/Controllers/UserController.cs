@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using TestJWT.Services;
 
 namespace TestJWT.Controllers
@@ -45,9 +46,10 @@ namespace TestJWT.Controllers
             if (result.Succeeded)
             {
                 var user = await _userManager.FindByNameAsync(email);
+                Log.Information($"User {user.Email} logged in at {DateTime.UtcNow}");
                 return Ok(new { Token = await _jwtTokenGeneratorService.GenerateToken(user) });
             }
-
+            Log.Warning($"Unsuccessfull attempt to log with {email} at {DateTime.Now}.");
             return Unauthorized();
         }
 
