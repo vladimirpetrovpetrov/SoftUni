@@ -34,16 +34,26 @@ namespace TestJWT.Services
             }
         }
 
-        public async Task<List<string>> GetAllPermissionsForRoleAsync(string roleId)
+        public async Task<Dictionary<string, bool>> GetAllPermissionsForRoleAsync(string roleId)
         {
-            return await context.RolesPermissions
+            var allPermissions = await context.Permissions.ToListAsync();
+
+            var rolePermissions = await context.RolesPermissions
                 .Include(rp => rp.Permission)
-                .Include(rp => rp.Role)
                 .Where(rp => rp.RoleId == roleId)
                 .Select(rp => rp.Permission.Name)
                 .ToListAsync();
 
+            var permissionsDict = new Dictionary<string, bool>();
+
+            foreach (var permission in allPermissions)
+            {
+                permissionsDict[permission.Name] = rolePermissions.Contains(permission.Name);
+            }
+
+            return permissionsDict;
         }
+
 
         public async Task<bool> PermissionExistAsync(string name)
         {
