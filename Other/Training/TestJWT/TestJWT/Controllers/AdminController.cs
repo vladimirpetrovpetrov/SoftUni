@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using NuGet.DependencyResolver;
 using Serilog;
-using System.Security;
 using TestJWT.Contracts;
 using TestJWT.Dtos;
 
@@ -27,7 +24,7 @@ public class AdminController : ControllerBase
     }
 
     [HttpPost]
-    [Route("create")]
+    [Route("createRole")]
     public async Task<IActionResult> CreateRole([FromBody] RoleDto roleDto)
     {
         //Check if the role already exists
@@ -41,14 +38,14 @@ public class AdminController : ControllerBase
         var result = await _roleManager.CreateAsync(role);
 
         //If creation succeed
-        if(result.Succeeded)
+        if (result.Succeeded)
         {
             foreach (var permission in roleDto.Permissions)
             {
                 //If the permission exists , add it to the role
-                if(await perService.PermissionExistAsync(permission))
+                if (await perService.PermissionExistAsync(permission))
                 {
-                    await perService.AddRolePermission(permission,role.Name);
+                    await perService.AddRolePermission(permission, role.Name);
                 }
             }
         }
@@ -56,7 +53,7 @@ public class AdminController : ControllerBase
         //Log the creation
         Log.Information($"Admin created successfully the role '{role.Name}' with {string.Join(", ", roleDto.Permissions)} permissions. at {DateTime.UtcNow}");
 
-        return Ok($"Role '{role.Name}' has been created successfully with {string.Join(", ",roleDto.Permissions)}");
+        return Ok($"Role '{role.Name}' has been created successfully with {string.Join(", ", roleDto.Permissions)}");
 
     }
 
@@ -64,7 +61,7 @@ public class AdminController : ControllerBase
     [Route("permissions/{roleId}")]
     public async Task<IActionResult> GetRolePermissions(string roleId)
     {
-        
+
         var role = await _roleManager.FindByIdAsync(roleId);
 
         if (role == null)
@@ -72,12 +69,74 @@ public class AdminController : ControllerBase
             return NotFound($"Role with ID '{roleId}' does not exist.");
         }
 
-       
+
         var rolePermissions = await perService.GetAllPermissionsForRoleAsync(roleId);
 
 
         return Ok(rolePermissions);
     }
 
+    // Create a new user
+    [HttpPost]
+    [Route("createUser")]
+    public async Task<IActionResult> CreateUser([FromBody] UserDto userDto)
+    {
+        // Check if the user already exists 
+        var existingUser = await _userManager.FindByNameAsync(userDto.Email);
+        if (existingUser != null)
+        {
+            return BadRequest($"User '{userDto.Email}' already exists.");
+        }
 
+        //Creating new user
+        var user = new IdentityUser { UserName = userDto.Email, Email = userDto.Email };
+
+        var result = await _userManager.CreateAsync(user, userDto.Password);
+
+        if (result.Succeeded)
+        {
+            Log.Warning($"Admin created new user - {user.Email}");
+            return Ok($"User '{userDto.Email}' has been created successfully.");
+        }
+        else
+        {
+            return BadRequest(result.Errors);
+        }
+    }
+
+    // Get a user by ID
+    [HttpGet]
+    [Route("readUser/{userId}")]
+    public async Task<IActionResult> GetUser(string userId)
+    {
+        // Find the user by his id
+        var user = await _userManager.FindByIdAsync(userId);
+
+        if (user == null)
+        {
+            //If user does not exist
+            return NotFound($"User with ID '{userId}' does not exist.");
+        }
+
+        // Get the roles for the user
+        var roles = await _userManager.GetRolesAsync(user);
+
+        var userData = new UserDataDto
+        {
+            Email = user.Email,
+        };
+
+        // If the user has a role, get the permissions
+        if (roles.Any())
+        {
+            userData.Role = roles.First();
+            var role = await _roleManager.FindByNameAsync(userData.Role);
+            var rolePermissions = await perService.GetAllPermissionsForRoleAsync(role.Id);
+            userData.Permissions = rolePermissions;
+        }
+
+        Log.Warning($"Admin requested information about user with Id - {userId}");
+
+        return Ok(userData);
+    }
 }
