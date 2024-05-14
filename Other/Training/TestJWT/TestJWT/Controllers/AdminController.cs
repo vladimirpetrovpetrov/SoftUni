@@ -25,6 +25,8 @@ public class AdminController : ControllerBase
 
     [HttpPost]
     [Route("createRole")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateRole([FromBody] RoleDto roleDto)
     {
         //Check if the role already exists
@@ -59,6 +61,8 @@ public class AdminController : ControllerBase
 
     [HttpGet]
     [Route("permissions/{roleId}")]
+    [ProducesResponseType(typeof(Dictionary<string, bool>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetRolePermissions(string roleId)
     {
 
@@ -79,6 +83,8 @@ public class AdminController : ControllerBase
     // Create a new user
     [HttpPost]
     [Route("createUser")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateUser([FromBody] UserDto userDto)
     {
         // Check if the user already exists 
@@ -107,6 +113,8 @@ public class AdminController : ControllerBase
     // Get a user by ID
     [HttpGet]
     [Route("readUser/{userId}")]
+    [ProducesResponseType(typeof(UserDataDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetUser(string userId)
     {
         // Find the user by his id
